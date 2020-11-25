@@ -9,7 +9,7 @@
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="22" Y="21"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="43"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,7 +19,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="33"/>
         <CursorPos X="4" Y="64"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="43"/>
       </Unit1>
       <Unit2>
         <Filename Value="initialisationecran.pas"/>
@@ -27,7 +27,7 @@
         <UnitName Value="initialisationEcran"/>
         <EditorIndex Value="4"/>
         <CursorPos X="13" Y="16"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="43"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -35,9 +35,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="navigationMenues"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="93"/>
-        <CursorPos X="32" Y="74"/>
-        <UsageCount Value="41"/>
+        <TopLine Value="74"/>
+        <CursorPos X="34" Y="104"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -46,9 +46,9 @@
         <UnitName Value="menuInterface"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="164"/>
-        <CursorPos X="23" Y="177"/>
-        <UsageCount Value="39"/>
+        <TopLine Value="170"/>
+        <CursorPos X="36" Y="183"/>
+        <UsageCount Value="40"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -58,7 +58,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="11"/>
         <CursorPos X="27" Y="32"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="40"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
