@@ -4,7 +4,7 @@ program jeu;
 {L'unité menuNouvellePartie sert à appeler toutes les composantes du menu de création de partie}
 {L'unité initialisationEcran sert à appeler toutes les composantes qui permettent
 d'initialiser l'écran (taille, couleur etc...)}
-uses Keyboard ,menuNouvellePartie, initialisationEcran, menuInterface, evenementClavier;
+uses Keyboard ,menuNouvellePartie, initialisationEcran, menuInterface, evenementClavier,GestionEcran ;
 
 //glossaire
 var
@@ -19,5 +19,8 @@ begin
   //appel de la procédure qui affiche tous les éléments du menuNouvellePartie
   //affichageMenuCreaPartie();
   mainMenuInterface();
+  effacerEcran; //raffraichit l'écran
+  writeln('Menu tour suivant');
+  readln()
 end.
 

@@ -19,6 +19,8 @@ begin
   //appel de la procédure qui affiche tous les éléments du menuNouvellePartie
   //affichageMenuCreaPartie();
   mainMenuInterface();
-  readln();
+  effacerEcran; //raffraichit l'écran
+  writeln('Menu tour suivant');
+  readln()
 end.
 
