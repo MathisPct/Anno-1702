@@ -28,6 +28,7 @@ implementation
   var
     itemActuel:Integer; {variable entière qui est la position dans le tableau des élèments du menu, est incrémenté ou désincrémenté si l'user
                             descend ou monte avec les flèches directionnelles du clavier}
+    itemAnterieur: Integer; {variable entière qui est l'item qui est l'avant dernier item choisie par l'user}
 
    procedure initialisationItemActuel(valeur:Integer);  //cette procedure initialise l'itemActuel à un item du menu quand on lance le menu
      begin
