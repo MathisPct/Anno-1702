@@ -14,19 +14,21 @@ implementation
   const
       //Nombre d'item dans les menus
       //nb d'item dans le menu
-      totaleItemsMenu=4;
+      totaleItemsMenu=5;
 
       //Déclaration des items de notre menu initial
       txtSuivant='Tour suivant'; //constante de type string qui est le 1er item du menu
       txtGestionbatiment='Accéder au menu de gestion des batimênts'; //constante de type string qui est le 2ème item du menu
       txtQuitter='Quitter la partie'; //constante de type string qui est le 3ème item du menu
       txtTest='Test1';
+      txtTest2='Test2';
 
       //Déclaration des ordonnées de notre menu
       txtSuivantY= 30; //ordonnée de txtSuivant à 30px
       txtGestionbatimentY=35; //ordonnée de txtGestionbatiment 35px
       txtQuitterY=40; //ordonnée de txtGestionbatiment 40px
       txtTestY=45;  //ordonnée de txtGestionbatiment 45px
+      txtTest2Y=55;
 
   //type connue de toute l'unité
   type
@@ -41,9 +43,11 @@ implementation
 
     nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
 
-    menuInterfa:menu=(txtSuivant,txtGestionbatiment,txtQuitter,txtTest); //tableau qui contient les différents item texte de notre menu
+    menuInterfa:menu=(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte de notre menu
 
-    itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY); //tableau qui contient les différents item texte de notre menu
+    itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents item texte de notre menu
+
+    touche:String; //touche du clavier
 
   {Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
   procedure initiaNbTourBoucle();
@@ -97,6 +101,7 @@ implementation
     affichageItem(menuInterfa[2],10,itemsCoordY[2]); //affichage de l'item 2 du menu
     affichageItem(menuInterfa[3],10,itemsCoordY[3]); //affichage de l'item 3 du menu
     affichageItem(menuInterfa[4],10,itemsCoordY[4]); //affichage de l'item 4 du menu
+    affichageItem(menuInterfa[5],10,itemsCoordY[5]); //affichage de l'item 4 du menu
   end;
 
   {Procédure qui colorier l'élément actuel sur lequel est placé l'utilisateur}
@@ -104,10 +109,11 @@ implementation
   begin
     //colorie la zone qui est l'élément actuel sur lequel l'user est placé
     case getItemActuel() of
-      1 : ColorierZone(1,15,10,10+20,itemsCoordY[1]) ; //colorie le 1er item
-      2 : ColorierZone(1,15,10,10+20,itemsCoordY[2]) ; //colorie le 2eme item
-      3 : ColorierZone(1,15,10,10+20,itemsCoordY[3]) ; //colorie le 3eme item
-      4 : ColorierZone(1,15,10,10+20,itemsCoordY[4]) ; //colorie le 4eme item
+      1 : ColorierZone(1,15,10,10+30,itemsCoordY[1]) ; //colorie le 1er item
+      2 : ColorierZone(1,15,10,10+30,itemsCoordY[2]) ; //colorie le 2eme item
+      3 : ColorierZone(1,15,10,10+30,itemsCoordY[3]) ; //colorie le 3eme item
+      4 : ColorierZone(1,15,10,10+30,itemsCoordY[4]) ; //colorie le 4eme item
+      5 : ColorierZone(1,15,10,10+30,itemsCoordY[5]) ; //colorie le 4eme item
     end
   end;
 
@@ -115,10 +121,11 @@ implementation
     begin
       //rétablie la couleur de l'élément précedemment choisie par l'user
       case getItemAnterieur() of
-        1 : ColorierZone(0,15,10,10+20,itemsCoordY[1]); //rétablie la couleur du 1er item
-        2 : ColorierZone(0,15,10,10+20,itemsCoordY[2]); //rétablie la couleur du 1er item
-        3 : ColorierZone(0,15,10,10+20,itemsCoordY[3]); //rétablie la couleur du 1er item
-        4 : ColorierZone(0,15,10,10+20,itemsCoordY[4]); //rétablie la couleur du 1er item
+        1 : ColorierZone(0,15,10,10+30,itemsCoordY[1]); //rétablie la couleur du 1er item
+        2 : ColorierZone(0,15,10,10+30,itemsCoordY[2]); //rétablie la couleur du 1er item
+        3 : ColorierZone(0,15,10,10+30,itemsCoordY[3]); //rétablie la couleur du 1er item
+        4 : ColorierZone(0,15,10,10+30,itemsCoordY[4]); //rétablie la couleur du 1er item
+        5 : ColorierZone(0,15,10,10+30,itemsCoordY[5]); //rétablie la couleur du 1er item
       end;
     end;
 
@@ -147,41 +154,21 @@ implementation
               initialisationItemActuel(1);
               //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
               initialisationItemAnterieur();
-               affichage();// affichage des rectangles du nom du menu et de tous les items du menu
-              {
-              //affichage des rectangles, du texte et du menu
-              rectangleZoneJeu(); //dessine le rectangle de la zone de jeu
-              cadreTxtNomMenu(); //dessine les éléments entourant le texte Création d'une nouvelle partie
-
-              //Procédure qui affiche tous les items du menu en position X et Y
-              affichageItemsMenu();
-              //FIN affichage des rectangles, du texte et du menu...
-              }
+             //affichage des rectangles, du texte et du menu
+             affichage();// affichage des rectangles du nom du menu et de tous les items du menu
             end
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
           else if(nbTourBoucle>=1) then
+            touche:=ToucheClavier;
             begin
-               //affichage des rectangles, du texte et du menu
-              //rectangleZoneJeu(); //dessine le rectangle de la zone de jeu
-              //cadreTxtNomMenu(); //dessine les éléments entourant le texte Création d'une nouvelle partie
-              {Procédure qui affiche tous les items du menu en position X et Y}
-              //affichageItemsMenu();
-              //FIN affichage des rectangles, du texte et du menu...
-
               //navigationTabMenu(menuInterfa,toucheClavier(),getItemChoisi()); //appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
-              navigationTabMenu(menuInterfa,toucheClavier(),getItemActuel());
+              navigationTabMenu(menuInterfa,touche,getItemActuel());
               //affichage test
               colorierElementActuel();
-              reintialiserElementAnterieur();
-              //writeln('L''item actuel est: ',getItemActuel()); //affichage de l'item actuel quand on appuie sur les flèches haut et bas
-              //fonction qui renvoie l'item choisie si l'user appuie sur entrée
-              //writeln('L''item choisie est',getItemChoisie(toucheClavier())); //affichage de l'item choisie quand on appuie sur entrée
-
-              //FIN affichage test
-              //effacerEcran; //mise à jour de l'affichage de l'écran
-
+              reintialiserElementAnterieur(); //réintialise la couleur de l'item précedemment choisie
             end;
           incrementaNbTourBoucle(); //incrémentation du tour de boucle
+          write(getItemChoisie(touche));
         end;
     end;
 
