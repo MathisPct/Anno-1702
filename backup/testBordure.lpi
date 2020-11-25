@@ -11,7 +11,7 @@
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <Title Value="menusV2"/>
+      <Title Value="testBordure"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
     </General>
@@ -28,7 +28,7 @@
     </RunParams>
     <Units Count="1">
       <Unit0>
-        <Filename Value="menusV2.pas"/>
+        <Filename Value="testBordure.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
     </Units>
@@ -37,7 +37,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="menusV2"/>
+      <Filename Value="testBordure"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
@@ -58,4 +58,3 @@
     </Exceptions>
   </Debugging>
 </CONFIG>
-
