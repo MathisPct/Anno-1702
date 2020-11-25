@@ -5,7 +5,7 @@ unit menuInterface;
 
 interface
 
-uses gestionecran,navigationMenues,evenementClavier; //appel des unités
+uses gestionecran,navigationMenues,evenementClavier,Keyboard; //appel des unités
 
 procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
 
@@ -28,7 +28,7 @@ implementation
       txtGestionbatimentY=35; //ordonnée de txtGestionbatiment 35px
       txtQuitterY=40; //ordonnée de txtGestionbatiment 40px
       txtTestY=45;  //ordonnée de txtGestionbatiment 45px
-      txtTest2Y=55;
+      txtTest2Y=50;
 
   //type connue de toute l'unité
   type
@@ -41,13 +41,13 @@ implementation
   //déclaration des variables connues de toute l'unité
   var
 
+    touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
+
     nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
 
     menuInterfa:menu=(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte de notre menu
 
     itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents item texte de notre menu
-
-    touche:String; //touche du clavier
 
   {Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
   procedure initiaNbTourBoucle();
@@ -150,6 +150,8 @@ implementation
           //si on vient d'arriver sur le menu on initialise l'affichage des éléments du menu, initialisation de l'item actuel à 1 etc
           if (nbTourBoucle=0) then
             begin
+               // initialisation du module keyboard
+               InitKeyboard;//initialisation du mondule
               //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
               initialisationItemActuel(1);
               //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
@@ -159,7 +161,8 @@ implementation
             end
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
           else if(nbTourBoucle>=1) then
-            touche:=ToucheClavier;
+            touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
+            touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
             begin
               navigationTabMenu(menuInterfa,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
               //affichage test
@@ -167,7 +170,23 @@ implementation
               reintialiserElementAnterieur(); //réintialise la couleur de l'item précedemment choisie
             end;
           incrementaNbTourBoucle(); //incrémentation du tour de boucle
-          write(getItemChoisie(touche));
+          if (getItemChoisie(touche)=1) then
+            begin
+            effacerEcran;
+            running:=False;
+            while true do
+              write(menuInterfa[1]);
+            end
+          else if (getItemChoisie(touche)=2) then
+            writeln(menuInterfa[2])
+          else if (getItemChoisie(touche)=3) then
+            begin
+            writeln(menuInterfa[3]);
+            end
+          else if (getItemChoisie(touche)=4) then
+            writeln(menuInterfa[4])
+          else if (getItemChoisie(touche)=5) then
+            writeln(menuInterfa[5])
         end;
     end;
 
