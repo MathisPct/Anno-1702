@@ -21,7 +21,6 @@ implementation
   {fonction qui retourne entree, echap, haut, bas , si elle est pressée}
   function toucheClavier():String;
     begin
-      InitKeyboard;//initialisation du mondule
       touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
       touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
       if (touche=33619745) then
@@ -32,8 +31,6 @@ implementation
           toucheClavier:='echap' //retounement de la valeur 'echap' par la fonction
       else if (touche=7181) then
           toucheClavier:='entree' //retounement de la valeur 'entree' par la fonction
-      else
-          toucheClavier:=''; //sinon pas d'autres touches
     end;
 
 end.
