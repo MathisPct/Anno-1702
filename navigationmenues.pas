@@ -8,7 +8,7 @@ uses Keyboard;
 
 //procédure qui permet de naviguer dans un tableau grâce aux touches du clavier
 //retourne la position de l'élément dans le tableau sur lequel l'user est
-procedure navigationTabMenu(menu:Array Of String;touche: String;itemActuel:Integer);
+procedure navigationTabMenu(menu:Array Of String;touche: TkeyEvent;itemActuel:Integer);
 
 procedure initialisationItemActuel(valeur:Integer);  //cette procedure initialise l'itemActuel quand on lance le menu
 
@@ -19,7 +19,7 @@ function getItemActuel():Integer;
 procedure SetItemActuel(valeur:Integer);
 
 //fonction qui renvoie l'item choisie si l'user appuie sur entrée
-function getItemChoisie(touche: String):Integer;
+function getItemChoisie(touche: TkeyEvent):Integer;
 
 //procédure qui initialise l'intem Anterieur à l'initialisation de l'itemActuel-1
 procedure initialisationItemAnterieur();
@@ -76,18 +76,18 @@ implementation
 
   //procédure qui permet de naviguer dans un tableau grâce aux touches du clavier  'haut' 'bas'
   //retourne la position de l'élément dans le tableau sur lequel l'user est
-  procedure navigationTabMenu(menu:Array Of String; touche: String;itemActuel:Integer);
+  procedure navigationTabMenu(menu:Array Of String; touche: TkeyEvent;itemActuel:Integer);
      var
       totaleItems:Integer; //variable entière qui est la taille du menu
     begin
       totaleItems:=Length(menu); //initialisation de totaleItem  à la longueur du menu
-      if (touche='bas') then //si toucheClavier = touche du bas pressée alors on passe à l'élément suivant du tableau
+      if (touche=33619751) then //si toucheClavier = touche du bas pressée alors on passe à l'élément suivant du tableau
          begin
            //itemActuel:=itemActuel+1; //incrémentation de index
             SetItemActuel(1); //incrémentation de l'index du menu
             SetItemAnterieur(getItemActuel()-1);
          end
-      else if (touche='haut') then //si toucheClavier = touche du haut pressée alors on passe à l'élément précédent du tableau
+      else if (touche=33619745) then //si toucheClavier = touche du haut pressée alors on passe à l'élément précédent du tableau
          begin
             //itemActuel:=itemActuel-1; //décrémentation de index
             SetItemActuel(-1); //décrémentation de index du menu
@@ -110,9 +110,9 @@ implementation
     end;
 
   //fonction qui renvoie l'item choisie si l'user appuie sur entrée
-  function getItemChoisie(touche: String):Integer;
+  function getItemChoisie(touche: TkeyEvent):Integer;
     begin
-      if (touche='entree') then
+      if (touche=7181) then
          getItemChoisie:=getItemActuel(); //renvoie l'item du menu qu'a choisie l'user
     end;
 end.
