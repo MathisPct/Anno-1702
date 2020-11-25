@@ -107,7 +107,7 @@ implementation
   {Procédure qui colorier l'élément actuel sur lequel est placé l'utilisateur}
   procedure colorierElementActuel();
   begin
-    //colorie la zone qui est l'élément actuel sur lequel l'user est placé
+    //colorie la zone en fonction de l'élément actuel sur lequel l'user est placé
     case getItemActuel() of
       1 : ColorierZone(1,15,10,10+30,itemsCoordY[1]) ; //colorie le 1er item
       2 : ColorierZone(1,15,10,10+30,itemsCoordY[2]) ; //colorie le 2eme item
@@ -150,12 +150,12 @@ implementation
           //si on vient d'arriver sur le menu on initialise l'affichage des éléments du menu, initialisation de l'item actuel à 1 etc
           if (nbTourBoucle=0) then
             begin
-               // initialisation du module keyboard
-               InitKeyboard;//initialisation du mondule
-              //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
-              initialisationItemActuel(1);
-              //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
-              initialisationItemAnterieur();
+             // initialisation du module keyboard
+             InitKeyboard;//initialisation du mondule
+            //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
+            initialisationItemActuel(1);
+            //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
+            initialisationItemAnterieur();
              //affichage des rectangles, du texte et du menu
              affichage();// affichage des rectangles du nom du menu et de tous les items du menu
             end

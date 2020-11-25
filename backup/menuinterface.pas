@@ -150,12 +150,12 @@ implementation
           //si on vient d'arriver sur le menu on initialise l'affichage des éléments du menu, initialisation de l'item actuel à 1 etc
           if (nbTourBoucle=0) then
             begin
-               // initialisation du module keyboard
-               InitKeyboard;//initialisation du mondule
-              //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
-              initialisationItemActuel(1);
-              //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
-              initialisationItemAnterieur();
+             // initialisation du module keyboard
+             InitKeyboard;//initialisation du mondule
+            //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
+            initialisationItemActuel(1);
+            //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
+            initialisationItemAnterieur();
              //affichage des rectangles, du texte et du menu
              affichage();// affichage des rectangles du nom du menu et de tous les items du menu
             end
@@ -175,7 +175,7 @@ implementation
             effacerEcran;
             running:=False;
             while true do
-                  write(menuInterfa[1]);
+              write(menuInterfa[1]);
             end
           else if (getItemChoisie(touche)=2) then
             writeln(menuInterfa[2])
