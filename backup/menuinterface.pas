@@ -111,6 +111,17 @@ implementation
     end
   end;
 
+  procedure reintialiserElementAnterieur();
+    begin
+      //rétablie la couleur de l'élément précedemment choisie par l'user
+      case getItemAnterieur() of
+        1 : ColorierZone(0,15,10,10+20,itemsCoordY[1]); //rétablie la couleur du 1er item
+        2 : ColorierZone(0,15,10,10+20,itemsCoordY[2]); //rétablie la couleur du 1er item
+        3 : ColorierZone(0,15,10,10+20,itemsCoordY[3]); //rétablie la couleur du 1er item
+        4 : ColorierZone(0,15,10,10+20,itemsCoordY[4]); //rétablie la couleur du 1er item
+      end;
+    end;
+
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu}
   //créer la procédure ICIIII
   procedure affichage();
@@ -126,7 +137,6 @@ implementation
       running: Boolean; //variable booleenne qui permet de demarrer le menu
     begin
       running:=True; //initialisation de running à true quand on arrive sur le menu
-
       //tant que le menu est lancé executé les instructions
       while (running=True) do
           begin
@@ -135,7 +145,9 @@ implementation
             begin
               //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
               initialisationItemActuel(1);
-
+              //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
+              initialisationItemAnterieur();
+               affichage();// affichage des rectangles du nom du menu et de tous les items du menu
               {
               //affichage des rectangles, du texte et du menu
               rectangleZoneJeu(); //dessine le rectangle de la zone de jeu
@@ -146,7 +158,6 @@ implementation
               //FIN affichage des rectangles, du texte et du menu...
               }
             end
-
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
           else if(nbTourBoucle>=1) then
             begin
@@ -157,13 +168,11 @@ implementation
               //affichageItemsMenu();
               //FIN affichage des rectangles, du texte et du menu...
 
-              affichage;// affichage des rectangles du nom du menu et de tous les items du menu
               //navigationTabMenu(menuInterfa,toucheClavier(),getItemChoisi()); //appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
               navigationTabMenu(menuInterfa,toucheClavier(),getItemActuel());
-
               //affichage test
               colorierElementActuel();
-
+              reintialiserElementAnterieur();
               //writeln('L''item actuel est: ',getItemActuel()); //affichage de l'item actuel quand on appuie sur les flèches haut et bas
               //fonction qui renvoie l'item choisie si l'user appuie sur entrée
               //writeln('L''item choisie est',getItemChoisie(toucheClavier())); //affichage de l'item choisie quand on appuie sur entrée
@@ -172,7 +181,6 @@ implementation
               //effacerEcran; //mise à jour de l'affichage de l'écran
 
             end;
-
           incrementaNbTourBoucle(); //incrémentation du tour de boucle
         end;
     end;
