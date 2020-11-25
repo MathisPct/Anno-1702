@@ -53,7 +53,7 @@ implementation
    //procédure qui modifie la valeur de la variable itemAnterieur
    procedure SetItemAnterieur(valeur:Integer);
    begin
-      itemAnterieur:=getItemAnterieur()+valeur; //incrémentation ou décrémentation suivant les valeurs des touches du clavier
+      itemAnterieur:=valeur; //incrémentation ou décrémentation suivant les valeurs des touches du clavier
    end;
 
   //fonction qui renvoie la valeur de la variable itemAnterieur
@@ -85,20 +85,20 @@ implementation
          begin
            //itemActuel:=itemActuel+1; //incrémentation de index
             SetItemActuel(1); //incrémentation de l'index du menu
-            SetItemAnterieur(-1); //désincrémentation de l'index antérieur choisie
+            SetItemAnterieur(getItemActuel()-1);
          end
       else if (touche='haut') then //si toucheClavier = touche du haut pressée alors on passe à l'élément précédent du tableau
          begin
             //itemActuel:=itemActuel-1; //décrémentation de index
             SetItemActuel(-1); //décrémentation de index du menu
-            SetItemAnterieur(+1);//incrémentation de l'index antérieur choisie
+            SetItemAnterieur(getItemActuel()+1);
          end;
       {si la position est inférieur à 1 cela veut dire qu'on sort du tableau, donc pour patche ce soucis on revient au dernier élément du tableau}
       if (getItemActuel()<1) then
          begin
          //itemActuel:=totaleItems //revient au dernier élément du menu
          SetItemActuel(totaleItems); //revient au dernier élément du menu
-         initialisationItemAnterieur() //revient au premier élément du menu
+         SetItemAnterieur(1);
          end
       {si la position est supérieur à; la taille du tableau cela veut dire qu'on sort du tableau, donc pour patche ce soucis on revient au
       premier élément du tableau}
@@ -106,7 +106,6 @@ implementation
          begin
          //itemActuel:=1;  //revient au premier élément du menu
          initialisationItemActuel(1); //revient au premier élément du menu
-         SetItemAnterieur(totaleItems); //reste au dernier élément du menu
          end;
     end;
 
@@ -114,10 +113,7 @@ implementation
   function getItemChoisie(touche: String):Integer;
     begin
       if (touche='entree') then
-         getItemChoisie:=getItemActuel() //renvoie l'item du menu qu'a choisie l'user
-      else
-         getItemChoisie:=0; //pas d'item choisie
+         getItemChoisie:=getItemActuel(); //renvoie l'item du menu qu'a choisie l'user
     end;
-
 end.
 
