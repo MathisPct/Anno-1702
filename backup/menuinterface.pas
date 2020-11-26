@@ -23,17 +23,27 @@ implementation
       txtTest='Test1';
       txtTest2='Test2';
 
+      //Déclaration des abcisses de notre menu
+      txtSuivantX= 10; //abcisse de txtSuivant à 30px
+      txtGestionbatimentX=10; //abcisse de txtGestionbatiment 35px
+      txtQuitterX=10; //abcisse de txtGestionbatiment à 40px
+      txtTestX=10;  //abcisse de txtGestionbatiment à 45px
+      txtTest2X=30; //abcisse de txtTest2 à 50px
+
       //Déclaration des ordonnées de notre menu
       txtSuivantY= 30; //ordonnée de txtSuivant à 30px
       txtGestionbatimentY=35; //ordonnée de txtGestionbatiment 35px
-      txtQuitterY=40; //ordonnée de txtGestionbatiment 40px
-      txtTestY=45;  //ordonnée de txtGestionbatiment 45px
-      txtTest2Y=50;
+      txtQuitterY=40; //ordonnée de txtGestionbatiment à 40px
+      txtTestY=45;  //ordonnée de txtGestionbatiment à 45px
+      txtTest2Y=45; //ordonnée de txtTest2 à 50px
 
   //type connue de toute l'unité
   type
    //déclaration type menu qui est un type qui sert à contenir les différents items de notre menu
    menu = array[1..totaleItemsMenu] of String;
+
+   //déclaration type tabCoordXItem qui est un type qui sert à contenir les différentes abcisses où sont placées les items de notre menu
+   tabCoordXItem = array[1..totaleItemsMenu] of Integer;
 
    //déclaration type tabCoordYItem qui est un type qui sert à contenir les différentes ordonnées où sont placées les items de notre menu
    tabCoordYItem = array[1..totaleItemsMenu] of Integer;
@@ -45,9 +55,11 @@ implementation
 
     nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
 
-    menuInterfa:menu=(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte de notre menu
+    menuInterfa:menu=(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte du menu
 
-    itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents item texte de notre menu
+    itemsCoordX: tabCoordXItem = (txtSuivantX,txtGestionbatimentX,txtQuitterX,txtTestX,txtTest2X); //tableau qui contient les différents abcisses des items du menu
+
+    itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
 
   {Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
   procedure initiaNbTourBoucle();
@@ -97,23 +109,23 @@ implementation
   procedure affichageItemsMenu();
   begin
     //affichage des items du menu  (affichageItem est une fonction de gestionEcran)
-    affichageItem(menuInterfa[1],10,itemsCoordY[1]); //affichage de l'item 1 du menu avec les coordonnées de cette item
-    affichageItem(menuInterfa[2],10,itemsCoordY[2]); //affichage de l'item 2 du menu
-    affichageItem(menuInterfa[3],10,itemsCoordY[3]); //affichage de l'item 3 du menu
-    affichageItem(menuInterfa[4],10,itemsCoordY[4]); //affichage de l'item 4 du menu
-    affichageItem(menuInterfa[5],10,itemsCoordY[5]); //affichage de l'item 4 du menu
+    affichageItem(menuInterfa[1],itemsCoordX[1],itemsCoordY[1]); //affichage de l'item 1 du menu avec les coordonnées de cette item
+    affichageItem(menuInterfa[2],itemsCoordX[2],itemsCoordY[2]); //affichage de l'item 2 du menu
+    affichageItem(menuInterfa[3],itemsCoordX[3],itemsCoordY[3]); //affichage de l'item 3 du menu
+    affichageItem(menuInterfa[4],itemsCoordX[4],itemsCoordY[4]); //affichage de l'item 4 du menu
+    affichageItem(menuInterfa[5],itemsCoordX[5],itemsCoordY[5]); //affichage de l'item 5 du menu
   end;
 
   {Procédure qui colorier l'élément actuel sur lequel est placé l'utilisateur}
   procedure colorierElementActuel();
   begin
-    //colorie la zone qui est l'élément actuel sur lequel l'user est placé
+    //colorie la zone en fonction de l'élément actuel sur lequel l'user est placé
     case getItemActuel() of
-      1 : ColorierZone(1,15,10,10+30,itemsCoordY[1]) ; //colorie le 1er item
-      2 : ColorierZone(1,15,10,10+30,itemsCoordY[2]) ; //colorie le 2eme item
-      3 : ColorierZone(1,15,10,10+30,itemsCoordY[3]) ; //colorie le 3eme item
-      4 : ColorierZone(1,15,10,10+30,itemsCoordY[4]) ; //colorie le 4eme item
-      5 : ColorierZone(1,15,10,10+30,itemsCoordY[5]) ; //colorie le 4eme item
+      1 : ColorierZone(1,15,itemsCoordX[1],itemsCoordX[1]+30,itemsCoordY[1]) ; //colorie le 1er item
+      2 : ColorierZone(1,15,itemsCoordX[2],itemsCoordX[2]+30,itemsCoordY[2]) ; //colorie le 2eme item
+      3 : ColorierZone(1,15,itemsCoordX[3],itemsCoordX[3]+30,itemsCoordY[3]) ; //colorie le 3eme item
+      4 : ColorierZone(1,15,itemsCoordX[4],itemsCoordX[4]+30,itemsCoordY[4]) ; //colorie le 4eme item
+      5 : ColorierZone(1,15,itemsCoordX[5],itemsCoordX[5]+30,itemsCoordY[5]) ; //colorie le 5eme item
     end
   end;
 
@@ -121,11 +133,11 @@ implementation
     begin
       //rétablie la couleur de l'élément précedemment choisie par l'user
       case getItemAnterieur() of
-        1 : ColorierZone(0,15,10,10+30,itemsCoordY[1]); //rétablie la couleur du 1er item
-        2 : ColorierZone(0,15,10,10+30,itemsCoordY[2]); //rétablie la couleur du 1er item
-        3 : ColorierZone(0,15,10,10+30,itemsCoordY[3]); //rétablie la couleur du 1er item
-        4 : ColorierZone(0,15,10,10+30,itemsCoordY[4]); //rétablie la couleur du 1er item
-        5 : ColorierZone(0,15,10,10+30,itemsCoordY[5]); //rétablie la couleur du 1er item
+        1 : ColorierZone(0,15,itemsCoordX[1],itemsCoordX[1]+30,itemsCoordY[1]); //rétablie la couleur du 1er item
+        2 : ColorierZone(0,15,itemsCoordX[2],itemsCoordX[2]+30,itemsCoordY[2]); //rétablie la couleur du 1er item
+        3 : ColorierZone(0,15,itemsCoordX[3],itemsCoordX[3]+30,itemsCoordY[3]); //rétablie la couleur du 1er item
+        4 : ColorierZone(0,15,itemsCoordX[4],itemsCoordX[4]+30,itemsCoordY[4]); //rétablie la couleur du 1er item
+        5 : ColorierZone(0,15,itemsCoordX[5],itemsCoordX[5]+30,itemsCoordY[5]); //rétablie la couleur du 1er item
       end;
     end;
 
