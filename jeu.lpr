@@ -22,7 +22,7 @@ begin
   initEcran();
   //initialisation de la variable jeu à true, au départ on démarre le jeu
   boucleJeu:=True;
-  while (boucleJeu=True) //tant qu'on est dans le jeu
+  {while (boucleJeu=True) //tant qu'on est dans le jeu
     begin
     nbTourBoucle;=0;//initialisation du nb de tour de boucle
     while (menuAccueil=True) do
@@ -38,10 +38,10 @@ begin
         if (nbTourBoucle=0) then
            writeln('menuCreaPartie');  //appel du menu de creation de partie
         nbTourBoucle:=nbTourBoucle+1;
-      end;
+      end;}
     mainMenuInterface(); //appel du menuInterface
     boucleJeu:=False;//fin du jeu, on quitte la boucle du jeu
-    end;
+    //end;
     writeln('fin du jeu'); //On quitte la partie
   readln()
 end.

@@ -15,6 +15,7 @@ var
   menuCreaPartie:Boolean; //variable de type boolean, qui est la boucle de menu de création de partie
 
   nbTourBoucle: integer; //variable de type integer, qui est le nb de tour dans une boucle
+  touche:TKeyEvent;
 
 begin
   //initialisation de l'écran (taille,couleur...)
