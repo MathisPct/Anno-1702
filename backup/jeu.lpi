@@ -26,7 +26,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="6">
+    <Units Count="8">
       <Unit0>
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -56,6 +56,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="evenementClavier"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="menuaccueil.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="menuAccueil"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="bouclesjeux.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="bouclesJeux"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
