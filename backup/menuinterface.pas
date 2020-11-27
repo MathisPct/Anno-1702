@@ -5,7 +5,7 @@ unit menuInterface;
 
 interface
 
-uses gestionecran,navigationMenues,evenementClavier,Keyboard; //appel des unités
+uses gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux; //appel des unités
 
 procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
 
@@ -53,7 +53,7 @@ implementation
 
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
 
-    nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
+    //nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
 
     menuInterfa:menu=(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte du menu
 
@@ -61,6 +61,7 @@ implementation
 
     itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
 
+    {
   {Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
   procedure initiaNbTourBoucle();
     begin
@@ -78,6 +79,7 @@ implementation
   begin
        getNbTourBoucle := nbTourBoucle;
   end;
+  }
 
   {Procédure qui dessine le rectangle de la zone du jeu}
   procedure rectangleZoneJeu();
@@ -155,16 +157,15 @@ implementation
     var
       running: Boolean; //variable booleenne qui permet de demarrer le menu
     begin
+      initiaNbTourBoucle(); //initialisation du nb de tour de boucle
       running:=True; //initialisation de running à true quand on arrive sur le menu
       //tant que le menu est lancé executé les instructions
       while (running=True) do
           begin
           //si on vient d'arriver sur le menu on initialise l'affichage des éléments du menu, initialisation de l'item actuel à 1 etc
-          if (nbTourBoucle=0) then
+          if (getNbTourBoucle()=0) then
             begin
             effacerEcran; //raffraichissement de l'écran car on est passé sur un autre menu
-             // initialisation du module keyboard
-             InitKeyboard;//initialisation du module
             //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
             initialisationItemActuel(1);
             //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
@@ -173,7 +174,7 @@ implementation
              affichage();// affichage des rectangles du nom du menu et de tous les items du menu
             end
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
-          else if(nbTourBoucle>=1) then
+          else if(getNbTourBoucle>=1) then
             touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
             touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
             begin
