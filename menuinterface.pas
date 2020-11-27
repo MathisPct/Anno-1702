@@ -53,8 +53,6 @@ implementation
 
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
 
-    //nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
-
     menuInterfa:menu=(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte du menu
 
     itemsCoordX: tabCoordXItem = (txtSuivantX,txtGestionbatimentX,txtQuitterX,txtTestX,txtTest2X); //tableau qui contient les différents abcisses des items du menu
@@ -98,7 +96,6 @@ implementation
     end;
 
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu}
-  //créer la procédure ICIIII
   procedure affichage();
   begin
     rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran

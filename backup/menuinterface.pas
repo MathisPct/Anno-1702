@@ -53,24 +53,11 @@ implementation
 
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
 
-    //nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
-
     menuInterfa:menu=(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte du menu
 
     itemsCoordX: tabCoordXItem = (txtSuivantX,txtGestionbatimentX,txtQuitterX,txtTestX,txtTest2X); //tableau qui contient les différents abcisses des items du menu
 
     itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
-
-  {Procédure qui affiche un item présents dans le menu en position X et Y}
-  procedure affichageItem(item:String;posX,posY:Integer);
-  var
-    posItem: coordonnees; //variable, coordonnées de placement d'un item avec sa position en x et en y
-  begin
-    posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
-    posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
-
-    ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
-  end;
 
   {Procédure qui affiche tous les items du menu en position X et Y}
   procedure affichageItemsMenu();
@@ -109,7 +96,6 @@ implementation
     end;
 
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu}
-  //créer la procédure ICIIII
   procedure affichage();
   begin
     rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
