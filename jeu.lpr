@@ -26,10 +26,9 @@ begin
   boucleJeu:=True;
   while (boucleJeu=True) do //tant qu'on est dans le jeu
     begin
-    initiaNbTourBoucle(); //initialisation du nb de tour de boucle
-    menuInterfaAccueil:=True; //initialisation de la boucle du menuAccueil à true (quand on arrive sur le jeu)
     mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil
     menuCreaPartie:=True;
+    initiaNbTourBoucle; //initialise la boucle car on arrive sur le nouveau menu menu
     while (menuCreaPartie=True) do
       begin
         if (getNbTourBoucle=0) then
