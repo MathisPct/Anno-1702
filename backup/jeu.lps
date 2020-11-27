@@ -8,10 +8,8 @@
       <Unit0>
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="20"/>
-        <CursorPos X="28" Y="33"/>
-        <UsageCount Value="50"/>
+        <CursorPos X="15" Y="31"/>
+        <UsageCount Value="51"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -21,7 +19,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="33"/>
         <CursorPos X="4" Y="64"/>
-        <UsageCount Value="50"/>
+        <UsageCount Value="51"/>
       </Unit1>
       <Unit2>
         <Filename Value="initialisationecran.pas"/>
@@ -29,7 +27,7 @@
         <UnitName Value="initialisationEcran"/>
         <EditorIndex Value="6"/>
         <CursorPos X="28" Y="19"/>
-        <UsageCount Value="50"/>
+        <UsageCount Value="51"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -39,16 +37,18 @@
         <EditorIndex Value="4"/>
         <TopLine Value="93"/>
         <CursorPos X="67" Y="14"/>
-        <UsageCount Value="49"/>
+        <UsageCount Value="50"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="menuinterface.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuInterface"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="124"/>
-        <UsageCount Value="47"/>
+        <TopLine Value="92"/>
+        <CursorPos X="27" Y="101"/>
+        <UsageCount Value="48"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -58,7 +58,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="11"/>
         <CursorPos X="27" Y="32"/>
-        <UsageCount Value="47"/>
+        <UsageCount Value="48"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -66,9 +66,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuAccueil"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="104"/>
-        <CursorPos X="19" Y="117"/>
-        <UsageCount Value="22"/>
+        <TopLine Value="56"/>
+        <CursorPos Y="133"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -77,8 +77,8 @@
         <UnitName Value="bouclesJeux"/>
         <EditorIndex Value="3"/>
         <TopLine Value="53"/>
-        <CursorPos Y="28"/>
-        <UsageCount Value="22"/>
+        <CursorPos X="19" Y="61"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -104,7 +104,7 @@
         <Filename Value="gestionecran.pas"/>
         <UnitName Value="GestionEcran"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="40"/>
+        <TopLine Value="10"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit11>
