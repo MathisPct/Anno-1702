@@ -24,18 +24,18 @@ implementation
       txtTest2='Test2';
 
       //Déclaration des abcisses de notre menu
-      txtSuivantX= 10; //abcisse de txtSuivant à 30px
-      txtGestionbatimentX=10; //abcisse de txtGestionbatiment 35px
-      txtQuitterX=10; //abcisse de txtGestionbatiment à 40px
-      txtTestX=10;  //abcisse de txtGestionbatiment à 45px
-      txtTest2X=60; //abcisse de txtTest2 à 50px
+      txtSuivantX= 15; //abcisse de txtSuivant
+      txtGestionbatimentX=15; //abcisse de txtGestionbatiment
+      txtQuitterX=15; //abcisse de txtGestionbatiment
+      txtTestX=15;  //abcisse de txtGestionbatiment
+      txtTest2X=15; //abcisse de txtTest2
 
       //Déclaration des ordonnées de notre menu
-      txtSuivantY= 30; //ordonnée de txtSuivant à 30px
-      txtGestionbatimentY=35; //ordonnée de txtGestionbatiment 35px
-      txtQuitterY=40; //ordonnée de txtGestionbatiment à 40px
-      txtTestY=45;  //ordonnée de txtGestionbatiment à 45px
-      txtTest2Y=40; //ordonnée de txtTest2 à 50px
+      txtSuivantY= 40; //ordonnée de txtSuivant
+      txtGestionbatimentY=42; //ordonnée de txtGestionbatiment
+      txtQuitterY=48; //ordonnée de txtGestionbatiment
+      txtTestY=50;  //ordonnée de txtGestionbatiment
+      txtTest2Y=52; //ordonnée de txtTest2
 
   //type connue de toute l'unité
   type
@@ -95,12 +95,33 @@ implementation
       end;
     end;
 
+  {Procédure qui dessine le cadre dans lequel on affiche les différentes ressources}
+  procedure dessinerCadreLsRessources();
+  begin
+    dessinerCadreXY(100+10,10,190,55,simple,15,0); //procédure qui dessine le cadre
+  end;
+
+  {Procédure qui dessine le cadre dans lequel on afficha la description}
+  procedure dessinerCadreDescription();
+  begin
+    dessinerCadreXY(10,10,90,20,simple,15,0); //procédure qui dessine le cadre
+  end;
+
+  {Procédure qui dessine le cadre dans lequel on afficha la liste des habitants}
+  procedure dessinerCadreLsHab();
+  begin
+    dessinerCadreXY(10,25,90,35,simple,15,0); //procédure qui dessine le cadre
+  end;
+
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu}
   procedure affichage();
   begin
     rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
     cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
     affichageItemsMenu; //procédure qui affiche tous les items du menu en position X et Y
+    dessinerCadreLsRessources(); {Procédure qui dessine le cadre dans lequel on affiche les différentes ressources}
+    dessinerCadreLsHab();
+    dessinerCadreDescription(); {Procédure qui dessine le cadre dans lequel on afficha la description}
   end;
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu interface }

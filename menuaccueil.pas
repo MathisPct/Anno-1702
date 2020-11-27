@@ -129,9 +129,7 @@ implementation
               menu:=False;
               Exit; //on quitte le jeu
             end;
-
         end;
-
     end;
 
 end.

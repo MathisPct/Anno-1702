@@ -109,9 +109,9 @@ implementation
 
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
           else if(getNbTourBoucle>=1) then
+            touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
+            touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
             begin
-              touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
-              touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
               navigationTabMenu(menuInterfaAccueil,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
               colorierElementActuel(); //colorie l'item actuel sur lequel l'user est
               reintialiserElementAnterieur(); //réintialise la couleur de l'item précedemment choisie
@@ -129,9 +129,7 @@ implementation
               menu:=False;
               Exit; //on quitte le jeu
             end;
-
         end;
-
     end;
 
 end.
