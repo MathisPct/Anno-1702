@@ -162,8 +162,7 @@ implementation
           //si on vient d'arriver sur le menu on initialise l'affichage des éléments du menu, initialisation de l'item actuel à 1 etc
           if (nbTourBoucle=0) then
             begin
-             // initialisation du module keyboard
-             InitKeyboard;//initialisation du mondule
+            effacerEcran; //raffraichissement de l'écran car on est passé sur un autre menu
             //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
             initialisationItemActuel(1);
             //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu

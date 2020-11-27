@@ -28,14 +28,14 @@ implementation
       txtGestionbatimentX=10; //abcisse de txtGestionbatiment 35px
       txtQuitterX=10; //abcisse de txtGestionbatiment à 40px
       txtTestX=10;  //abcisse de txtGestionbatiment à 45px
-      txtTest2X=30; //abcisse de txtTest2 à 50px
+      txtTest2X=60; //abcisse de txtTest2 à 50px
 
       //Déclaration des ordonnées de notre menu
       txtSuivantY= 30; //ordonnée de txtSuivant à 30px
       txtGestionbatimentY=35; //ordonnée de txtGestionbatiment 35px
       txtQuitterY=40; //ordonnée de txtGestionbatiment à 40px
       txtTestY=45;  //ordonnée de txtGestionbatiment à 45px
-      txtTest2Y=45; //ordonnée de txtTest2 à 50px
+      txtTest2Y=40; //ordonnée de txtTest2 à 50px
 
   //type connue de toute l'unité
   type
@@ -162,8 +162,9 @@ implementation
           //si on vient d'arriver sur le menu on initialise l'affichage des éléments du menu, initialisation de l'item actuel à 1 etc
           if (nbTourBoucle=0) then
             begin
+            effacerEcran; //raffraichissement de l'écran car on est passé sur un autre menu
              // initialisation du module keyboard
-             InitKeyboard;//initialisation du mondule
+             InitKeyboard;//initialisation du module
             //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
             initialisationItemActuel(1);
             //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
