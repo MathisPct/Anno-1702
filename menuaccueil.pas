@@ -1,3 +1,4 @@
+{$codepage utf8}
 unit menuAccueil;
 
 {$mode objfpc}{$H+}
@@ -24,11 +25,11 @@ implementation
 
     //Déclaration des abcisses de notre menu
     txtNewPartieX= 10; //abcisse de txtSuivant à 30px
-    txtQuitterX=10; //abcisse de txtGestionbatiment à 40px
+    txtQuitterX=10; //abcisse de txtGestionbatiment à 10px
 
     //Déclaration des ordonnées de notre menu
-    txtNewPartieY= 20; //ordonnée de txtSuivant à 30px
-    txtQuitterY=30; //ordonnée de txtGestionbatiment à 40px
+    txtNewPartieY= 20; //ordonnée de txtSuivant à 20px
+    txtQuitterY=30; //ordonnée de txtGestionbatiment à 30px
 
   //type connue de toute l'unité
   type
@@ -44,8 +45,6 @@ implementation
    //déclaration des variables connues de toute l'unité
     var
       touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
-
-      nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
 
       menuInterfaAccueil:menu=(txtNewPartie,txtQuitter); //tableau qui contient les différents item texte du menu
       itemsCoordX: tabCoordXItem = (txtNewPartieX,txtQuitterX); //tableau qui contient les différents abcisses des items du menu
@@ -110,9 +109,9 @@ implementation
 
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
           else if(getNbTourBoucle>=1) then
+            touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
+            touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
             begin
-              touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
-              touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
               navigationTabMenu(menuInterfaAccueil,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
               colorierElementActuel(); //colorie l'item actuel sur lequel l'user est
               reintialiserElementAnterieur(); //réintialise la couleur de l'item précedemment choisie

@@ -1,3 +1,4 @@
+{$codepage utf8}
 unit menuAccueil;
 
 {$mode objfpc}{$H+}
@@ -24,11 +25,11 @@ implementation
 
     //Déclaration des abcisses de notre menu
     txtNewPartieX= 10; //abcisse de txtSuivant à 30px
-    txtQuitterX=10; //abcisse de txtGestionbatiment à 40px
+    txtQuitterX=10; //abcisse de txtGestionbatiment à 10px
 
     //Déclaration des ordonnées de notre menu
-    txtNewPartieY= 30; //ordonnée de txtSuivant à 30px
-    txtQuitterY=40; //ordonnée de txtGestionbatiment à 40px
+    txtNewPartieY= 20; //ordonnée de txtSuivant à 20px
+    txtQuitterY=30; //ordonnée de txtGestionbatiment à 30px
 
   //type connue de toute l'unité
   type
@@ -44,8 +45,6 @@ implementation
    //déclaration des variables connues de toute l'unité
     var
       touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
-
-      nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
 
       menuInterfaAccueil:menu=(txtNewPartie,txtQuitter); //tableau qui contient les différents item texte du menu
       itemsCoordX: tabCoordXItem = (txtNewPartieX,txtQuitterX); //tableau qui contient les différents abcisses des items du menu
