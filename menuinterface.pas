@@ -61,17 +61,6 @@ implementation
 
     itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
 
-  {Procédure qui affiche un item présents dans le menu en position X et Y}
-  procedure affichageItem(item:String;posX,posY:Integer);
-  var
-    posItem: coordonnees; //variable, coordonnées de placement d'un item avec sa position en x et en y
-  begin
-    posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
-    posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
-
-    ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
-  end;
-
   {Procédure qui affiche tous les items du menu en position X et Y}
   procedure affichageItemsMenu();
   begin

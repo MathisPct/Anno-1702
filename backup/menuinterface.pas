@@ -61,21 +61,6 @@ implementation
 
     itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
 
-  {Procédure qui dessine le rectangle de la zone du jeu}
-  procedure rectangleZoneJeu();
-    begin
-     //zone de jeu
-      dessinerCadreXY(3,3,197,57,simple,15,0);
-    end;
-
-  {Procédure qui affiche le cadre entourant le texte Bienvenue sur 'NomIle'}
-  procedure cadreTxtNomMenu();
-    begin
-      dessinerCadreXY(80-10,1,80,5-2,simple,15,0); //petit rectangle décors gauche
-      dessinerCadreXY(120,1,120+10,5-2,simple,15,0); //petit rectangle décors droit
-      dessinerCadreXY(80,1,120,5,simple,15,0); //rectangle entourant le texte Création d'une nouvelle partie
-    end;
-
   {Procédure qui affiche un item présents dans le menu en position X et Y}
   procedure affichageItem(item:String;posX,posY:Integer);
   var
