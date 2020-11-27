@@ -24,6 +24,10 @@ function getNbTourBoucle(): Integer;
  {Procédure qui affiche le cadre entourant le texte Bienvenue sur 'NomIle'}
  procedure cadreTxtNomMenu();
 
+
+ {Procédure qui affiche un item présents dans le menu en position X et Y}
+procedure affichageItem(item:String;posX,posY:Integer);
+
 implementation
   //variables connues de toute l'unité
   var
@@ -64,6 +68,18 @@ implementation
       dessinerCadreXY(120,1,120+10,5-2,simple,15,0); //petit rectangle décors droit
       dessinerCadreXY(80,1,120,5,simple,15,0); //rectangle entourant le texte Création d'une nouvelle partie
     end;
+
+   //--------------FIN Procédures qui servent à décorer la zone de jeu---------------//
+
+  {Procédure qui affiche un item présents dans le menu en position X et Y}
+  procedure affichageItem(item:String;posX,posY:Integer);
+  var
+    posItem: coordonnees; //variable, coordonnées de placement d'un item avec sa position en x et en y
+  begin
+    posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
+    posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
+    ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
+  end;
 
 end.
 
