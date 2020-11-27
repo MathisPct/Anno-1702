@@ -61,26 +61,6 @@ implementation
 
     itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
 
-    {
-  {Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
-  procedure initiaNbTourBoucle();
-    begin
-      nbTourBoucle:=1; //initialisation du nb de tour de boucle à 1 quand on arrive sur le menu
-    end;
-
-  {Procédure qui modifie le nbTourBoucle : incrémente de 1 le nb de tour de boucle }
-  procedure incrementaNbTourBoucle();
-    begin
-      nbTourBoucle:=nbTourBoucle+1;//incrémentation du nombre de tours dans la boucle
-    end;
-
-  //Cette fonction renvoie la valeur de la variable nbTourBoucle
-  function getNbTourBoucle(): Integer;
-  begin
-       getNbTourBoucle := nbTourBoucle;
-  end;
-  }
-
   {Procédure qui dessine le rectangle de la zone du jeu}
   procedure rectangleZoneJeu();
     begin
@@ -157,7 +137,7 @@ implementation
     var
       running: Boolean; //variable booleenne qui permet de demarrer le menu
     begin
-      initiaNbTourBoucle(); //initialisation du nb de tour de boucle
+      initiaNbTourBoucle(); //initialisation du nb de tour de boucle quand on arrive sur le menu
       running:=True; //initialisation de running à true quand on arrive sur le menu
       //tant que le menu est lancé executé les instructions
       while (running=True) do
