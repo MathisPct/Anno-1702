@@ -8,9 +8,10 @@
       <Unit0>
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="12"/>
-        <CursorPos X="30" Y="27"/>
-        <UsageCount Value="62"/>
+        <CursorPos X="25" Y="27"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -20,7 +21,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="33"/>
         <CursorPos X="4" Y="64"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="63"/>
       </Unit1>
       <Unit2>
         <Filename Value="initialisationecran.pas"/>
@@ -28,7 +29,7 @@
         <UnitName Value="initialisationEcran"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="19"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="63"/>
       </Unit2>
       <Unit3>
         <Filename Value="navigationmenues.pas"/>
@@ -37,7 +38,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="93"/>
         <CursorPos X="40" Y="42"/>
-        <UsageCount Value="61"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -45,9 +46,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuInterface"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="161"/>
-        <CursorPos X="10" Y="161"/>
-        <UsageCount Value="59"/>
+        <TopLine Value="160"/>
+        <CursorPos X="13" Y="175"/>
+        <UsageCount Value="60"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -56,17 +57,16 @@
         <UnitName Value="evenementClavier"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="27" Y="32"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="60"/>
       </Unit5>
       <Unit6>
         <Filename Value="menuaccueil.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuAccueil"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="109"/>
-        <CursorPos X="66" Y="128"/>
-        <UsageCount Value="34"/>
+        <CursorPos X="15" Y="128"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -76,7 +76,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="64"/>
         <CursorPos Y="41"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -86,7 +86,7 @@
         <EditorIndex Value="1"/>
         <TopLine Value="104"/>
         <CursorPos X="28" Y="117"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
@@ -94,7 +94,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="28"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="29"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\..\..\..\..\..\AppData\Local\Temp\Rar$DIa23836.2823\testBordure.pas"/>

@@ -9,8 +9,8 @@
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="12"/>
-        <CursorPos X="25" Y="27"/>
+        <TopLine Value="10"/>
+        <CursorPos X="10" Y="18"/>
         <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -47,7 +47,7 @@
         <UnitName Value="menuInterface"/>
         <EditorIndex Value="2"/>
         <TopLine Value="160"/>
-        <CursorPos X="13" Y="175"/>
+        <CursorPos X="26" Y="169"/>
         <UsageCount Value="60"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -65,7 +65,7 @@
         <UnitName Value="menuAccueil"/>
         <EditorIndex Value="3"/>
         <TopLine Value="109"/>
-        <CursorPos X="15" Y="128"/>
+        <CursorPos X="20" Y="128"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit6>
@@ -85,7 +85,7 @@
         <UnitName Value="menuCreationPartie"/>
         <EditorIndex Value="1"/>
         <TopLine Value="104"/>
-        <CursorPos X="28" Y="117"/>
+        <CursorPos X="35" Y="122"/>
         <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit8>
