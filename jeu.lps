@@ -8,10 +8,9 @@
       <Unit0>
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="10"/>
-        <CursorPos X="10" Y="18"/>
-        <UsageCount Value="63"/>
+        <TopLine Value="9"/>
+        <CursorPos X="76" Y="19"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -21,7 +20,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="33"/>
         <CursorPos X="4" Y="64"/>
-        <UsageCount Value="63"/>
+        <UsageCount Value="65"/>
       </Unit1>
       <Unit2>
         <Filename Value="initialisationecran.pas"/>
@@ -29,26 +28,27 @@
         <UnitName Value="initialisationEcran"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="19"/>
-        <UsageCount Value="63"/>
+        <UsageCount Value="65"/>
       </Unit2>
       <Unit3>
         <Filename Value="navigationmenues.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="navigationMenues"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="93"/>
-        <CursorPos X="40" Y="42"/>
-        <UsageCount Value="62"/>
+        <TopLine Value="57"/>
+        <CursorPos X="36" Y="133"/>
+        <UsageCount Value="64"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="menuinterface.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuInterface"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="160"/>
-        <CursorPos X="26" Y="169"/>
-        <UsageCount Value="60"/>
+        <TopLine Value="155"/>
+        <CursorPos X="39" Y="161"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -57,16 +57,16 @@
         <UnitName Value="evenementClavier"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="27" Y="32"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="62"/>
       </Unit5>
       <Unit6>
         <Filename Value="menuaccueil.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuAccueil"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="109"/>
-        <CursorPos X="20" Y="128"/>
-        <UsageCount Value="35"/>
+        <TopLine Value="103"/>
+        <CursorPos X="84" Y="109"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -74,9 +74,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="bouclesJeux"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="64"/>
-        <CursorPos Y="41"/>
-        <UsageCount Value="35"/>
+        <TopLine Value="67"/>
+        <CursorPos X="2" Y="76"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -84,9 +84,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuCreationPartie"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="104"/>
-        <CursorPos X="35" Y="122"/>
-        <UsageCount Value="32"/>
+        <TopLine Value="102"/>
+        <CursorPos X="20" Y="118"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
@@ -94,7 +94,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="28"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="31"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\..\..\..\..\..\AppData\Local\Temp\Rar$DIa23836.2823\testBordure.pas"/>
@@ -121,11 +121,11 @@
         <EditorIndex Value="6"/>
         <TopLine Value="106"/>
         <CursorPos X="15" Y="202"/>
-        <UsageCount Value="18"/>
+        <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit13>
     </Units>
-    <JumpHistory Count="18" HistoryIndex="17">
+    <JumpHistory Count="21" HistoryIndex="20">
       <Position1>
         <Filename Value="menucreationpartie.pas"/>
         <Caret Line="123" Column="35" TopLine="103"/>
@@ -198,6 +198,18 @@
         <Filename Value="jeu.lpr"/>
         <Caret Line="35" Column="19" TopLine="12"/>
       </Position18>
+      <Position19>
+        <Filename Value="jeu.lpr"/>
+        <Caret Line="31" Column="7" TopLine="9"/>
+      </Position19>
+      <Position20>
+        <Filename Value="navigationmenues.pas"/>
+        <Caret Line="27" Column="24" TopLine="13"/>
+      </Position20>
+      <Position21>
+        <Filename Value="menuinterface.pas"/>
+        <Caret Line="160" Column="39" TopLine="155"/>
+      </Position21>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

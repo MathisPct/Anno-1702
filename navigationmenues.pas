@@ -18,8 +18,17 @@ function getItemActuel():Integer;
 //procedure qui modifie la valeur de la variable itemActuel
 procedure SetItemActuel(valeur:Integer);
 
+
+
+//procédure qui initialise l'item choisie: quand rien n'est choisie il est égale à 0
+procedure initItemChoisie();
+
 //fonction qui renvoie l'item choisie si l'user appuie sur entrée
-function getItemChoisie(touche: TkeyEvent):Integer;
+function getItemChoisie():Integer;
+
+//procédure qui modifie la valeur de l'item choisie si l'user appuie sur entrée
+procedure setItemChoisie(touche: TkeyEvent);
+
 
 //procédure qui initialise l'intem Anterieur à l'initialisation de l'itemActuel-1
 procedure initialisationItemAnterieur();
@@ -38,6 +47,8 @@ implementation
     itemActuel:Integer; {variable entière qui est la position dans le tableau des élèments du menu, est incrémenté ou désincrémenté si l'user
                             descend ou monte avec les flèches directionnelles du clavier}
     itemAnterieur: Integer; {variable entière qui est l'item qui est l'avant dernier item choisie par l'user}
+
+    itemChoisie: Integer; //variable entière qui est l'item choisi par l'user
 
    procedure initialisationItemActuel(valeur:Integer);  //cette procedure initialise l'itemActuel à un item du menu quand on lance le menu
      begin
@@ -109,11 +120,24 @@ implementation
          end;
     end;
 
-  //fonction qui renvoie l'item choisie si l'user appuie sur entrée
-  function getItemChoisie(touche: TkeyEvent):Integer;
+  //procédure qui initialise l'item choisie: quand rien n'est choisie il est égale à 0
+  procedure initItemChoisie();
+   begin
+     itemChoisie:=0;
+   end;
+
+  //procédure qui modifie la valeur de l'item choisie si l'user appuie sur entrée
+  procedure setItemChoisie(touche: TkeyEvent);
     begin
       if (touche=7181) then
-         getItemChoisie:=getItemActuel(); //renvoie l'item du menu qu'a choisie l'user
+         itemChoisie:=getItemActuel();
     end;
+
+  //fonction qui retourne la valeur de itemChoisie
+  function getItemChoisie():Integer;
+    begin
+      getItemChoisie:=itemChoisie; //renvoie l'item du menu qu'a choisie l'user
+    end;
+
 end.
 

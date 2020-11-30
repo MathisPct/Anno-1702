@@ -133,6 +133,7 @@ implementation
   procedure mainMenuInterface();
     var
       running: Boolean; //variable booleenne qui permet de demarrer le menu
+      runningTourSuivant: Boolean;
     begin
       initiaNbTourBoucle(); //initialisation du nb de tour de boucle quand on arrive sur le menu
       running:=True; //initialisation de running à true quand on arrive sur le menu
@@ -143,40 +144,67 @@ implementation
           if (getNbTourBoucle()=0) then
             begin
             effacerEcran; //raffraichissement de l'écran car on est passé sur un autre menu
+            initItemChoisie(); //initialisation de l'itemChoisie
             //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
             initialisationItemActuel(1);
             //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
             initialisationItemAnterieur();
              //affichage des rectangles, du texte et du menu
              affichage();// affichage des rectangles du nom du menu et de tous les items du menu
+             colorierElementActuel(); //initialisation de colorierElementActuel
             end
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
           else if(getNbTourBoucle>=1) then
-            touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
-            touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
             begin
-              navigationTabMenu(menuInterfa,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
-              //affichage test
+              touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
+              touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
+              setItemChoisie(touche);
+              navigationTabMenu(menuInterfa,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menucolorierElementActuel();
               colorierElementActuel();
               reintialiserElementAnterieur(); //réintialise la couleur de l'item précedemment choisie
             end;
           incrementaNbTourBoucle(); //incrémentation du tour de boucle
-          if (getItemChoisie(touche)=1) then
+
+          if (getItemChoisie()=1) then
             begin
-            effacerEcran;
-            running:=False;
-            while true do
-              write(menuInterfa[1]);
+              effacerEcran;
+              running:=False;
+              runningTourSuivant:=True;
+              while runningTourSuivant do
+                begin
+                writeln('Sous-Menu tour suivant') ;
+                ReadLn();
+                effacerEcran; //raffraichit l'écran
+                initiaNbTourBoucle;
+                initItemChoisie;
+                runningTourSuivant:=False;
+                running:=true;
+                end;
             end
-          else if (getItemChoisie(touche)=2) then
-            writeln(menuInterfa[2])
-          else if (getItemChoisie(touche)=3) then
+          else if (getItemChoisie()=2) then
+            //writeln(menuInterfa[2])
+             begin
+              effacerEcran;
+              running:=False;
+              runningTourSuivant:=True;
+              while runningTourSuivant do
+                begin
+                writeln('Sous-Menu Gestion des batiments') ;
+                ReadLn();
+                effacerEcran; //raffraichit l'écran
+                initiaNbTourBoucle;
+                initItemChoisie;
+                runningTourSuivant:=False;
+                running:=true;
+                end;
+            end
+          else if (getItemChoisie()=3) then
             begin
-              halt(); //quitte la fenêtre si l'user choisi quitter
+            halt(); //quitte la fenêtre si l'user choisi quitter
             end
-          else if (getItemChoisie(touche)=4) then
+          else if (getItemChoisie()=4) then
             writeln(menuInterfa[4])
-          else if (getItemChoisie(touche)=5) then
+          else if (getItemChoisie()=5) then
             writeln(menuInterfa[5])
         end;
     end;

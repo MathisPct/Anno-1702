@@ -101,6 +101,7 @@ implementation
           if (getNbTourBoucle()=0) then
             begin
             effacerEcran; //raffraichissement de l'écran car on vient d'arriver sur un autre menu
+            initItemChoisie(); //initialisation de l'itemChoisie
             initialisationItemActuel(1); //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
             initialisationItemAnterieur(); //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
             //affichage des rectangles, du texte et du menu
@@ -109,23 +110,24 @@ implementation
 
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
           else if(getNbTourBoucle>=1) then
-            touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
-            touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
             begin
+              touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
+              touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
+              setItemChoisie(touche);
               navigationTabMenu(menuInterfaAccueil,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
               colorierElementActuel(); //colorie l'item actuel sur lequel l'user est
               reintialiserElementAnterieur(); //réintialise la couleur de l'item précedemment choisie
             end;
           incrementaNbTourBoucle(); //incrémentation du tour de boucle
 
-          if (getItemChoisie(touche)=1) then
+          if (getItemChoisie()=1) then
             begin
             effacerEcran;
             menu:=False; // on passe au menu suivant
             end
-          else if (getItemChoisie(touche)=2) then
+          else if (getItemChoisie()=2) then
             begin
-              halt(); //procédure qui permet de fermer la fenêtre
+              halt(); //quitte la fenêtre si l'user choisi quitter
             end;
         end;
     end;
