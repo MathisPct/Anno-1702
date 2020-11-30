@@ -25,8 +25,8 @@ function getNbTourBoucle(): Integer;
  procedure cadreTxtNomMenu();
 
 
-   {Procédure qui affiche un item présents dans le menu en position X et Y}
-  procedure affichageItem(item:String;posX,posY:Integer);
+ {Procédure qui affiche un item présents dans le menu en position X et Y}
+procedure affichageItem(item:String;posX,posY:Integer);
 
 implementation
   //variables connues de toute l'unité
