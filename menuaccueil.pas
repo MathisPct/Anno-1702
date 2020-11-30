@@ -125,9 +125,7 @@ implementation
             end
           else if (getItemChoisie(touche)=2) then
             begin
-              effacerEcran;
-              menu:=False;
-              Exit; //on quitte le jeu
+              halt(); //quitte la fenêtre si l'user choisi quitter
             end;
         end;
     end;

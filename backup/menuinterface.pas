@@ -172,8 +172,7 @@ implementation
             writeln(menuInterfa[2])
           else if (getItemChoisie(touche)=3) then
             begin
-            writeln(menuInterfa[3]);
-            running:=False;
+              halt(); //quitte la fenêtre si l'user choisi quitter
             end
           else if (getItemChoisie(touche)=4) then
             writeln(menuInterfa[4])
