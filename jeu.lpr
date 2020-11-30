@@ -5,7 +5,7 @@ program jeu;
 {L'unité initialisationEcran sert à appeler toutes les composantes qui permettent
 d'initialiser l'écran (taille, couleur etc...)}
 uses Keyboard, menuNouvellePartie, initialisationEcran, menuInterface,
-  evenementClavier, GestionEcran, menuAccueil, bouclesJeux ;
+  evenementClavier, GestionEcran, menuAccueil, bouclesJeux, menuCreationPartie;
 
 //glossaire
 var
@@ -28,20 +28,8 @@ begin
     begin
     mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil
     menuCreaPartie:=True;
-    initiaNbTourBoucle; //initialise la boucle car on arrive sur le nouveau menu menu
-    while (menuCreaPartie=True) do
-      begin
-        if (getNbTourBoucle=0) then
-           begin
-           effacerEcran; //raffraichissement de l'écran car on est passé sur un autre menu
-           writeln('menuCreaPartie');  //appel du menu de creation de partie
-           end;
-        touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
-        touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
-        if (touche=7181) then  //on sort du menu si la touche 'Entree' est pressée
-           menuCreaPartie:=False;  //boucle à False donc on passe à l'autre boucle
-        incrementaNbTourBoucle(); //incrémentation de nb tour boucle
-      end;
+    //initiaNbTourBoucle; //initialise la boucle car on arrive sur le nouveau menu menu
+    mainMenuCreaPartie();
     mainMenuInterface(); //appel du menuInterface
     boucleJeu:=False;//fin du jeu, on quitte la boucle du jeu
     end;

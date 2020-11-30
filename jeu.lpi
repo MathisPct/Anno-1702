@@ -26,7 +26,12 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="8">
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="10">
       <Unit0>
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -66,6 +71,15 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="bouclesJeux"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="menucreationpartie.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="menuCreationPartie"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="personnage.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit9>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
