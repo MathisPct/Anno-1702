@@ -8,8 +8,8 @@
       <Unit0>
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <CursorPos X="19" Y="7"/>
+        <TopLine Value="13"/>
+        <CursorPos X="28" Y="28"/>
         <UsageCount Value="61"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -44,8 +44,10 @@
         <Filename Value="menuinterface.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuInterface"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <CursorPos X="35" Y="7"/>
+        <TopLine Value="154"/>
+        <CursorPos X="69" Y="176"/>
         <UsageCount Value="58"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -84,7 +86,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuCreationPartie"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="28"/>
+        <TopLine Value="88"/>
         <CursorPos X="5" Y="29"/>
         <UsageCount Value="30"/>
         <Loaded Value="True"/>
@@ -93,7 +95,6 @@
         <Filename Value="personnage.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="28"/>
         <CursorPos Y="28"/>
         <UsageCount Value="27"/>
         <Loaded Value="True"/>
@@ -130,123 +131,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="personnage.pas"/>
-        <Caret Line="12" Column="7"/>
+        <Caret Line="22" Column="14" TopLine="9"/>
       </Position1>
       <Position2>
         <Filename Value="personnage.pas"/>
-        <Caret Line="22" Column="14" TopLine="9"/>
+        <Caret Line="20" Column="15" TopLine="8"/>
       </Position2>
       <Position3>
         <Filename Value="personnage.pas"/>
-        <Caret Line="20" Column="15" TopLine="8"/>
+        <Caret Line="27" Column="26" TopLine="7"/>
       </Position3>
       <Position4>
         <Filename Value="personnage.pas"/>
-        <Caret Line="27" Column="26" TopLine="7"/>
+        <Caret Line="25" Column="22" TopLine="4"/>
       </Position4>
       <Position5>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="25" Column="22" TopLine="4"/>
-      </Position5>
-      <Position6>
         <Filename Value="menucreationpartie.pas"/>
         <Caret Line="123" Column="35" TopLine="103"/>
-      </Position6>
-      <Position7>
+      </Position5>
+      <Position6>
         <Filename Value="personnage.pas"/>
         <Caret Line="27" Column="30" TopLine="4"/>
+      </Position6>
+      <Position7>
+        <Filename Value="menucreationpartie.pas"/>
+        <Caret Line="80" Column="25" TopLine="70"/>
       </Position7>
       <Position8>
         <Filename Value="menucreationpartie.pas"/>
-        <Caret Line="80" Column="25" TopLine="70"/>
+        <Caret Line="85" Column="27" TopLine="72"/>
       </Position8>
       <Position9>
         <Filename Value="menucreationpartie.pas"/>
-        <Caret Line="85" Column="27" TopLine="72"/>
+        <Caret Line="86" Column="26" TopLine="73"/>
       </Position9>
       <Position10>
         <Filename Value="menucreationpartie.pas"/>
-        <Caret Line="86" Column="26" TopLine="73"/>
+        <Caret Line="84" Column="21" TopLine="74"/>
       </Position10>
       <Position11>
         <Filename Value="menucreationpartie.pas"/>
-        <Caret Line="84" Column="21" TopLine="74"/>
+        <Caret Line="78" Column="29" TopLine="57"/>
       </Position11>
       <Position12>
-        <Filename Value="menucreationpartie.pas"/>
-        <Caret Line="78" Column="29" TopLine="57"/>
-      </Position12>
-      <Position13>
         <Filename Value="personnage.pas"/>
         <Caret Line="16"/>
-      </Position13>
-      <Position14>
+      </Position12>
+      <Position13>
         <Filename Value="menucreationpartie.pas"/>
         <Caret Line="85" Column="43" TopLine="74"/>
-      </Position14>
-      <Position15>
+      </Position13>
+      <Position14>
         <Filename Value="jeu.lpr"/>
         <Caret Line="39" Column="24" TopLine="14"/>
+      </Position14>
+      <Position15>
+        <Filename Value="menucreationpartie.pas"/>
+        <Caret Line="121" Column="19" TopLine="102"/>
       </Position15>
       <Position16>
         <Filename Value="menucreationpartie.pas"/>
-        <Caret Line="121" Column="19" TopLine="102"/>
+        <Caret Line="83" Column="36" TopLine="70"/>
       </Position16>
       <Position17>
         <Filename Value="menucreationpartie.pas"/>
-        <Caret Line="83" Column="36" TopLine="70"/>
+        <Caret Line="122" Column="21" TopLine="102"/>
       </Position17>
       <Position18>
-        <Filename Value="menucreationpartie.pas"/>
-        <Caret Line="122" Column="21" TopLine="102"/>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="28" Column="21" TopLine="3"/>
       </Position18>
       <Position19>
         <Filename Value="personnage.pas"/>
-        <Caret Line="28" Column="21" TopLine="3"/>
+        <Caret Line="31" Column="18" TopLine="6"/>
       </Position19>
       <Position20>
         <Filename Value="personnage.pas"/>
-        <Caret Line="31" Column="18" TopLine="6"/>
+        <Caret Line="28" Column="14" TopLine="9"/>
       </Position20>
       <Position21>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="28" Column="14" TopLine="9"/>
-      </Position21>
-      <Position22>
         <Filename Value="menuinterface.pas"/>
         <Caret Line="134" Column="25" TopLine="112"/>
-      </Position22>
-      <Position23>
+      </Position21>
+      <Position22>
         <Filename Value="personnage.pas"/>
         <Caret Line="40" Column="26" TopLine="18"/>
-      </Position23>
-      <Position24>
+      </Position22>
+      <Position23>
         <Filename Value="menuinterface.pas"/>
         <Caret Line="166" Column="36" TopLine="152"/>
-      </Position24>
-      <Position25>
+      </Position23>
+      <Position24>
         <Filename Value="menucreationpartie.pas"/>
         <Caret Line="84" Column="28" TopLine="72"/>
+      </Position24>
+      <Position25>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="45" Column="15" TopLine="23"/>
       </Position25>
       <Position26>
         <Filename Value="personnage.pas"/>
-        <Caret Line="45" Column="15" TopLine="23"/>
+        <Caret Line="21" Column="23" TopLine="8"/>
       </Position26>
       <Position27>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="21" Column="23" TopLine="8"/>
-      </Position27>
-      <Position28>
         <Filename Value="menuinterface.pas"/>
         <Caret Line="129" Column="91" TopLine="112"/>
-      </Position28>
-      <Position29>
+      </Position27>
+      <Position28>
         <Filename Value="personnage.pas"/>
         <Caret Line="55" Column="23" TopLine="33"/>
-      </Position29>
-      <Position30>
+      </Position28>
+      <Position29>
         <Filename Value="menucreationpartie.pas"/>
         <Caret Line="115" Column="38" TopLine="103"/>
+      </Position29>
+      <Position30>
+        <Filename Value="menuinterface.pas"/>
+        <Caret Line="175" Column="37" TopLine="159"/>
       </Position30>
     </JumpHistory>
     <RunParams>
