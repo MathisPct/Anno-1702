@@ -173,6 +173,7 @@ implementation
           else if (getItemChoisie(touche)=3) then
             begin
             writeln(menuInterfa[3]);
+            running:=False; //fin du jeu si l'user clique sur entree
             end
           else if (getItemChoisie(touche)=4) then
             writeln(menuInterfa[4])

@@ -126,7 +126,7 @@ implementation
     dessinerCadreLsRessources(); {Procédure qui dessine le cadre dans lequel on affiche les différentes ressources}
     dessinerCadreLsHab(); {Procédure qui dessine le cadre dans lequel on afficha la liste des habitants}
     dessinerCadreDescription(); {Procédure qui dessine le cadre dans lequel on afficha la description}
-    afficheNomJoueur(15,12); //procédure qui affiche le nom du joueur en position X et Y
+    afficheNomJoueur(20,12); //procédure qui affiche le nom du joueur en position X et Y
   end;
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu interface }
@@ -173,6 +173,7 @@ implementation
           else if (getItemChoisie(touche)=3) then
             begin
             writeln(menuInterfa[3]);
+            running:=False;
             end
           else if (getItemChoisie(touche)=4) then
             writeln(menuInterfa[4])
