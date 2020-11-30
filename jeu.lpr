@@ -23,15 +23,14 @@ begin
   // initialisation du module keyboard
   InitKeyboard;//initialisation du module
   //initialisation de la variable jeu à true, au départ on démarre le jeu
-  boucleJeu:=True;
-  while (boucleJeu=True) do //tant qu'on est dans le jeu
+  //boucleJeu:=True;
+  initBoucleJeu(); //initialisation de boucleJeu à true
+  while (getBoucleJeu()=True) do //tant qu'on est dans le jeu
     begin
     mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil
+    getBoucleJeu();
     mainMenuCreaPartie(); //appel de la procédure qui lance le menu de création de partie
-    mainMenuInterface(); //appel du menuInterface
-    effacerEcran; //raffraichit la page
-    boucleJeu:=False;//fin du jeu, on quitte la boucle du jeu
+    setBoucleJeu(False);//fin du jeu, on quitte la boucle du jeu
     end;
-    writeln('Fin du jeu'); //Affichage du message de fin du jeu
 end.
 
