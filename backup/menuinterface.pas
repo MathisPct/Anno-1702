@@ -5,7 +5,7 @@ unit menuInterface;
 
 interface
 
-uses gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux; //appel des unités
+uses gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage; //appel des unités
 
 procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
 
@@ -58,6 +58,8 @@ implementation
     itemsCoordX: tabCoordXItem = (txtSuivantX,txtGestionbatimentX,txtQuitterX,txtTestX,txtTest2X); //tableau qui contient les différents abcisses des items du menu
 
     itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
+
+    joueur: perso; //variable de type perso (record issu de l'unité personnage)
 
   {Procédure qui affiche tous les items du menu en position X et Y}
   procedure affichageItemsMenu();
@@ -113,6 +115,8 @@ implementation
     dessinerCadreXY(10,25,90,35,simple,15,0); //procédure qui dessine le cadre
   end;
 
+
+
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu}
   procedure affichage();
   begin
@@ -120,8 +124,9 @@ implementation
     cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
     affichageItemsMenu; //procédure qui affiche tous les items du menu en position X et Y
     dessinerCadreLsRessources(); {Procédure qui dessine le cadre dans lequel on affiche les différentes ressources}
-    dessinerCadreLsHab();
+    dessinerCadreLsHab(); {Procédure qui dessine le cadre dans lequel on afficha la liste des habitants}
     dessinerCadreDescription(); {Procédure qui dessine le cadre dans lequel on afficha la description}
+    afficheNomJoueur(15,12); //procédure qui affiche le nom du joueur en position X et Y
   end;
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu interface }
