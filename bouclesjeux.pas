@@ -24,7 +24,6 @@ function getNbTourBoucle(): Integer;
  {Procédure qui affiche le cadre entourant le texte Bienvenue sur 'NomIle'}
  procedure cadreTxtNomMenu();
 
-
  {Procédure qui affiche un item présents dans le menu en position X et Y}
 procedure affichageItem(item:String;posX,posY:Integer);
 
