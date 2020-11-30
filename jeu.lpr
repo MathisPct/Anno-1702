@@ -27,13 +27,11 @@ begin
   while (boucleJeu=True) do //tant qu'on est dans le jeu
     begin
     mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil
-    menuCreaPartie:=True;
-    //initiaNbTourBoucle; //initialise la boucle car on arrive sur le nouveau menu menu
-    mainMenuCreaPartie();
+    mainMenuCreaPartie(); //appel de la procédure qui lance le menu de création de partie
     mainMenuInterface(); //appel du menuInterface
+    effacerEcran; //raffraichit la page
     boucleJeu:=False;//fin du jeu, on quitte la boucle du jeu
     end;
-    writeln('fin du jeu'); //On quitte la partie
-  readln()
+    writeln('Fin du jeu'); //Affichage du message de fin du jeu
 end.
 
