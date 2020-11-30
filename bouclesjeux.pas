@@ -18,6 +18,16 @@ procedure incrementaNbTourBoucle();
 function getNbTourBoucle(): Integer;
 
 
+{Procédure qui initialise la boucle du Jeu à True quand le programme est lancé}
+procedure initBoucleJeu();
+
+//Procédure qui sert à affecter True ou False à la variable boucleJeu
+procedure setBoucleJeu(valeur:Boolean);
+
+//Fonction qui sert à renvoyer la valeur de la variable boucleJeu
+function getBoucleJeu():Boolean;
+
+
 {Procédure qui dessine le rectangle de la zone du jeu}
  procedure rectangleZoneJeu();
 
@@ -27,10 +37,15 @@ function getNbTourBoucle(): Integer;
  {Procédure qui affiche un item présents dans le menu en position X et Y}
 procedure affichageItem(item:String;posX,posY:Integer);
 
+
+
 implementation
   //variables connues de toute l'unité
   var
     nbTourBoucle:Integer; //variable de type integer qui compte le nb de tour dans la boucle
+    boucleJeu:Boolean; //variable de type boolean -> sert pour lancer ou quitter la boucle du jeu
+
+   //--------------DEBUT Fonctions et Procédure qui servent pour les Boucles des Menus---------------------//
 
   {Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
   procedure initiaNbTourBoucle();
@@ -49,6 +64,28 @@ implementation
   begin
        getNbTourBoucle := nbTourBoucle;
   end;
+
+
+
+  {Procédure qui initialise la boucle du Jeu à True quand le programme est lancé}
+  procedure initBoucleJeu();
+    begin
+       boucleJeu:=True;
+    end;
+
+  //Procédure qui sert à affecter True ou False à la variable boucleJeu
+  procedure setBoucleJeu(valeur:Boolean);
+    begin
+       boucleJeu:=valeur;
+    end;
+
+  //Fonction qui sert à renvoyer la valeur de la variable boucleJeu
+  function getBoucleJeu():Boolean;
+    begin
+       getBoucleJeu:=boucleJeu;
+    end;
+
+  //--------------Fin Fonctions et Procédure qui servent pour les Boucles des Menus---------------------//
 
 
   //--------------Procédures qui servent à décorer la zone de jeu---------------//
@@ -70,6 +107,9 @@ implementation
 
    //--------------FIN Procédures qui servent à décorer la zone de jeu---------------//
 
+
+   //--------------DEBUT Procédures qui servent pour les items---------------------//
+
   {Procédure qui affiche un item présents dans le menu en position X et Y}
   procedure affichageItem(item:String;posX,posY:Integer);
   var
@@ -79,6 +119,8 @@ implementation
     posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
     ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
   end;
+
+  //--------------FIN Procédures qui servent pour les items---------------------//
 
 end.
 
