@@ -120,6 +120,16 @@ implementation
     ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
   end;
 
+  {Procédure qui affiche tous les items d'un menu passé en paramètre en position X et Y}
+  procedure affichageItemsMenu(var menu: Array of String;arrayCoordX,arrayCoordY:Array of Integer;var totaleItemsMenu: Integer);
+  var
+    item: Integer; //variable entière: compteur boucle affichage items menu interface
+  begin
+    //affichage des items du menu  (affichageItem est une fonction de bouclesJeux)
+    for item:=1 to totaleItemsMenu do
+        affichageItem(menu[item],arrayCoordX[item],arrayCoordY[item]);
+  end;
+
   //--------------FIN Procédures qui servent pour les items---------------------//
 
 end.

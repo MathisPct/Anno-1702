@@ -37,6 +37,8 @@ function getBoucleJeu():Boolean;
  {Procédure qui affiche un item présents dans le menu en position X et Y}
 procedure affichageItem(item:String;posX,posY:Integer);
 
+
+
 implementation
   //variables connues de toute l'unité
   var
@@ -116,6 +118,16 @@ implementation
     posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
     posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
     ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
+  end;
+
+  {Procédure qui affiche tous les items d'un menu passé en paramètre en position X et Y}
+  procedure affichageItemsMenu(var menu: Array of String;var arrayCoordX,var arrayCoordY:Array of Integer;var totaleItemsMenu: Integer);
+  var
+    item: Integer; //variable entière: compteur boucle affichage items menu interface
+  begin
+    //affichage des items du menu  (affichageItem est une fonction de bouclesJeux)
+    for item:=1 to totaleItemsMenu do
+        affichageItem(menu[item],arrayCoordX[item],arrayCoordY[item]);
   end;
 
   //--------------FIN Procédures qui servent pour les items---------------------//
