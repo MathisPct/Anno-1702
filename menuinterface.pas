@@ -63,13 +63,12 @@ implementation
 
   {Procédure qui affiche tous les items du menu en position X et Y}
   procedure affichageItemsMenu();
+  var
+    item: Integer; //variable entière: compteur boucle affichage items menu interface
   begin
-    //affichage des items du menu  (affichageItem est une fonction de gestionEcran)
-    affichageItem(menuInterfa[1],itemsCoordX[1],itemsCoordY[1]); //affichage de l'item 1 du menu avec les coordonnées de cette item
-    affichageItem(menuInterfa[2],itemsCoordX[2],itemsCoordY[2]); //affichage de l'item 2 du menu
-    affichageItem(menuInterfa[3],itemsCoordX[3],itemsCoordY[3]); //affichage de l'item 3 du menu
-    affichageItem(menuInterfa[4],itemsCoordX[4],itemsCoordY[4]); //affichage de l'item 4 du menu
-    affichageItem(menuInterfa[5],itemsCoordX[5],itemsCoordY[5]); //affichage de l'item 5 du menu
+    //affichage des items du menu  (affichageItem est une fonction de bouclesJeux)
+    for item:=1 to totaleItemsMenu do
+        affichageItem(menuInterfa[item],itemsCoordX[item],itemsCoordY[item]);
   end;
 
   {Procédure qui colorier l'élément actuel sur lequel est placé l'utilisateur}
