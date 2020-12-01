@@ -115,8 +115,8 @@ const
              end
              else if(getNbTourBoucle>=1) then
                 begin
-                  touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
-                  touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
+                  //touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
+                  //touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
                   navigationTabMenu(menuCreaPartie,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
                   saisieNom(); //procédure de saisie du nom du personnage
                   running:=False; //fin du menu quand le nom a été saisi
