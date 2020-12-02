@@ -5,56 +5,56 @@ unit menuInterface;
 
 interface
 
-uses sysutils,gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments ; //appel des unités
+  uses sysutils,gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments ; //appel des unités
 
-procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
+  procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
 
 implementation
   //déclaration des constantes connues de toute l'unité
   const
-      //Nombre d'item dans les menus
-      //nb d'item dans le menu
-      totaleItemsMenu=5;
+    //Nombre d'item dans les menus
+    //nb d'item dans le menu
+    totaleItemsMenu=5;
 
-      //nb de ressources
-      totaleItemsRessources=6;
+    //nb de ressources
+    totaleItemsRessources=6;
 
-      //Déclaration des items de notre menu initial
-      txtSuivant='Tour suivant'; //constante de type string qui est le 1er item du menu
-      txtGestionbatiment='Accéder au menu de gestion des batimênts'; //constante de type string qui est le 2ème item du menu
-      txtQuitter='Quitter la partie'; //constante de type string qui est le 3ème item du menu
-      txtTest='Test1';
-      txtTest2='Test2';
+    //Déclaration des items de notre menu initial
+    txtSuivant='Tour suivant'; //constante de type string qui est le 1er item du menu
+    txtGestionbatiment='Accéder au menu de gestion des batimênts'; //constante de type string qui est le 2ème item du menu
+    txtQuitter='Quitter la partie'; //constante de type string qui est le 3ème item du menu
+    txtTest='Test1';
+    txtTest2='Test2';
 
-      //Déclaration des abcisses de notre menu
-      txtSuivantX= 15; //abcisse de txtSuivant
-      txtGestionbatimentX=15; //abcisse de txtGestionbatiment
-      txtQuitterX=15; //abcisse de txtGestionbatiment
-      txtTestX=15;  //abcisse de txtGestionbatiment
-      txtTest2X=15; //abcisse de txtTest2
+    //Déclaration des abcisses de notre menu
+    txtSuivantX= 15; //abcisse de txtSuivant
+    txtGestionbatimentX=15; //abcisse de txtGestionbatiment
+    txtQuitterX=15; //abcisse de txtGestionbatiment
+    txtTestX=15;  //abcisse de txtGestionbatiment
+    txtTest2X=15; //abcisse de txtTest2
 
-      //Déclaration des ordonnées de notre menu
-      txtSuivantY= 40; //ordonnée de txtSuivant
-      txtGestionbatimentY=42; //ordonnée de txtGestionbatiment
-      txtQuitterY=48; //ordonnée de txtGestionbatiment
-      txtTestY=50;  //ordonnée de txtGestionbatiment
-      txtTest2Y=52; //ordonnée de txtTest2
+    //Déclaration des ordonnées de notre menu
+    txtSuivantY= 40; //ordonnée de txtSuivant
+    txtGestionbatimentY=42; //ordonnée de txtGestionbatiment
+    txtQuitterY=48; //ordonnée de txtGestionbatiment
+    txtTestY=50;  //ordonnée de txtGestionbatiment
+    txtTest2Y=52; //ordonnée de txtTest2
 
-      //absicces ressources
-      txtGoldX= 115; //abcisse du text gold
-      txtWoodX=115;
-      txtFishX=115;
-      txtLaineX=115;
-      txtTissuX=115;
-      txtToolX=115;
+    //absicces ressources
+    txtGoldX= 115; //abcisse du text gold
+    txtWoodX=115;
+    txtFishX=115;
+    txtLaineX=115;
+    txtTissuX=115;
+    txtToolX=115;
 
-      //ordonnées ressources
-      txtGoldY= 12;
-      txtWoodY= 15;
-      txtFishY= 18;
-      txtLaineY= 21;
-      txtTissuY= 24;
-      txtToolY= 27;
+    //ordonnées ressources
+    txtGoldY= 12;
+    txtWoodY= 15;
+    txtFishY= 18;
+    txtLaineY= 21;
+    txtTissuY= 24;
+    txtToolY= 27;
 
   //type connue de toute l'unité
   type
@@ -231,9 +231,9 @@ implementation
 
                2:
                 begin
-                mainSMenuGBat();//affichage sous menu batiments
-                initiaNbTourBoucle(); //initialisation nbTour boucle
-                running:=True; //quand on sort du menu batiments
+                  mainSMenuGBat();//affichage sous menu batiments
+                  initiaNbTourBoucle(); //initialisation nbTour boucle
+                  running:=True; //quand on sort du menu batiments
                 end;
 
                3: halt(); //quitte la fenêtre si l'user choisi quitter
@@ -242,9 +242,9 @@ implementation
 
                5: writeln(menuInterfa[5]);
 
-               end; //fin case of
+             end; //fin case of
 
-            end; //fin boucle tant que
+           end; //fin boucle tant que
   end;
 
 end.
