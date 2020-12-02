@@ -84,7 +84,7 @@ implementation
     begin
       rectangleZoneJeu(); //appel de la procédure: on dessine le rectangle sur l'écran
       cadreTxtNomMenu(); //procédure qui dessine le cadre qui entoure le texte en haut au milieu
-      affichageItemsMenuAccueil(); //procédure qui affiche tous les items du menu en position X et Y
+      affichageItemsMenuAccueil() ; //procédure qui affiche tous les items du menu en position X et Y
     end;
 
     procedure mainMenuAccueil(); {Procédure qui appelle toutes les fonctions et procédures du menu accueil }

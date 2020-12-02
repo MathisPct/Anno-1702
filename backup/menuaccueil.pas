@@ -84,7 +84,7 @@ implementation
     begin
       rectangleZoneJeu(); //appel de la procédure: on dessine le rectangle sur l'écran
       cadreTxtNomMenu(); //procédure qui dessine le cadre qui entoure le texte en haut au milieu
-      affichageItemsMenuAccueil(); //procédure qui affiche tous les items du menu en position X et Y
+      affichageItemsMenu() ; //procédure qui affiche tous les items du menu en position X et Y
     end;
 
     procedure mainMenuAccueil(); {Procédure qui appelle toutes les fonctions et procédures du menu accueil }
@@ -106,6 +106,7 @@ implementation
             initialisationItemAnterieur(); //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
             //affichage des rectangles, du texte et du menu
             affichage();// affichage des rectangles du nom du menu et de tous les items du menu
+            colorierElementActuel(); //colorie l'item actuel sur lequel l'user est
             end
 
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
