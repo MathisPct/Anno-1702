@@ -9,7 +9,7 @@
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="16"/>
-        <CursorPos X="5" Y="33"/>
+        <CursorPos X="10" Y="22"/>
         <UsageCount Value="83"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -45,8 +45,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuInterface"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="90"/>
-        <CursorPos X="39" Y="224"/>
+        <TopLine Value="170"/>
+        <CursorPos X="69" Y="235"/>
         <UsageCount Value="80"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -63,9 +63,10 @@
         <Filename Value="menuaccueil.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuAccueil"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="106"/>
-        <CursorPos X="82" Y="117"/>
+        <TopLine Value="120"/>
+        <CursorPos X="28" Y="125"/>
         <UsageCount Value="55"/>
         <Loaded Value="True"/>
       </Unit6>
@@ -91,10 +92,9 @@
       <Unit9>
         <Filename Value="personnage.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <TopLine Value="19"/>
-        <CursorPos X="26" Y="26"/>
+        <CursorPos X="39" Y="32"/>
         <UsageCount Value="49"/>
         <Loaded Value="True"/>
       </Unit9>
@@ -103,8 +103,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="sMenuGestionBatiments"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="201"/>
-        <CursorPos X="50" Y="216"/>
+        <TopLine Value="210"/>
+        <CursorPos X="14" Y="227"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit10>
@@ -138,8 +138,8 @@
       <Unit15>
         <Filename Value="unitRessources.pas"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="76"/>
-        <CursorPos X="28" Y="87"/>
+        <TopLine Value="147"/>
+        <CursorPos X="2" Y="4"/>
         <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit15>
