@@ -4,8 +4,9 @@ program jeu;
 {L'unité menuNouvellePartie sert à appeler toutes les composantes du menu de création de partie}
 {L'unité initialisationEcran sert à appeler toutes les composantes qui permettent
 d'initialiser l'écran (taille, couleur etc...)}
-uses Keyboard, menuNouvellePartie, initialisationEcran, menuInterface,
-  evenementClavier, GestionEcran, menuAccueil, bouclesJeux, menuCreationPartie;
+uses Keyboard , menuNouvellePartie , initialisationEcran , menuInterface ,
+  evenementClavier , GestionEcran , menuAccueil , bouclesJeux ,
+  menuCreationPartie , sMenuGestionBatiments,unitRessources,sysutils;
 
 //glossaire
 var
@@ -22,11 +23,12 @@ begin
   initEcran();
   // initialisation du module keyboard
   InitKeyboard;//initialisation du module
-  //initialisation de la variable jeu à true, au départ on démarre le jeu
-  //boucleJeu:=True;
+  //Initialisation système jeu
+  initialisationRess(); //init du système de ressources
   initBoucleJeu(); //initialisation de boucleJeu à true
   while (getBoucleJeu()=True) do //tant qu'on est dans le jeu
     begin
+    readln();
     mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil
     mainMenuCreaPartie(); //appel de la procédure qui lance le menu de création de partie
     mainMenuInterface(); //appel du menuInterface
