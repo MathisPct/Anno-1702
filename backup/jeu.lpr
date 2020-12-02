@@ -28,9 +28,9 @@ begin
   initBoucleJeu(); //initialisation de boucleJeu à true
   while (getBoucleJeu()=True) do //tant qu'on est dans le jeu
     begin
-    //mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil
-    //mainMenuCreaPartie(); //appel de la procédure qui lance le menu de création de partie
-    //readln();
+    readln();
+    mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil
+    mainMenuCreaPartie(); //appel de la procédure qui lance le menu de création de partie
     mainMenuInterface(); //appel du menuInterface
     end;
 end.

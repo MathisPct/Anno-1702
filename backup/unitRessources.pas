@@ -160,7 +160,7 @@ implementation
   //modifie variable tool
   procedure setTool(valeur : integer);
     begin
-        tool := tool+valeur;
+         tool := tool+valeur;
     end;
 
 end.

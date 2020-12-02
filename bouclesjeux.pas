@@ -3,45 +3,45 @@ unit bouclesJeux;
 {$mode objfpc}{$H+}
 
 interface
-//visibles par les programmes qui appelle l'unité
+  //visibles par les programmes qui appelle l'unité
 
-uses
-  SysUtils,GestionEcran ; //appel des unités
+  uses
+    SysUtils,GestionEcran ; //appel des unités
 
-{Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
-procedure initiaNbTourBoucle();
+  {Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
+  procedure initiaNbTourBoucle();
 
-{Procédure qui modifie le nbTourBoucle : incrémente de 1 le nb de tour de boucle }
-procedure incrementaNbTourBoucle();
+  {Procédure qui modifie le nbTourBoucle : incrémente de 1 le nb de tour de boucle }
+  procedure incrementaNbTourBoucle();
 
-//Cette fonction renvoie la valeur de la variable nbTourBoucle
-function getNbTourBoucle(): Integer;
-
-
-{Procédure qui initialise la boucle du Jeu à True quand le programme est lancé}
-procedure initBoucleJeu();
-
-//Procédure qui sert à affecter True ou False à la variable boucleJeu
-procedure setBoucleJeu(valeur:Boolean);
-
-//Fonction qui sert à renvoyer la valeur de la variable boucleJeu
-function getBoucleJeu():Boolean;
+  //Cette fonction renvoie la valeur de la variable nbTourBoucle
+  function getNbTourBoucle(): Integer;
 
 
-{Procédure qui dessine le rectangle de la zone du jeu}
- procedure rectangleZoneJeu();
+  {Procédure qui initialise la boucle du Jeu à True quand le programme est lancé}
+  procedure initBoucleJeu();
 
- {Procédure qui affiche le cadre entourant le texte Bienvenue sur 'NomIle'}
- procedure cadreTxtNomMenu();
+  //Procédure qui sert à affecter True ou False à la variable boucleJeu
+  procedure setBoucleJeu(valeur:Boolean);
 
- {Procédure: écrit le nom du menu en pos x et y (en haut de l'écran)}
- procedure afficheNomMenu(nom:String);
+  //Fonction qui sert à renvoyer la valeur de la variable boucleJeu
+  function getBoucleJeu():Boolean;
 
- {Procédure qui affiche un item présents dans le menu en position X et Y}
-procedure affichageItem(item:String;posX,posY:Integer);
 
-{Procédure qui affiche tous les items d'un menu d'éléments txt passé en paramètre en position X et Y}
-//procedure affichageItemsMenu(menuTxt: Array of String;arrayCoordX,arrayCoordY:Array of Integer;const totaleItemsMenu: Integer);
+  {Procédure qui dessine le rectangle de la zone du jeu}
+   procedure rectangleZoneJeu();
+
+   {Procédure qui affiche le cadre entourant le texte Bienvenue sur 'NomIle'}
+   procedure cadreTxtNomMenu();
+
+   {Procédure: écrit le nom du menu en pos x et y (en haut de l'écran)}
+   procedure afficheNomMenu(nom:String);
+
+   {Procédure qui affiche un item présents dans le menu en position X et Y}
+  procedure affichageItem(item:String;posX,posY:Integer);
+
+  {Procédure qui affiche tous les items d'un menu d'éléments txt passé en paramètre en position X et Y}
+  //procedure affichageItemsMenu(menuTxt: Array of String;arrayCoordX,arrayCoordY:Array of Integer;const totaleItemsMenu: Integer);
 
 
 
@@ -68,7 +68,7 @@ implementation
   //Cette fonction renvoie la valeur de la variable nbTourBoucle
   function getNbTourBoucle(): Integer;
   begin
-       getNbTourBoucle := nbTourBoucle;
+     getNbTourBoucle := nbTourBoucle;
   end;
 
 
@@ -128,13 +128,13 @@ implementation
 
   {Procédure qui affiche un item présents dans le menu en position X et Y}
   procedure affichageItem(item:String;posX,posY:Integer);
-  var
-    posItem: coordonnees; //variable, coordonnées de placement d'un item avec sa position en x et en y
-  begin
-    posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
-    posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
-    ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
-  end;
+    var
+      posItem: coordonnees; //variable, coordonnées de placement d'un item avec sa position en x et en y
+    begin
+      posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
+      posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
+      ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
+    end;
 
   {Procédure qui affiche tous les items d'un menu d'éléments txt passé en paramètre en position X et Y}
   {
