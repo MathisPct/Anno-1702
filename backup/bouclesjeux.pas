@@ -34,8 +34,14 @@ function getBoucleJeu():Boolean;
  {Procédure qui affiche le cadre entourant le texte Bienvenue sur 'NomIle'}
  procedure cadreTxtNomMenu();
 
+ {Procédure: écrit le nom du menu en pos x et y (en haut de l'écran)}
+ procedure afficheNomMenu(nom:String);
+
  {Procédure qui affiche un item présents dans le menu en position X et Y}
 procedure affichageItem(item:String;posX,posY:Integer);
+
+{Procédure qui affiche tous les items d'un menu d'éléments txt passé en paramètre en position X et Y}
+//procedure affichageItemsMenu(menuTxt: Array of String;arrayCoordX,arrayCoordY:Array of Integer;const totaleItemsMenu: Integer);
 
 
 
@@ -105,6 +111,16 @@ implementation
       dessinerCadreXY(80,1,120,5,simple,15,0); //rectangle entourant le texte Création d'une nouvelle partie
     end;
 
+  {Procédure: écrit le nom du menu en pos x et y (en haut de l'écran)}
+  procedure afficheNomMenu(nom:String);
+    var
+      posNomMenu: coordonnees; //variable, coordonnées de placement du texte nom en paramètre
+    begin
+      posNomMenu.x:=93; //initialisation placement en x passé en paramètre
+      posNomMenu.y:=3; //initialisation placement en y du nom passé en paramètre
+      ecrireEnPosition(posNomMenu,nom); //fonction de l'unité Gestion Ecran qui affiche le nom à la position posNomMenu
+    end;
+
    //--------------FIN Procédures qui servent à décorer la zone de jeu---------------//
 
 
@@ -120,16 +136,17 @@ implementation
     ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
   end;
 
-  {Procédure qui affiche tous les items d'un menu passé en paramètre en position X et Y}
-  procedure affichageItemsMenu(var menu: Array of String;var arrayCoordX,var arrayCoordY:Array of Integer;var totaleItemsMenu: Integer);
+  {Procédure qui affiche tous les items d'un menu d'éléments txt passé en paramètre en position X et Y}
+  {
+  procedure affichageItemsMenu(menuTxt: Array of String;arrayCoordX,arrayCoordY:Array of Integer;const totaleItemsMenu: Integer);
   var
     item: Integer; //variable entière: compteur boucle affichage items menu interface
   begin
     //affichage des items du menu  (affichageItem est une fonction de bouclesJeux)
     for item:=1 to totaleItemsMenu do
-        affichageItem(menu[item],arrayCoordX[item],arrayCoordY[item]);
+        affichageItem(menuTxt[item],arrayCoordX[item],arrayCoordY[item]);
   end;
-
+  }
   //--------------FIN Procédures qui servent pour les items---------------------//
 
 end.
