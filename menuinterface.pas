@@ -5,9 +5,9 @@ unit menuInterface;
 
 interface
 
-uses sysutils,gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments ; //appel des unités
+  uses sysutils,gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments ; //appel des unités
 
-procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
+  procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
 
 implementation
   //déclaration des constantes connues de toute l'unité
@@ -231,7 +231,7 @@ implementation
 
                2:
                 begin
-                mainSMenuGBat();//affichage sous menu bat
+                mainSMenuGBat();//affichage sous menu batiments
                 initiaNbTourBoucle(); //initialisation nbTour boucle
                 running:=True; //quand on sort du menu batiments
                 end;

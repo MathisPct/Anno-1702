@@ -221,6 +221,7 @@ implementation
                     begin
                       writeln('Sous-Menu tour suivant') ;
                       ReadLn();
+                      //initialisation
                       initiaNbTourBoucle();
                       initItemChoisie();
                       runningTourSuivant:=False;
@@ -230,7 +231,7 @@ implementation
 
                2:
                 begin
-                mainSMenuGBat();//affichage sous menu bat
+                mainSMenuGBat();//affichage sous menu batiments
                 initiaNbTourBoucle(); //initialisation nbTour boucle
                 running:=True; //quand on sort du menu batiments
                 end;
