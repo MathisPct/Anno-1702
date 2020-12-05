@@ -6,7 +6,8 @@ program jeu;
 d'initialiser l'écran (taille, couleur etc...)}
 uses Keyboard , menuNouvellePartie , initialisationEcran , menuInterface ,
   evenementClavier , GestionEcran , menuAccueil , bouclesJeux ,
-  menuCreationPartie , sMenuGestionBatiments,unitRessources,sysutils;
+  menuCreationPartie , sMenuGestionBatiments , unitRessources , unitBuilding ,
+  sysutils , population , sMenuMarchand;
 
 //glossaire
 var
@@ -24,8 +25,11 @@ begin
   // initialisation du module keyboard
   InitKeyboard;//initialisation du module
   //Initialisation système jeu
-  initialisationRess(); //init du système de ressources
+  initRessource(); //init du système de ressources
+  initBuilding(); //init du système de batiments
+  initCaractPop(); //init système de population
   initBoucleJeu(); //initialisation de boucleJeu à true
+  initTauxAppaMarchand(2); //initialisation taux apparition marchand
   while (getBoucleJeu()=True) do //tant qu'on est dans le jeu
     begin
       readln();

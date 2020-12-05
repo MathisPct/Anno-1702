@@ -5,18 +5,16 @@ unit menuInterface;
 
 interface
 
-  uses sysutils,gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments ; //appel des unités
+  uses sysutils,gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments, smenutoursuivant ,population , UnitBuilding ,sMenuMarchand; //appel des unités
 
   procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
 
 implementation
   //déclaration des constantes connues de toute l'unité
   const
-    //Nombre d'item dans les menus
     //nb d'item dans le menu
     totaleItemsMenu=5;
-
-    //nb de ressources
+    //nb de ressources (affichage x et y)
     totaleItemsRessources=6;
 
     //Déclaration des items de notre menu initial
@@ -56,88 +54,35 @@ implementation
     txtTissuY= 24;
     txtToolY= 27;
 
-  //type connue de toute l'unité
   type
-   //déclaration type menu qui est un type qui sert à contenir les différents items de notre menu
-   menu = array[1..totaleItemsMenu] of String;
-
-   //déclaration type tabCoordXItem qui est un type qui sert à contenir les différentes abcisses où sont placées les items de notre menu
-   tabCoordXItem = array[1..totaleItemsMenu] of Integer;
-
-   //déclaration type tabCoordYItem qui est un type qui sert à contenir les différentes ordonnées où sont placées les items de notre menu
-   tabCoordYItem = array[1..totaleItemsMenu] of Integer;
-
-   //déclaration type qui sert à contenir les coordonnées du placement des txt des ressources
+    //déclaration type qui sert à contenir les coordonnées du placement des txt des ressources
    tabCoordXItemRessources= array[1..totaleItemsRessources] of Integer;
-
    tabCoordYItemRessources = array[1..totaleItemsRessources] of Integer;
-
-
 
   //déclaration des variables connues de toute l'unité
   var
 
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
 
-    menuInterfa:menu=(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte du menu
+    menuInterfa:array[1..totaleItemsMenu] of String =(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte du menu
+    itemsCoordX:array[1..totaleItemsMenu] of Integer = (txtSuivantX,txtGestionbatimentX,txtQuitterX,txtTestX,txtTest2X) ;//tableau qui contient les différents abcisses des items du menu
+    itemsCoordY:array[1..totaleItemsMenu] of Integer= (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
 
-    itemsCoordX: tabCoordXItem = (txtSuivantX,txtGestionbatimentX,txtQuitterX,txtTestX,txtTest2X); //tableau qui contient les différents abcisses des items du menu
-
-    itemsCoordY:tabCoordYItem = (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
-
-    //tableau qui contient les ressources
-    RessourcesCoordX: tabCoordXItemRessources = (txtGoldX,txtWoodX,txtFishX,txtLaineX,txtTissuX,txtToolX);
-
-    RessourcesCoordY: tabCoordYItemRessources = (txtGoldY,txtWoodY,txtFishY,txtLaineY,txtTissuY,txtToolY);
+    //tableaux qui contient les coordonnées (x et y) des ressources
+    RessourcesCoordX:  tabCoordXItemRessources = (txtGoldX,txtWoodX,txtFishX,txtLaineX,txtTissuX,txtToolX);
+    RessourcesCoordY:  tabCoordYItemRessources = (txtGoldY,txtWoodY,txtFishY,txtLaineY,txtTissuY,txtToolY);
 
     joueur: perso; //variable de type perso (record issu de l'unité personnage)
 
-  {Procédure qui affiche tous les items du menu en position X et Y  }
-  procedure affichageItemsMenu();
-  var
-    item: Integer; //variable entière: compteur boucle affichage items menu interface
-  begin
-    //affichage des items du menu  (affichageItem est une fonction de bouclesJeux)
-    for item:=1 to totaleItemsMenu do
-        affichageItem(menuInterfa[item],itemsCoordX[item],itemsCoordY[item]);
-  end;
-
-
   {  affiche tous les txt des ressources en position X et Y  }
-  procedure affichageItemsRess(totalItem: Integer; CoordX: tabCoordXItemRessources; CoordY: tabCoordYItemRessources);
+  procedure affichageItemsRess(totalItem: Integer; CoordX:tabCoordXItemRessources;CoordY: tabCoordXItemRessources);
   var
     itemRess: Integer; //variable entière, compteur de la boucle d'affichage (index tableau)
   begin
     //affichage de chaque ressource
     for itemRess:=1 to totalItem do
-        affichageItem(GetRessources(itemRess),CoordX[itemRess],CoordY[itemRess]); //affichage de l'item 1 du menu avec les coordonnées de cette item
+        affichageItem(GetRessourcesTxtValue(itemRess),CoordX[itemRess],CoordY[itemRess]); //affichage de l'item 1 du menu avec les coordonnées de cette item
   end;
-
-
-  {Procédure qui colorier l'élément actuel sur lequel est placé l'utilisateur}
-  procedure colorierElementActuel(margeGauche,margeDroite: integer);
-  begin
-    //colorie la zone en fonction de l'élément actuel sur lequel l'user est placé
-    case getItemActuel() of
-      1 : ColorierZone(1,15,itemsCoordX[1]-margeGauche,itemsCoordX[1]+margeDroite,itemsCoordY[1]) ; //colorie le 1er item
-      2 : ColorierZone(1,15,itemsCoordX[2]-margeGauche,itemsCoordX[2]+margeDroite,itemsCoordY[2]) ; //colorie le 2eme item
-      3 : ColorierZone(1,15,itemsCoordX[3]-margeGauche,itemsCoordX[3]+margeDroite,itemsCoordY[3]) ; //colorie le 3eme item
-      4 : ColorierZone(1,15,itemsCoordX[4]-margeGauche,itemsCoordX[4]+margeDroite,itemsCoordY[4]) ; //colorie le 4eme item
-      5 : ColorierZone(1,15,itemsCoordX[5]-margeGauche,itemsCoordX[5]+margeDroite,itemsCoordY[5]) ; //colorie le 5eme item
-    end
-  end;
-
-  procedure reintialiserElementAnterieur(margeGauche,margeDroite: integer);
-    begin
-      //rétablie la couleur de l'élément précedemment choisie par l'user
-      case getItemAnterieur() of
-        1 : ColorierZone(0,15,itemsCoordX[1]-margeGauche,itemsCoordX[1]+margeDroite,itemsCoordY[1]); //rétablie la couleur du 1er item
-        2 : ColorierZone(0,15,itemsCoordX[2]-margeGauche,itemsCoordX[2]+margeDroite,itemsCoordY[2]); //rétablie la couleur du 1er item
-        3 : ColorierZone(0,15,itemsCoordX[3]-margeGauche,itemsCoordX[3]+margeDroite,itemsCoordY[3]); //rétablie la couleur du 1er item
-        4 : ColorierZone(0,15,itemsCoordX[4]-margeGauche,itemsCoordX[4]+margeDroite,itemsCoordY[4]); //rétablie la couleur du 1er item
-        5 : ColorierZone(0,15,itemsCoordX[5]-margeGauche,itemsCoordX[5]+margeDroite,itemsCoordY[5]); //rétablie la couleur du 1er item
-      end;
-    end;
 
   {Procédure qui dessine le cadre dans lequel on affiche les différentes ressources}
   procedure dessinerCadreLsRessources();
@@ -157,21 +102,22 @@ implementation
     dessinerCadreXY(10,25,90,35,simple,15,0); //procédure qui dessine le cadre
   end;
 
-
-
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu}
   procedure affichage();
-  begin
-    rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
-    cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
-    afficheNomMenu('Interface de jeu'); //procédure écrit nom menu
-    affichageItemsMenu(); //procédure qui affiche tous les items du menu en position X et Y
-    dessinerCadreLsRessources(); {Procédure qui dessine le cadre dans lequel on affiche les différentes ressources}
-    affichageItemsRess((GetTotalItemRessources()),RessourcesCoordX, RessourcesCoordY);
-    dessinerCadreLsHab(); {Procédure qui dessine le cadre dans lequel on afficha la liste des habitants}
-    dessinerCadreDescription(); {Procédure qui dessine le cadre dans lequel on afficha la description}
-    afficheNomJoueur(20,12); //procédure qui affiche le nom du joueur en position X et Y
-  end;
+    begin
+      rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
+      cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
+      afficheNomMenu('Interface de jeu'); //procédure écrit nom menu
+
+      printItemsMenu(totaleItemsMenu,menuInterfa,itemsCoordX,itemsCoordY);
+      dessinerCadreLsRessources(); {Procédure qui dessine le cadre dans lequel on affiche les différentes ressources}
+      affichageItemsRess(GetTotalItemRessources(),RessourcesCoordX, RessourcesCoordY);
+      //affichageItemsRess();  //affichage des ressources
+      dessinerCadreLsHab(); {Procédure qui dessine le cadre dans lequel on afficha la liste des habitants}
+      dessinerCadreDescription(); {Procédure qui dessine le cadre dans lequel on afficha la description}
+      afficheNomJoueur(20,12); //procédure qui affiche le nom du joueur en position X et Y
+      afficheNbHab(1,15,27);  {procedure qui affiche la valeur du nombre de la pop en position x et y}
+    end;
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu interface }
   procedure mainMenuInterface();
@@ -197,7 +143,10 @@ implementation
 
                   //affichage des rectangles, du texte et du menu
                   affichage();// affichage des rectangles du nom du menu et de tous les items du menu
-                  colorierElementActuel(10,50); //initialisation de colorierElementActuel
+
+                  colorierElementActu(10,50,itemsCoordX,itemsCoordY);
+
+                  quantityAllRessTPrec();
                  end
             //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
              else if(getNbTourBoucle>=1) then
@@ -206,32 +155,32 @@ implementation
                   touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
                   setItemChoisie(touche);
                   navigationTabMenu(menuInterfa,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menucolorierElementActuel();
-                  colorierElementActuel(10,50);
-                  reintialiserElementAnterieur(10,50); //réintialise la couleur de l'item précedemment choisie
+                  //colorierElementActuel(10,50);
+                  //reintialiserElementAnterieur(10,50); //réintialise la couleur de l'item précedemment choisie
+                  colorierElementActu(10,50,itemsCoordX,itemsCoordY);
+                  reintialiserElementAnt(10,50,itemsCoordX,itemsCoordY);
                  end;
              incrementaNbTourBoucle(); //incrémentation du tour de boucle
 
              case (getItemChoisie()) of
                1:
                 begin
-                  effacerEcran;
-                  running:=False;
-                  runningTourSuivant:=True;
-                  while runningTourSuivant do
-                    begin
-                      writeln('Sous-Menu tour suivant') ;
-                      ReadLn();
-                      //initialisation
-                      initiaNbTourBoucle();
-                      initItemChoisie();
-                      runningTourSuivant:=False;
-                      running:=true;
-                    end;
+                  setBoucleNbTour(1);//incrémentation nbTour
+                  running:=False;   //on sort du menu interface
+                  initItemChoisie(); //initialisation de l'itemChoisie
+                  mainSMenuMarchand();
+                  initiaNbTourBoucle(); //initialisation nbTourBoucle pour affichage etc
+                  productionBatTour(); //produire des ressources suivant le nb de batiment qu'on a et les coefs de prod de ressources de chaque bat
+                  consommation(1); //consommation de ressources par la pop (nbHab*coefNutri)
+                  //initialisation système de jeu
+                  setNbPop(1,getBat_Prop('HABITAT','Maison de Colon','quantity'),getBat_Prop('HABITAT','Maison de Colon','capacity')); //init nb population (type , nbMaison, capacité maison )
+                  maintSMenuTs(); //affichage du sous menu
+                  running:=True;
                 end;
 
                2:
                 begin
-                  mainSMenuGBat();//affichage sous menu batiments
+                  mainSMenuGBat();//affichage sous menu bat
                   initiaNbTourBoucle(); //initialisation nbTour boucle
                   running:=True; //quand on sort du menu batiments
                 end;
@@ -242,9 +191,9 @@ implementation
 
                5: writeln(menuInterfa[5]);
 
-             end; //fin case of
+               end; //fin case of
 
-           end; //fin boucle tant que
+            end; //fin boucle tant que
   end;
 
 end.

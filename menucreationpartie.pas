@@ -5,14 +5,14 @@ unit menuCreationPartie;
 
 interface
 
-  uses gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage; //appel des unités
+uses gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage; //appel des unités
 
-  {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu de création de partie }
-  procedure mainMenuCreaPartie();
+{Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu de création de partie }
+procedure mainMenuCreaPartie();
 
 implementation
-   //déclaration des constantes connues de toute l'unité
-  const
+//déclaration des constantes connues de toute l'unité
+const
     //Nombre d'item dans les menus
     //nb d'item dans le menu
     totaleItemsMenu=1;
@@ -38,7 +38,7 @@ implementation
      tabCoordYItem = array[1..totaleItemsMenu] of Integer;
 
  //déclaration des variables connues de toute l'unité
-  var
+ var
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
 
     menuCreaPartie:menu=(txtNomPerso); //tableau qui contient les différents item texte du menu

@@ -11,8 +11,8 @@ uses gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personn
 procedure mainMenuCreaPartie();
 
 implementation
-   //déclaration des constantes connues de toute l'unité
-  const
+//déclaration des constantes connues de toute l'unité
+const
     //Nombre d'item dans les menus
     //nb d'item dans le menu
     totaleItemsMenu=1;
@@ -38,7 +38,7 @@ implementation
      tabCoordYItem = array[1..totaleItemsMenu] of Integer;
 
  //déclaration des variables connues de toute l'unité
-  var
+ var
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
 
     menuCreaPartie:menu=(txtNomPerso); //tableau qui contient les différents item texte du menu
@@ -116,6 +116,8 @@ implementation
                 end
               else if(getNbTourBoucle>=1) then
                 begin
+                  //touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
+                  //touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
                   navigationTabMenu(menuCreaPartie,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
                   saisieNom(); //procédure de saisie du nom du personnage
                   running:=False; //fin du menu quand le nom a été saisi
