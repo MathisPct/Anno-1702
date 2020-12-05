@@ -41,39 +41,13 @@ const
  var
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
 
-    menuCreaPartie:menu=(txtNomPerso); //tableau qui contient les différents item texte du menu
+    menuCreaPartie:array[1..totaleItemsMenu] of String=(txtNomPerso); //tableau qui contient les différents item texte du menu
 
-    itemsCoordX: tabCoordXItem = (txtNomPersoX); //tableau qui contient les différents abcisses des items du menu
+    itemsCoordX: array[1..totaleItemsMenu] of Integer = (txtNomPersoX); //tableau qui contient les différents abcisses des items du menu
 
-    itemsCoordY:tabCoordYItem = (txtNomPersoY); //tableau qui contient les différents ordonnées des items du menu
+    itemsCoordY:array[1..totaleItemsMenu] of Integer = (txtNomPersoY); //tableau qui contient les différents ordonnées des items du menu
 
     joueur : perso; //variable de type perso (record issu de l'unité personnage)
-
-
-{ Procédure qui affiche tous les items du menu en position X et Y   }
-  procedure affichageItemsMenu();
-  begin
-    //affichage des items du menu  (affichageItem est une fonction de gestionEcran)
-    affichageItem(menuCreaPartie[1],itemsCoordX[1],itemsCoordY[1]); //affichage de l'item 1 du menu avec les coordonnées de cette item
-  end;
-
-
-  {Procédure qui colorier l'élément actuel sur lequel est placé l'utilisateur}
-  procedure colorierElementActuel();
-  begin
-    //colorie la zone en fonction de l'élément actuel sur lequel l'user est placé
-    case getItemActuel() of
-      1 : ColorierZone(1,15,itemsCoordX[1],itemsCoordX[1]+30,itemsCoordY[1]) ; //colorie le 1er item
-    end
-  end;
-
-  procedure reintialiserElementAnterieur();
-    begin
-      //rétablie la couleur de l'élément précedemment choisie par l'user
-      case getItemAnterieur() of
-        1 : ColorierZone(0,15,itemsCoordX[1],itemsCoordX[1]+30,itemsCoordY[1]); //rétablie la couleur du 1er item
-      end;
-    end;
 
    //procédure de saisie du nom du personnage
    procedure saisieNom();
@@ -90,7 +64,7 @@ const
   procedure affichage();
   begin
     rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
-    affichageItemsMenu(); //procédure qui affiche tous les items du menu en position X et Y
+    printItemsMenu(totaleItemsMenu,menuCreaPartie,itemsCoordX,itemsCoordY); //procédure qui affiche tous les items du menu en position X et Y
   end;
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu de création de partie }
@@ -116,8 +90,6 @@ const
                 end
               else if(getNbTourBoucle>=1) then
                 begin
-                  //touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
-                  //touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
                   navigationTabMenu(menuCreaPartie,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menu
                   saisieNom(); //procédure de saisie du nom du personnage
                   running:=False; //fin du menu quand le nom a été saisi
