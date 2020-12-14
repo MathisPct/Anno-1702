@@ -24,6 +24,8 @@ begin
   initEcran();
   // initialisation du module keyboard
   InitKeyboard;//initialisation du module
+  // initialisation du module random
+  randomize;
   //Initialisation système jeu
   initRessourceDiffNormal(); //init ressources (difficulté de base = normal )
   initEImpromDiffNormal(); //init event impromptus (difficulté de base = normal)
@@ -32,6 +34,9 @@ begin
   initTauxAppaMarchand(5); //initialisation taux apparition marchand (difficulté de base = normal )
   initBoucleJeu(); //initialisation de boucleJeu à true
   initEtatEventImpr(); {initialise etatEvent à false: au début pas d'event}
+  writeln(getBat_Cost_Txt(1));
+  writeln(getBat_Cost_Item_Value(1,3));
+  readln;
   while (getBoucleJeu()=True) do //tant qu'on est dans le jeu
     begin
       mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil

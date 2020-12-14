@@ -10,7 +10,6 @@ interface
   // initialise les batiment en début de partie
   procedure initBuilding();
 
-
   //procédure product de ressources suivant le nb de batiment qu'on a et suivant les coefs de prod de ressources de chaque batiment
   procedure productionIndustrieTour();
 
@@ -326,9 +325,10 @@ implementation
        TempTxt:='';
        for numRessource:= 1 to GetTotalItemRessources() do
          begin
-            if (batiment[numBat].construct[numRessource]) > 0 then   // on va retourner seulement les items necessaires à la construction
+            if ( (batiment[numBat].construct[numRessource]) > 0 ) then   // on va retourner seulement les items necessaires à la construction
                  TempTxt:= TempTxt + GetRessourcesTxt(numRessource) + IntToStr(getBat_Cost_Item_Value(numBat,numRessource)) + '    ';
          end;
+       getBat_Cost_Txt:=TempTxt
     end;
 
   // permet de modifier la quantité du batiment passé en paramètre
@@ -403,7 +403,6 @@ implementation
       //marge: Integer;
       txtToDisplay: String;
     begin
-      //marge:= 3;
       case propriety of
            'nom'              : txtToDisplay:=  batiment[numBat].nom;//getBat_Nom(sorte,nom);
            'quantity'         : txtToDisplay:= 'Nombre : ' + IntToStr(batiment[numBat].quantity);//IntToStr(getBat_Prop(sorte,nom,'quantity'));

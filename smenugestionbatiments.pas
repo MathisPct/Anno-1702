@@ -159,14 +159,14 @@ const
    itemsBatIndusY: tabCoordYItemBatIndus=(CabPecheurY,CabBucheronY,BergerieY,TisserandY);
 
     procedure affichageItemsBat_Habitat(CoordX: tabCoordXItemBatHabitat; CoordY: tabCoordYItemBatHabitat);
-        const
+      const
          margeX = 4;  // marge x des textes infos de chaque batiment
          margeY = 1;  // marge y
 
          // permet de changer l'ordre d'affichage des batiments
          Maison  = 1;
          villa   =2;
-    begin
+        begin
           // affichage maison de colon
           affichageBatiment(1,'nom'         ,CoordX[Maison]          ,CoordY[Maison]);
           affichageBatiment(1,'quantity'    ,CoordX[Maison] + margeX ,CoordY[Maison] + (1*margeY));
@@ -175,7 +175,7 @@ const
           affichageBatiment(8,'nom'         ,CoordX[villa]          ,CoordY[villa]);
           affichageBatiment(8,'quantity'    ,CoordX[villa] + margeX ,CoordY[villa] + (1*margeY));
           //affichageBatiment(8,'necessite'   ,CoordX[villa] + margeX ,CoordY[villa] + (2*margeY));
-    end;
+        end;
 
     procedure affichageItemsBat_Social(CoordX: tabCoordXItemBatSocial; CoordY: tabCoordYItemBatSocial);
         const
@@ -259,12 +259,29 @@ const
       affichageItemsBat_Industrie(itemsBatIndusX, itemsBatIndusY)
     end;
 
+  {procedure qui initialise l'affichage }
+  procedure initItemsMenu2();
+    const
+       txtCout= '       | coût  ';
+       txtSymb= '|';
+    begin
+       menu2[1]:=menu2[1]+txtCout+getBat_Cost_Txt(1)+ txtSymb;
+       menu2[2]:=menu2[2]+txtCout+getBat_Cost_Txt(8)+txtSymb;
+       menu2[3]:=menu2[3]+txtCout+getBat_Cost_Txt(7)+txtSymb;
+       menu2[4]:=menu2[4]+txtCout+getBat_Cost_Txt(6)+txtSymb;
+       menu2[5]:=menu2[5]+txtCout+getBat_Cost_Txt(2)+txtSymb;
+       menu2[6]:=menu2[6]+txtCout+getBat_Cost_Txt(3)+txtSymb;
+       menu2[7]:=menu2[7]+txtCout+getBat_Cost_Txt(4)+txtSymb;
+       menu2[8]:=menu2[8]+txtCout+getBat_Cost_Txt(5)+txtSymb;
+    end;
+
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu2}
   procedure affichageMenu2();
     begin
       rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
       cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
       afficheNomMenu('Construction batiments'); //procédure écrit nom menu
+      initItemsMenu2();
       printItemsMenu(totalItemsMenuConstru,menu2,menu2X,menu2Y); //procédure qui affiche tous les items du menu en position X et Y
     end;
 
@@ -327,7 +344,7 @@ const
                               initItemChoisie();  //initia item choisie
                               //affichage
                               affichageMenu2(); //affichage de tous les éléments du menu2
-                              colorierElementActu(10,30,menu2X,menu2Y);
+                              colorierElementActu(2,80,menu2X,menu2Y);
                           end
                         else if (getNbTourBoucle>=1) then
                           begin
@@ -335,8 +352,8 @@ const
                               touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
                               setItemChoisie(touche);
                               navigationTabMenu(menu2,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menucolorierElementActuel();
-                              colorierElementActu(10,30,menu2X,menu2Y);
-                              reintialiserElementAnt(10,30,menu2X,menu2Y); //réintialise la couleur de l'item précedemment choisie
+                              colorierElementActu(2,80,menu2X,menu2Y);
+                              reintialiserElementAnt(2,80,menu2X,menu2Y); //réintialise la couleur de l'item précedemment choisie
                           end;
                         incrementaNbTourBoucle(); //incrémentation du tour de boucle
 
