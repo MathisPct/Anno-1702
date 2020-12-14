@@ -5,13 +5,14 @@ unit UnitBuilding;
 interface
 
   uses
-    unitRessources, Classes, SysUtils;
+    unitRessources, Classes, SysUtils, GestionEcran, bouclesJeux ;
 
   // initialise les batiment en début de partie
   procedure initBuilding();
 
-  //procédure qui permet de produire des ressources suivant le nb de batiment qu'on a et les coefs de prod de ressources de chaque bat
-  procedure productionBatTour();
+
+  //procédure product de ressources suivant le nb de batiment qu'on a et suivant les coefs de prod de ressources de chaque batiment
+  procedure productionIndustrieTour();
 
   // retourne le nom du batiment passé en paramètre
   function getBat_Nom(sorte: String; nom: String): String;
@@ -34,10 +35,22 @@ interface
   // permet de modifier la quantité du batiment passé en paramètre
   procedure SetBat_Quantity(sorte: String; nom: String; valeur: Integer);
 
+  {fonction qui renvoie le nb de maisons au début du tour}
+  function getMaisonGagne():Integer;
+
+  {procedure qui récupère la quantité de maisons en début de tour}
+  procedure setMaisonDebTour();
+
   //procedure de construction d'un batiment passé en paramètre
   function Build_Batiment(sorte: String; nom: String):String;
 
   procedure affichageBatiment(sorte: String; nom:String; propriety: String; posX,posY:Integer);
+
+  //procédure initialise les batiments en difficulté NORMAL
+  procedure initBuildingDiffFacile();
+
+  //procédure initialise les batiments en difficulté HARD
+  procedure initBuildingDiffHard();
 
 
   type Building = record
@@ -51,51 +64,57 @@ interface
   end;
 
 implementation
-
+  type
+    enumRessources=(gold,wood,fish,laine,tissu,tool); //énumération des différentes ressources
   const
-    totalBatiment = 7; //nombre total de batiment
+    totalBatiment = 8; //nombre total de batiment
+
+    // sorte HABITAT
+    B_Maison      = 1; //maison des colons
+    B_Villa       =8; //maison des citoyens
+
+    // sorte INDUSTRIE
+    B_Fisher      = 2;
+    B_Bucheron    = 3;
+    B_Bergerie    = 4;
+    B_Tisserand   = 5;
+
+    // sorte SOCIAL
+    B_Chapelle    = 6;
+    B_CentreVille = 7;
+
   var
      batiment : array[1..totalBatiment] of Building; //permet de créer des variations du record building et ainsi de décrire tout les batiments du jeu
+     nbMaisonDebTour: Integer; //variable int, pour calculer le nb de maisons gagné durant le tour
 
   // initialise les batiment en début de partie
   procedure initBuilding();
-    const
-      // sorte HABITAT
-      B_Maison      = 1;
-
-      // sorte INDUSTRIE
-      B_Fisher      = 2;
-      B_Bucheron    = 3;
-      B_Bergerie    = 4;
-      B_Tisserand   = 5;
-
-      // sorte SOCIAL
-      B_Chapelle    = 6;
-      B_CentreVille = 7;
-
     begin
-
     /////////////////////////////////////// H-A-B-I-T-A-T/////////////////////////////////////////
-
        //------------------------------------------------------------------------- M A I S O N
        batiment[B_Maison].sorte           := 'HABITAT';
        batiment[B_Maison].nom             := 'Maison de Colon';
-       batiment[B_Maison].quantity        := 0;
+       batiment[B_Maison].quantity        := 4;
        batiment[B_Maison].capacity        := 4;
        //Cout de construction
        batiment[B_Maison].construct[1]    := 5; // cout GOLD
        batiment[B_Maison].construct[2]    := 5; // cout BOIS
-       batiment[B_Maison].construct[3]    := 0; // cout Poisson
-       batiment[B_Maison].construct[4]    := 0; // cout Laine
-       batiment[B_Maison].construct[5]    := 0; // cout Tissu
-       batiment[B_Maison].construct[6]    := 0; // cout Outils
        // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
        batiment[B_Maison].production[1]   := 0;   // Gold
        batiment[B_Maison].production[2]   := 0;   // Wood
        batiment[B_Maison].production[3]   := 0;   // Fish
        batiment[B_Maison].production[4]   := 0;   // Laine
-       batiment[B_Maison].production[5]   := -5;   // Tissu
+       batiment[B_Maison].production[5]   :=-2;  // Tissu
        batiment[B_Maison].production[6]   := 4;   // Outils
+
+      batiment[B_Villa].sorte  := 'HABITAT';
+      batiment[B_Villa].nom    := 'Villa de citoyen';
+      batiment[B_Villa].quantity  := 0;
+      batiment[B_Villa].capacity  := 5;
+      //cout de construction
+      batiment[B_Villa].construct[1] := 50; //cout gold
+      batiment[B_Villa].construct[2] := 100; //cout bois
+
 
   /////////////////////////////////////// S-O-C-I-A-L /////////////////////////////////////////
 
@@ -105,19 +124,19 @@ implementation
        batiment[B_Chapelle].quantity        := 0;
        batiment[B_Chapelle].capacity        := 0;
        //Cout de construction
-       batiment[B_Chapelle].construct[1]    := 3000; // cout GOLD
-       batiment[B_Chapelle].construct[2]    := 200; // cout BOIS
+       batiment[B_Chapelle].construct[1]    := 1000; // cout GOLD
+       batiment[B_Chapelle].construct[2]    := 100; // cout BOIS
        batiment[B_Chapelle].construct[3]    := 0; // cout Poisson
        batiment[B_Chapelle].construct[4]    := 0; // cout Laine
-       batiment[B_Chapelle].construct[5]    := 50; // cout Tissu
-       batiment[B_Chapelle].construct[6]    := 1; // cout Outils
+       batiment[B_Chapelle].construct[5]    := 5; // cout Tissu
+       batiment[B_Chapelle].construct[6]    := 0; // cout Outils
        // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
        batiment[B_Chapelle].production[1]   := 0;   // Gold
-       batiment[B_Chapelle].production[2]   := -5;  // Wood
+       //batiment[B_Chapelle].production[2]   := -5;  // Wood
        batiment[B_Chapelle].production[3]   := 0;   // Fish
        batiment[B_Chapelle].production[4]   := 0;   // Laine
        batiment[B_Chapelle].production[5]   := 0;   // Tissu
-       batiment[B_Chapelle].production[6]   := -5; // Outils
+       //batiment[B_Chapelle].production[6]   := -5; // Outils
 
        //------------------------------------------------------------------------- Centre-Ville
        batiment[B_CentreVille].sorte           := 'SOCIAL';
@@ -127,17 +146,9 @@ implementation
        //Cout de construction
        batiment[B_CentreVille].construct[1]    := 500; // cout GOLD
        batiment[B_CentreVille].construct[2]    := 100; // cout BOIS
-       batiment[B_CentreVille].construct[3]    := 0; // cout Poisson
-       batiment[B_CentreVille].construct[4]    := 0; // cout Laine
-       batiment[B_CentreVille].construct[5]    := 0; // cout Tissu
-       batiment[B_CentreVille].construct[6]    := 15; // cout Outils
+       //batiment[B_CentreVille].construct[6]    := 15; // cout Outils
        // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
-       batiment[B_CentreVille].production[1]   := 0;   // Gold
-       batiment[B_CentreVille].production[2]   := 0;  // Wood
-       batiment[B_CentreVille].production[3]   := 0;   // Fish
-       batiment[B_CentreVille].production[4]   := 0;   // Laine
-       batiment[B_CentreVille].production[5]   := 0;   // Tissu
-       batiment[B_CentreVille].production[6]   := -2; // Outils
+      // batiment[B_CentreVille].production[6]   := -2; // Outils
 
   ///////////////////////////////////////I-N-D-U-S-T-R-I-E////////////////////////////////////////////
 
@@ -149,18 +160,9 @@ implementation
        // COUT DE CONSTRUCTION [update l'unité ressources seulement à l'achat]
        batiment[B_Fisher].construct[1]    := 15;  // coute Gold
        batiment[B_Fisher].construct[2]    := 3;   // coute Wood
-       batiment[B_Fisher].construct[3]    := 0;   // coute Fish
-       batiment[B_Fisher].construct[4]    := 0;   // coute Laine
-       batiment[B_Fisher].construct[5]    := 0;   // coute Tissu
-       batiment[B_Fisher].construct[6]    := 0;   // coute Outils
 
        // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
-       batiment[B_Fisher].production[1]   := 0;   // Gold
-       batiment[B_Fisher].production[2]   := 0;   // Wood
        batiment[B_Fisher].production[3]   := 1;   // Fish
-       batiment[B_Fisher].production[4]   := 0;   // Laine
-       batiment[B_Fisher].production[5]   := 0;   // Tissu
-       batiment[B_Fisher].production[6]   := 0;   // Outils
 
        //----------------------------------------------------------C A B A N E   D E   B U C H E R O N ----------------------------------
        batiment[B_Bucheron].sorte           := 'INDUSTRIE';
@@ -171,17 +173,9 @@ implementation
        batiment[B_Bucheron].construct[1]    := 25;  // coute Gold
        batiment[B_Bucheron].construct[2]    := 5;   // coute Wood
        batiment[B_Bucheron].construct[2]    := 7;   // coute Fish
-       batiment[B_Bucheron].construct[4]    := 0;   // coute Laine
-       batiment[B_Bucheron].construct[5]    := 0;   // coute Tissu
-       batiment[B_Bucheron].construct[6]    := 0;   // coute Outils
-       // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
-       batiment[B_Bucheron].production[1]   := 0;   // Gold
-       batiment[B_Bucheron].production[2]   := 1;   // Wood
-       batiment[B_Bucheron].production[3]   := 0;   // Fish
-       batiment[B_Bucheron].production[4]   := 0;   // Laine
-       batiment[B_Bucheron].production[5]   := 0;   // Tissu
-       batiment[B_Bucheron].production[6]   := 0;   // Outils
 
+       // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
+       batiment[B_Bucheron].production[2]   := 3;   // Wood
 
        //---------------------------------------------------------- B E R G E R I E ----------------------------------
        batiment[B_Bergerie].sorte           := 'INDUSTRIE';
@@ -191,19 +185,9 @@ implementation
        //Cout de construction
        batiment[B_Bergerie].construct[1]    := 25;  // coute Gold
        batiment[B_Bergerie].construct[2]    := 10;  // coute Wood
-       batiment[B_Bergerie].construct[2]    := 0;   // coute Fish
-       batiment[B_Bergerie].construct[4]    := 0;   // coute Laine
-       batiment[B_Bergerie].construct[5]    := 0;   // coute Tissu
-       batiment[B_Bergerie].construct[6]    := 0;   // coute Outils
+
        // production de ressources
-       batiment[B_Bergerie].production[1]   := 0;   // Gold
-       batiment[B_Bergerie].production[2]   := 0;   // Wood
-       batiment[B_Bergerie].production[3]   := 0;   // Fish
        batiment[B_Bergerie].production[4]   := 5;   // Laine
-       batiment[B_Bergerie].production[5]   := 0;   // Tissu
-       batiment[B_Bergerie].production[6]   := 0;   // Outils
-
-
        //---------------------------------------------------------- T I S S E R A N D ----------------------------------
        batiment[B_Tisserand].sorte           := 'INDUSTRIE';
        batiment[B_Tisserand].nom             := 'Atelier de Tisserand';
@@ -212,42 +196,44 @@ implementation
        //Cout de construction
        batiment[B_Tisserand].construct[1]    := 35;  // coute Gold
        batiment[B_Tisserand].construct[2]    := 10;  // coute Wood
-       batiment[B_Tisserand].construct[2]    := 0;   // coute Fish
        batiment[B_Tisserand].construct[4]    := 10;  // coute Laine
-       batiment[B_Tisserand].construct[5]    := 0;   // coute Tissu
-       batiment[B_Tisserand].construct[6]    := 0;   // coute Outils
+
        // production de ressources
-       batiment[B_Tisserand].production[1]   := 0;   // Gold
-       batiment[B_Tisserand].production[2]   := 0;   // Wood
-       batiment[B_Tisserand].production[3]   := 0;   // Fish
        batiment[B_Tisserand].production[4]   := -1; // nécéssite de la Laine pour produire
        batiment[B_Tisserand].production[5]   := 3;   // Tissu
-       batiment[B_Tisserand].production[6]   := 0;   // Outils
   end;
 
-  //procédure qui permet de produire des ressources suivant le nb de batiment qu'on a et suivant les coefs de prod de ressources de chaque batiment
-  procedure productionBatTour();
-    var
-       boisProduit: Integer; //var int = nb de bois produit durant le tour affecté à la valeur du bois
-       poissonsProduit: Integer; //var int = nb de poissons produit durant le tour affecté à la valeur du poissons
-       laineProduites: Integer; //var int = nb de laines produit durant le tour affecté à la valeur du laine
-       tissusProduit: Integer; //var int = nb de tissus produit durant le tour. Enlève de la laine quand il est produit
-       laineEnMoins: Integer; //var int = nb de laines en moins si l'user a des cabanes de tisserand
+  //procédure initialise les batiments en difficulté normal
+  procedure initBuildingDiffFacile();
     begin
-       boisProduit:= batiment[3].quantity * batiment[3].production[2]; //quantité de bois produit= quantité de cabanes bucherons * coef prod bois /cabane
-       setWood(boisProduit); //ajoute nb bois produit
-       poissonsProduit:= batiment[2].quantity*batiment[2].production[3];
-       setFish(poissonsProduit); //ajoute nb poissons produit
-       laineProduites:= batiment[4].quantity * batiment[4].production[4];
-       setLaine(laineProduites);
-       //si assez de laine alors productions de tissus
-       if (getLaine() + batiment[5].production[4]>0 ) then
-         tissusProduit := batiment[5].quantity * batiment[5].production[5]; //quantité de bat tisserands * coef de prod de tissus
-         laineEnMoins :=  batiment[5].quantity * batiment[5].production[4]; //quantité de bat tisserands * coef de laines perdues
-         setTissu(tissusProduit);
-         setLaine(laineEnMoins);
-       //else sinon gestion des erreurs
+      batiment[B_Maison].quantity := 2; //2maisons de base
+      batiment[B_Maison].capacity := 4;
+    end;
 
+  //procédure initialise les batiments en difficulté normal
+  procedure initBuildingDiffHard();
+    begin
+      batiment[B_Maison].quantity := 0;
+      batiment[B_Maison].capacity := 2; //capacité limité= prog plus lente de la pop
+      batiment[B_Maison].production[5] := -5;   // -5 de Tissu en moins par maison
+    end;
+
+  //procédure product de ressources suivant le nb de batiment qu'on a et suivant les coefs de prod de ressources de chaque batiment
+  procedure productionIndustrieTour();
+    begin
+       setFish(batiment[B_Fisher].quantity     * batiment[B_Fisher].production[3]); //prod de poissons par la cabane de pêcheur
+       setWood(batiment[B_Bucheron].quantity   * batiment[B_Bucheron].production[2]); //prod de bois par la cabane de bucherons
+       setLaine(batiment[B_Bergerie].quantity  * batiment[B_Bergerie].production[4]); //prod de laine par la cabane de bucherons
+       //si assez de laine alors productions de tissus
+       if (getLaine() + batiment[B_Tisserand].production[4]>0 ) then
+         begin
+              setTissu(batiment[B_Tisserand].quantity * batiment[B_Tisserand].production[5] ) ;
+         end
+       else
+         begin
+             //afficher msg event
+            writeln('Vous n''avez pas assez de laines pour produire du tissus');
+         end;
     end;
 
   // retourne le nom du batiment passé en paramètre
@@ -417,6 +403,19 @@ implementation
                     batiment[x].quantity := batiment[x].quantity + valeur;                   // on ajoute la valeur passé en paramètre au nombre de batiment de ce nom et cette sorte
                end;
          end;
+    end;
+
+  {procedure qui récupère la quantité de maisons en début de tour}
+  procedure setMaisonDebTour();
+    begin
+       nbMaisonDebTour:= batiment[B_Maison].quantity;
+       writeln(nbMaisonDebTour);
+    end;
+
+  {fonction qui renvoie le nb de maisons au début du tour}
+  function getMaisonGagne():Integer;
+    begin
+      getMaisonGagne:= batiment[B_Maison].quantity-nbMaisonDebTour;
     end;
 
   //procedure de construction d'un batiment passé en paramètre

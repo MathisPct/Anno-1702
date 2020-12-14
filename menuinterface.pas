@@ -5,7 +5,7 @@ unit menuInterface;
 
 interface
 
-  uses sysutils,gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments, smenutoursuivant ,population , UnitBuilding ,sMenuMarchand; //appel des unités
+  uses sysutils,gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments, smenutoursuivant ,population , UnitBuilding ,sMenuMarchand, eventImpromptus; //appel des unités
 
   procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
 
@@ -105,18 +105,18 @@ implementation
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu}
   procedure affichage();
     begin
+      effacerEcran; //raffraichissement ecran
       rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
       cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
       afficheNomMenu('Interface de jeu'); //procédure écrit nom menu
-
+      printNbTour(180,2); //ecriture du numéro de tour
       printItemsMenu(totaleItemsMenu,menuInterfa,itemsCoordX,itemsCoordY);
       dessinerCadreLsRessources(); {Procédure qui dessine le cadre dans lequel on affiche les différentes ressources}
       affichageItemsRess(GetTotalItemRessources(),RessourcesCoordX, RessourcesCoordY);
-      //affichageItemsRess();  //affichage des ressources
       dessinerCadreLsHab(); {Procédure qui dessine le cadre dans lequel on afficha la liste des habitants}
       dessinerCadreDescription(); {Procédure qui dessine le cadre dans lequel on afficha la description}
       afficheNomJoueur(20,12); //procédure qui affiche le nom du joueur en position X et Y
-      afficheNbHab(1,15,27);  {procedure qui affiche la valeur du nombre de la pop en position x et y}
+      afficheNbHabCatego(1,15,27);
     end;
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu interface }
@@ -140,14 +140,14 @@ implementation
                   initialisationItemActuel(1);
                   //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
                   initialisationItemAnterieur();
-
+                  setEventImpromptu(); //possibilité d'event impromptu suivant la probabilité
+                  epidemieCovid(); //baisse de la pop si l'event covid est actif
                   //affichage des rectangles, du texte et du menu
                   affichage();// affichage des rectangles du nom du menu et de tous les items du menu
-
+                  setMessageEvent();
                   colorierElementActu(10,50,itemsCoordX,itemsCoordY);
-
-                  quantityAllRessTPrec();
-                 end
+                  quantityAllRessTPrec(); //calcul des ressources que l'user a durant ce tour (sert à calculer combien il en gagne)
+                end
             //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
              else if(getNbTourBoucle>=1) then
                 begin
@@ -155,8 +155,6 @@ implementation
                   touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
                   setItemChoisie(touche);
                   navigationTabMenu(menuInterfa,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menucolorierElementActuel();
-                  //colorierElementActuel(10,50);
-                  //reintialiserElementAnterieur(10,50); //réintialise la couleur de l'item précedemment choisie
                   colorierElementActu(10,50,itemsCoordX,itemsCoordY);
                   reintialiserElementAnt(10,50,itemsCoordX,itemsCoordY);
                  end;
@@ -165,17 +163,21 @@ implementation
              case (getItemChoisie()) of
                1:
                 begin
-                  setBoucleNbTour(1);//incrémentation nbTour
+                  setBoucleNbTour(1);//incrémentation nbTour du jeu
                   running:=False;   //on sort du menu interface
                   initItemChoisie(); //initialisation de l'itemChoisie
-                  mainSMenuMarchand();
+                  updateBonheurColons();
+                  mainSMenuMarchand(getEtatPiraterie()); //appel du menu marchand si l'event piraterie n'est pas actif
                   initiaNbTourBoucle(); //initialisation nbTourBoucle pour affichage etc
-                  productionBatTour(); //produire des ressources suivant le nb de batiment qu'on a et les coefs de prod de ressources de chaque bat
-                  consommation(1); //consommation de ressources par la pop (nbHab*coefNutri)
+                  productionIndustrieTour(); //produire des ressources suivant le nb de batiment qu'on a et les coefs de prod de ressources de chaque bat
+                  consommation(); //consommation de ressources par la pop (nbHab*coefNutri)
                   //initialisation système de jeu
-                  setNbPop(1,getBat_Prop('HABITAT','Maison de Colon','quantity'),getBat_Prop('HABITAT','Maison de Colon','capacity')); //init nb population (type , nbMaison, capacité maison )
+                  //setNbPop(1,getBat_Prop('HABITAT','Maison de Colon','quantity'),getBat_Prop('HABITAT','Maison de Colon','capacity')); //init nb population (type , nbMaison, capacité maison )
+                  setNbCategoPop(1,getMaisonGagne(),getBat_Prop('HABITAT','Maison de Colon','capacity'));  //init nb d'une catégorie de pop
+                  //setNbCategoPop(2,getBat_Prop('HABITAT','Villa de citoyen','quantity'),getBat_Prop('HABITAT','Villa de citoyen','capacity'));  //init nb d'une catégorie de pop
                   maintSMenuTs(); //affichage du sous menu
                   running:=True;
+                  setMaisonDebTour(); //procédure qui récupère la quantité de maisons en début de tour
                 end;
 
                2:

@@ -16,11 +16,11 @@ implementation
 const
   //nb d'items dans le sous menu
   totalItemsMenuGetBat    = 2;
-  totalItemsMenuConstru   = 8;
+  totalItemsMenuConstru   = 9;
 
   //nb d'item de batiments
-  totalItemBatiments        = 7;
-  totalItemBatimentsHabitat = 1; // batiment de type HABITAT
+  totalItemBatiments        = 8;
+  totalItemBatimentsHabitat = 2; // batiment de type HABITAT
   totalItemBatimentsIndus   = 4; // batiment de type INDUSTRIE
   totalItemBatimentsSocial  = 2; // batiment de type SOCIAL
 
@@ -39,6 +39,7 @@ const
 
   //déclaration des items des bâtiments
   txtMaison             ='Maisons';
+  txtVilla              ='Villa de citoyens';
   //bâtiments sociaux
   txtCentreVille        ='Centre-Ville';
   txtChapelle           ='Chapelle';
@@ -50,6 +51,7 @@ const
 
   //Abcisses texte batiments
   txtMaisonX            = 20;
+  txtVillaX             = 20;
   txtCentreVilleX       = 20;
   txtChapelleX          = 20;
   txtCaPecheurX         = 20;
@@ -59,6 +61,7 @@ const
 
   //Ordonnées texte batiments
   txtMaisonY            = 12;
+  txtVillaY             = 13;
   txtCentreVilleY       = 15;
   txtChapelleY          = 18;
   txtCaPecheurY         = 21;
@@ -71,6 +74,9 @@ const
   MaisonX        = 10;
   //abscisses habitat
   MaisonY        = 10;
+
+  villaX         =10 ;
+  villaY         =20 ;
 
    // BATIMENT HABITAT coordonnées
   // ordonnées habitat
@@ -123,26 +129,26 @@ const
 
    //tableaux qui contient les textes des menu
    menu1: array[1..totalItemsMenuGetBat] of String = (txtConsBat, txtMenuPrec);
-   menu2: array[1..totalItemsMenuConstru] of String  = (txtMaison,txtCentreVille,txtChapelle, txtCaPecheur,txtCaBucheron, txtBergerie,txtAtelierTisserand,txtMenuPrec);
+   menu2: array[1..totalItemsMenuConstru] of String  = (txtMaison,txtVilla,txtCentreVille,txtChapelle, txtCaPecheur,txtCaBucheron, txtBergerie,txtAtelierTisserand,txtMenuPrec);
 
    //tableau contient coordonnées des items du menu1
    menu1X: array[1..totalItemsMenuGetBat] of Integer = (consBatX,menuPrecX);
    menu1Y: array[1..totalItemsMenuGetBat] of Integer = (consBatY,menuPrecY);
 
    //tableau qui contient les coordonnées des items du menu2
-   menu2X: array[1..totalItemsMenuConstru] of Integer  = (txtMaisonX,txtCentreVilleX,txtChapelleX, txtCaPecheurX,txtCaBucheronX, txtBergerieX,txtAtelierTisserandX,menuPrecX);
-   menu2Y: array[1..totalItemsMenuConstru] of Integer = (txtMaisonY,txtCentreVilleY,txtChapelleY, txtCaPecheurY,txtCaBucheronY, txtBergerieY,txtAtelierTisserandY,menuPrecY);
+   menu2X: array[1..totalItemsMenuConstru] of Integer  = (txtMaisonX,txtVillaX,txtCentreVilleX,txtChapelleX, txtCaPecheurX,txtCaBucheronX, txtBergerieX,txtAtelierTisserandX,menuPrecX);
+   menu2Y: array[1..totalItemsMenuConstru] of Integer = (txtMaisonY,txtVillaY,txtCentreVilleY,txtChapelleY, txtCaPecheurY,txtCaBucheronY, txtBergerieY,txtAtelierTisserandY,menuPrecY);
 
 
    //tableau qui contient les textes des items batiments
-   itemsBat:tabItemBatiments=(txtCentreVille,txtChapelle, txtCaPecheur,txtCaBucheron, txtBergerie,txtAtelierTisserand,txtMaison);
+   itemsBat:tabItemBatiments=(txtCentreVille,txtChapelle, txtCaPecheur,txtCaBucheron, txtBergerie,txtAtelierTisserand,txtMaison,txtVilla);
    //tableau qui contient les coordonnées des items batiments
-   itemsBatX: tabCoordXItemBatiments=(txtMaisonX,txtCentreVilleX,txtChapelleX, txtCaPecheurX,txtCaBucheronX, txtBergerieX,txtAtelierTisserandX);
-   itemsBatY: tabCoordYItemBatiments=(txtMaisonY,txtCentreVilleY,txtChapelleY, txtCaPecheurY,txtCaBucheronY, txtBergerieY,txtAtelierTisserandY);
+   itemsBatX: tabCoordXItemBatiments=(txtMaisonX,txtVillaX,txtCentreVilleX,txtChapelleX, txtCaPecheurX,txtCaBucheronX, txtBergerieX,txtAtelierTisserandX);
+   itemsBatY: tabCoordYItemBatiments=(txtMaisonY,txtVillaY,txtCentreVilleY,txtChapelleY, txtCaPecheurY,txtCaBucheronY, txtBergerieY,txtAtelierTisserandY);
 
    //tableau qui contient les coordonnées des items batiments HABITAT
-   itemsBatHabitatX: tabCoordXItemBatHabitat=(MaisonX);
-   itemsBatHabitatY: tabCoordYItemBatHabitat=(MaisonY);
+   itemsBatHabitatX: tabCoordXItemBatHabitat=(MaisonX,villaX);
+   itemsBatHabitatY: tabCoordYItemBatHabitat=(MaisonY,villaY);
 
    //tableau qui contient les coordonnées des items batiments SOCIAL
    itemsBatSocialX: tabCoordXItemBatSocial=(CentreVilleX, ChapelleX);
@@ -159,11 +165,16 @@ const
 
          // permet de changer l'ordre d'affichage des batiments
          Maison  = 1;
+         villa   =2;
     begin
           // affichage maison de colon
           affichageBatiment('HABITAT','Maison de Colon'   ,'nom'         ,CoordX[Maison]          ,CoordY[Maison]             );
           affichageBatiment('HABITAT','Maison de Colon'   ,'quantity'    ,CoordX[Maison] + margeX ,CoordY[Maison] + (1*margeY));
           affichageBatiment('HABITAT','Maison de Colon'   ,'necessite'   ,CoordX[Maison] + margeX ,CoordY[Maison] + (2*margeY));
+
+          affichageBatiment('HABITAT','Villa de citoyen'   ,'nom'         ,CoordX[villa]          ,CoordY[villa]             );
+          affichageBatiment('HABITAT','Villa de citoyen'   ,'quantity'    ,CoordX[villa] + margeX ,CoordY[villa] + (1*margeY));
+          affichageBatiment('HABITAT','Villa de citoyen'   ,'necessite'   ,CoordX[villa] + margeX ,CoordY[villa] + (2*margeY));
     end;
 
     procedure affichageItemsBat_Social(CoordX: tabCoordXItemBatSocial; CoordY: tabCoordYItemBatSocial);
@@ -338,34 +349,42 @@ const
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          2: begin
+                          2:
+                            begin
+                                  message:=Build_Batiment('HABITAT', 'Villa de citoyen');
+                                  initItemChoisie();
+                                  initiaNbTourBoucle(); //initialisation  nb Tour boucle
+                                  runningMenuSuivant:=False;
+                                  running:=true;
+                            end;
+                          3: begin
                                   message:=Build_Batiment('SOCIAL', 'Centre-Ville');
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          3: begin
+                          4: begin
                                   message:=Build_Batiment('SOCIAL', 'Chapelle');
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          4: begin
+                          5: begin
                                   message:=Build_Batiment('INDUSTRIE', 'Cabane de Pecheur');
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          5: begin
+                          6: begin
                                   message:=Build_Batiment('INDUSTRIE', 'Cabane de Bucheron');
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          6: begin
+                          7: begin
                                   message:=Build_Batiment('INDUSTRIE', 'Bergerie');
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
@@ -373,14 +392,14 @@ const
                                   running:=true;
                              end;
 
-                          7: begin
+                          8: begin
                                   message:=Build_Batiment('INDUSTRIE', 'Atelier de Tisserand');
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          8: //item 8 du menu => menu précédent
+                          9: //item 8 du menu => menu précédent
                              begin
                                  initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                  initItemChoisie();

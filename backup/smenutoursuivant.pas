@@ -27,24 +27,13 @@ implementation
   var
     //tableau qui contient les textes des items du menu
     menuTourSuivant:array[1 .. totaleItemsMenu] of String=(txtPasser);
-
     //tableau qui contient les coordonnées des items du menu
     menuTourSuivantX: array[1 .. totaleItemsMenu] of Integer=(txtPasserX);
     menuTourSuivantY: array[1 .. totaleItemsMenu] of Integer=(txtPasserY);
 
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
 
-  {Procédure qui affiche les ressources consommées par la pop durant le tour en position x et y}
-  procedure affichageRessourcesConso();
-    const
-      txtConso= 'Ressources consommées par la population: ';
-      txtRessourcesEmpty= ' aucunes';
-    var
-      texte: String;
-    begin
-      texte:=txtConso+ IntToStr(eatFish()) + ' poissons ' + IntToStr(consoLaine()) + ' laines';
-      ecrireTexte(texte,10,12);
-    end;
+
 
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu tour suivant}
   procedure affichage();
@@ -52,7 +41,12 @@ implementation
       rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
       cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
       afficheNomMenu('Tour suivant'); //procédure écrit nom menu
-      affichageRessourcesConso();
+      affichageRessourcesConsoColons(10,12);  //affichage ressources consommées par les colons en pos x et y
+      affichageRessourcesConsoCitoyens(10,13);  //affichage ressources consommées par les citoyens  en pos x et y
+      affichageOrPop(10,14); //affichage de l'or rapporté par la population
+      besoinsColons(10,15);
+      printBonheureColons(10,16); {procédure qui affiche le niveau de bonheur en posX et posY}
+      printAllRessQuantityGagne(10,20,1); //Affiche la quantité de ressource gagné
       printItemsMenu(totaleItemsMenu,menuTourSuivant,menuTourSuivantX,menuTourSuivantY); //affichage des éléments du menu tour suivant
     end;
 
@@ -79,7 +73,6 @@ implementation
 
               //affichage des rectangles, du texte et du menu
               affichage();// affichage des éléments du menu 1
-              printAllRessQuantityGagne(10,15,1);
               colorierElementActu(10,60,menuTourSuivantX,menuTourSuivantY);  //initialisation de colorierElementActuel
             end
 

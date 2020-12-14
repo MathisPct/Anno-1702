@@ -7,7 +7,7 @@ d'initialiser l'écran (taille, couleur etc...)}
 uses Keyboard , menuNouvellePartie , initialisationEcran , menuInterface ,
   evenementClavier , GestionEcran , menuAccueil , bouclesJeux ,
   menuCreationPartie , sMenuGestionBatiments , unitRessources , unitBuilding ,
-  sysutils , population , sMenuMarchand;
+  sysutils , population , sMenuMarchand , eventImpromptus;
 
 //glossaire
 var
@@ -24,15 +24,18 @@ begin
   initEcran();
   // initialisation du module keyboard
   InitKeyboard;//initialisation du module
+  // initialisation du module random
+  randomize;
   //Initialisation système jeu
-  initRessource(); //init du système de ressources
-  initBuilding(); //init du système de batiments
+  initRessourceDiffNormal(); //init ressources (difficulté de base = normal )
+  initEImpromDiffNormal(); //init event impromptus (difficulté de base = normal)
+  initBuilding(); //init du système de batiments  (difficulté de base = normal )
   initCaractPop(); //init système de population
+  initTauxAppaMarchand(5); //initialisation taux apparition marchand (difficulté de base = normal )
   initBoucleJeu(); //initialisation de boucleJeu à true
-  initTauxAppaMarchand(2); //initialisation taux apparition marchand
+  initEtatEventImpr(); {initialise etatEvent à false: au début pas d'event}
   while (getBoucleJeu()=True) do //tant qu'on est dans le jeu
     begin
-      readln();
       mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil
       mainMenuCreaPartie(); //appel de la procédure qui lance le menu de création de partie
       mainMenuInterface(); //appel du menuInterface

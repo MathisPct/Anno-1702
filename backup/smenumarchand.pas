@@ -7,7 +7,7 @@ interface
   uses
     Classes , SysUtils , bouclesJeux, gestionEcran , Keyboard , navigationMenues , unitRessources ;
 
-  procedure mainSMenuMarchand();
+  procedure mainSMenuMarchand(piraterie:Boolean);
   procedure initTauxAppaMarchand(valeur: Integer);
 
 implementation
@@ -60,16 +60,6 @@ implementation
 
     txtNoPayY             =50;
 
-  type
-     //déclaration type menu qui est un type qui sert à contenir les différents items de notre menu
-   menu = array[1..totalItemsMenu] of String;
-
-   //déclaration type tabCoordXItem qui est un type qui sert à contenir les différentes abcisses où sont placées les items de notre menu
-   tabCoordXItem = array[1..totalItemsMenu] of Integer;
-
-   //déclaration type tabCoordYItem qui est un type qui sert à contenir les différentes ordonnées où sont placées les items de notre menu
-   tabCoordYItem = array[1..totalItemsMenu] of Integer;
-
   var
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
     menuMarchand: array[1..totalItemsMenu] of String = (txtPayWood,txtPayFish,txtPayLaine,txtPayTissu,txtPayTool,txtSendWood,txtSendFish,txtSendLaine,txtSendTissu,txtSendTool,txtNoPay);
@@ -93,15 +83,15 @@ implementation
       printItemsMenu(totalItemsMenu,menuMarchand,itemsCoordX,itemsCoordY);
     end;
 
-  procedure mainSMenuMarchand();
+  procedure mainSMenuMarchand(piraterie:Boolean);
     var
       running: Boolean;
       nbAleatoire: Integer;
     begin
        randomize; //initialisation de random
        nbAleatoire:=random(nbTauxAppaMenu);
-       //menu lance si nbAleatoire = nbTrue
-       if (nbAleatoire= 1) then
+       //menu lance si nbAleatoire = nbTrue et event piraterie = false
+       if ((nbAleatoire= 1) and (piraterie=False)) then
          begin
            running:=True; //on lance le menu
            initiaNbTourBoucle(); //initialisation du nb de tour de boucle quand on arrive sur le me

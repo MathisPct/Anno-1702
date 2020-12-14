@@ -6,7 +6,7 @@ interface
 //visibles par les programmes qui appelle l'unité
 
 uses
-  SysUtils,GestionEcran, unitBuilding ; //appel des unités
+  SysUtils,GestionEcran ; //appel des unités
 
 {Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
 procedure initiaNbTourBoucle();
@@ -42,11 +42,6 @@ function getBoucleJeu():Boolean;
  {Procédure qui affiche un item présents dans le menu en position X et Y}
 procedure affichageItem(item:String;posX,posY:Integer);
 
-{Procédure qui affiche tous les items d'un menu d'éléments txt passé en paramètre en position X et Y}
-//procedure affichageItemsMenu(menuTxt: Array of String;arrayCoordX,arrayCoordY:Array of Integer;const totaleItemsMenu: Integer);
-
-//procedure affichageBatiment(sorte: String; nom:String; propriety: String; posX,posY:Integer);
-
 
 //Liste procédures fonctions pour nbTour
 
@@ -58,6 +53,9 @@ procedure setBoucleNbTour(valeur:Integer);
 
 //fonction qui retourne la valeur du nb de tour
 function getNbTour():Integer;
+
+//procédure qui écrit le nb de tour à une position x et y
+procedure printNbTour(posX,posY:Integer);
 
 implementation
   //variables connues de toute l'unité
@@ -110,7 +108,7 @@ implementation
   //procédure qui sert à initialiser le nombre de tour
   procedure initNombreDeTour();
     begin
-       nbTour:=0;
+       nbTour:=1;
     end;
 
   //procédure qui sert à affecter le nombre de tour
@@ -125,6 +123,19 @@ implementation
        getNbTour:=nbTour; //retourne le nombre de tour
     end;
 
+  //procédure qui écrit le nb de tour à une position x et y
+  procedure printNbTour(posX,posY:Integer);
+    var
+      texte:String;
+    begin
+       if (getNbTour=0) then
+         ecrireTexte('Tour de départ',posX,posY)
+       else if (getNbTour()>=1) then
+         begin
+           texte:='Tour n°' + IntToStr(getNbTour());
+           ecrireTexte(texte,posX,posY);
+         end;
+    end;
   //--------------Fin Fonctions et Procédure qui servent pour les Boucles des Menus---------------------//
 
 

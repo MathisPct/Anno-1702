@@ -7,7 +7,7 @@ interface
   uses
     Classes , SysUtils , bouclesJeux, gestionEcran , Keyboard , navigationMenues , unitRessources ;
 
-  procedure mainSMenuMarchand();
+  procedure mainSMenuMarchand(piraterie:Boolean);
   procedure initTauxAppaMarchand(valeur: Integer);
 
 implementation
@@ -83,15 +83,15 @@ implementation
       printItemsMenu(totalItemsMenu,menuMarchand,itemsCoordX,itemsCoordY);
     end;
 
-  procedure mainSMenuMarchand();
+  procedure mainSMenuMarchand(piraterie:Boolean);
     var
       running: Boolean;
       nbAleatoire: Integer;
     begin
        randomize; //initialisation de random
        nbAleatoire:=random(nbTauxAppaMenu);
-       //menu lance si nbAleatoire = nbTrue
-       if (nbAleatoire= 1) then
+       //menu lance si nbAleatoire = nbTrue et event piraterie = false
+       if ((nbAleatoire= 1) and (piraterie=False)) then
          begin
            running:=True; //on lance le menu
            initiaNbTourBoucle(); //initialisation du nb de tour de boucle quand on arrive sur le me
@@ -117,8 +117,6 @@ implementation
                       touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
                       setItemChoisie(touche);
                       navigationTabMenu(menuMarchand,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menucolorierElementActuel();
-                      //colorierElementActuel(10,50);
-                      //reintialiserElementAnterieur(10,50); //réintialise la couleur de l'item précedemment choisie
                       colorierElementActu(10,50,itemsCoordX,itemsCoordY);
                       reintialiserElementAnt(10,50,itemsCoordX,itemsCoordY);
                    end;

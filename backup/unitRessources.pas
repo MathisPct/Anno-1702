@@ -17,8 +17,15 @@ interface
 
    enumRessources=(gold,wood,fish,laine,tissu,tool); //énumération des différentes ressources
 
-  //Cette fonction initialise les variables (au début de la partie par exemple)
-  procedure initRessource();
+  //Cette procédure initialise les variables (au début de la partie)
+  procedure initRessourceDiffFacile();
+
+  //Cette procédure initialise les quantités et les prix de vente des ress en difficulté normal
+  procedure initRessourceDiffNormal();
+
+  //Cette procédure initialise les quantités et les prix de vente des ress en difficulté hard
+  procedure initRessourceDiffHard();
+
   //Cette fonction renvoie la valeur de la variable Or
   function getGold() : Integer;
   //Cette procedure modifie la valeur de la variable Or
@@ -91,8 +98,8 @@ implementation
   var
      typeRessouce: array[gold..tool] of ressources;
 
-  //Cette fonction initialise les variables (au début de la partie par exemple)
-  procedure initRessource();
+  //Cette procédure initialise tous les noms des ressources
+  procedure initRessourceTxt();
     begin
        typeRessouce[gold].nom:='gold';
        typeRessouce[wood].nom:='wood';
@@ -100,6 +107,12 @@ implementation
        typeRessouce[laine].nom:='laine';
        typeRessouce[tissu].nom:='tissu';
        typeRessouce[tool].nom:='tool';
+    end;
+
+  //Cette procédure initialise les variables (au début de la partie)
+  procedure initRessourceDiffFacile();
+    begin
+       initRessourceTxt();//Cette procédure initialise tous les noms des ressources
 
        typeRessouce[gold].quantite:=4000;
        typeRessouce[wood].quantite:=100;
@@ -116,13 +129,44 @@ implementation
        typeRessouce[tool].prixVente:=5;
     end;
 
-  procedure ecrireTexte(nom:String; x:Integer; y:Integer);
-    var
-      posTexte: coordonnees; //variable, coordonnées de placement du texte nom en paramètre
+  //Cette procédure initialise les quantités et les prix de vente des ress en difficulté normal
+  procedure initRessourceDiffNormal();
     begin
-      posTexte.x:=x; //initialisation placement en x passé en paramètre
-      posTexte.y:=y; //initialisation placement en y du nom passé en paramètre
-      ecrireEnPosition(posTexte,nom); //fonction de l'unité Gestion Ecran qui affiche le nom à la position posNomMenu
+       initRessourceTxt();//Cette procédure initialise tous les noms des ressources
+
+       typeRessouce[gold].quantite:=2000;
+       typeRessouce[wood].quantite:=50;
+       typeRessouce[fish].quantite:=100;
+       typeRessouce[laine].quantite:=0;
+       typeRessouce[tissu].quantite:=0;
+       typeRessouce[tool].quantite:=0;
+
+       typeRessouce[gold].prixVente:=5;
+       typeRessouce[wood].prixVente:=5;
+       typeRessouce[fish].prixVente:=5;
+       typeRessouce[laine].prixVente:=5;
+       typeRessouce[tissu].prixVente:=5;
+       typeRessouce[tool].prixVente:=5;
+    end;
+
+    //Cette procédure initialise les quantités et les prix de vente des ress en difficulté hard
+  procedure initRessourceDiffHard();
+    begin
+       initRessourceTxt();//Cette procédure initialise tous les noms des ressources
+
+       typeRessouce[gold].quantite:=100;
+       typeRessouce[wood].quantite:=0;
+       typeRessouce[fish].quantite:=0;
+       typeRessouce[laine].quantite:=0;
+       typeRessouce[tissu].quantite:=0;
+       typeRessouce[tool].quantite:=0;
+
+       typeRessouce[gold].prixVente:=5;
+       typeRessouce[wood].prixVente:=5;
+       typeRessouce[fish].prixVente:=5;
+       typeRessouce[laine].prixVente:=5;
+       typeRessouce[tissu].prixVente:=5;
+       typeRessouce[tool].prixVente:=5;
     end;
 
   function GetRessourcesValue(item:Integer):integer;

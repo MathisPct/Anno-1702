@@ -31,7 +31,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="12">
+    <Units Count="13">
       <Unit0>
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -90,6 +90,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="sMenuMarchand"/>
       </Unit11>
+      <Unit12>
+        <Filename Value="eventimpromptus.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="eventImpromptus"/>
+      </Unit12>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
