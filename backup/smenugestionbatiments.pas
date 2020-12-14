@@ -44,7 +44,7 @@ const
   txtCentreVille        ='Centre-Ville';
   txtChapelle           ='Chapelle';
   //industries
-  txtCaPecheur          ='Cabane de pêcheur';
+  txtCaPecheur          ='Cabane de pecheur';
   txtCaBucheron         ='Cabane de bucheron';
   txtBergerie           ='Bergerie';
   txtAtelierTisserand   ='Atelier Tisserand';
@@ -259,20 +259,20 @@ const
       affichageItemsBat_Industrie(itemsBatIndusX, itemsBatIndusY)
     end;
 
-  {procedure qui initialise l'affichage }
+  {procedure qui initialise l'affichage}
   procedure initItemsMenu2();
     const
-       txtCout= '     | coût  ';
-       txtSymb= '|';
+       txtCout= ' | cout |   ';
+       longMaxTxt=45;
     begin
-       menu2[1]:=menu2[1]+txtCout+getBat_Cost_Txt(1)+ txtSymb;
-       menu2[2]:=menu2[2]+txtCout+getBat_Cost_Txt(8)+txtSymb;
-       menu2[3]:=menu2[3]+txtCout+getBat_Cost_Txt(7)+txtSymb;
-       menu2[4]:=menu2[4]+txtCout+getBat_Cost_Txt(6)+txtSymb;
-       menu2[5]:=menu2[5]+txtCout+getBat_Cost_Txt(2)+txtSymb;
-       menu2[6]:=menu2[6]+txtCout+getBat_Cost_Txt(3)+txtSymb;
-       menu2[7]:=menu2[7]+txtCout+getBat_Cost_Txt(4)+txtSymb;
-       menu2[8]:=menu2[8]+txtCout+getBat_Cost_Txt(5)+txtSymb;
+       menu2[1]:=txtIndentation(txtMaison,longMaxTxt)+txtCout+getBat_Cost_Txt(1);
+       menu2[2]:=txtIndentation(txtVilla,longMaxTxt) +txtCout+getBat_Cost_Txt(8);
+       menu2[3]:=txtIndentation(txtCentreVille,longMaxTxt)+txtCout+getBat_Cost_Txt(7);
+       menu2[4]:=txtIndentation(txtChapelle,longMaxTxt)+txtCout+getBat_Cost_Txt(6);
+       menu2[5]:=txtIndentation(txtCaPecheur,longMaxTxt)+txtCout+getBat_Cost_Txt(2);
+       menu2[6]:=txtIndentation(txtCaBucheron,longMaxTxt)+txtCout+getBat_Cost_Txt(3);
+       menu2[7]:=txtIndentation(txtBergerie,longMaxTxt)+txtCout+getBat_Cost_Txt(4);
+       menu2[8]:=txtIndentation(txtAtelierTisserand,longMaxTxt)+txtCout+getBat_Cost_Txt(5);
     end;
 
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu2}
@@ -281,7 +281,6 @@ const
       rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
       cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
       afficheNomMenu('Construction batiments'); //procédure écrit nom menu
-      initItemsMenu2();
       printItemsMenu(totalItemsMenuConstru,menu2,menu2X,menu2Y); //procédure qui affiche tous les items du menu en position X et Y
     end;
 
@@ -307,7 +306,6 @@ const
                   initialisationItemActuel(1);
                   //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
                   initialisationItemAnterieur();
-
                   //affichage des rectangles, du texte et du menu
                   affichageMenu1();// affichage des éléments du menu 1
                   colorierElementActu(10,30,menu1X,menu1Y);
@@ -337,6 +335,7 @@ const
                       begin
                         if (getNbTourBoucle()=0) then
                           begin
+                              initItemsMenu2();
                               //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
                               initialisationItemActuel(1);
                               //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu

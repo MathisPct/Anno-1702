@@ -62,7 +62,7 @@ interface
   function GetTotalItemRessources():Integer;
 
   // modifie une ressource passée en paramètre / utile pour la construction de batiment
-  procedure setRessource(item: Integer; valeur: Integer);
+  procedure setRessource(numRessource: Integer; valeur: Integer);
 
   //fonction qui retourne le prix d'un item
   function getPriceRessource(nomRessource: enumRessources):Integer;
@@ -197,17 +197,22 @@ implementation
     end;
 
   function GetRessourcesTxtValue(item:Integer):String;
-    var
-       TabTemp: menuRess;
-    begin
-      TabTemp[1]:= (texteGold+(IntToStr(getGold)));
-      TabTemp[2]:= (texteBois+(IntToStr(getWood)));
-      TabTemp[3]:= (texteFish+(IntToStr(getFish)));
-      TabTemp[4]:= (texteLaine+(IntToStr(getLaine)));
-      TabTemp[5]:= (texteTissu+(IntToStr(getTissu)));
-      TabTemp[6]:= (texteTool+(IntToStr(getTool)));
-      GetRessourcesTxtValue:=TabTemp[item];
-    end;
+  var
+     TabTemp: menuRess;
+     longueurIndent: Integer;
+     separation: String; // charactère qui sépare les textes de ressources et leur valeur
+  begin
+    longueurIndent:= 10;
+    separation:= ': ';
+    TabTemp[1]:= (txtIndentation(texteGold,longueurIndent)+separation+(IntToStr(getGold)));
+    TabTemp[2]:= (txtIndentation(texteBois,longueurIndent)+separation+(IntToStr(getWood)));
+    TabTemp[3]:= (txtIndentation(texteFish,longueurIndent)+separation+(IntToStr(getFish)));
+    TabTemp[4]:= (txtIndentation(texteLaine,longueurIndent)+separation+(IntToStr(getLaine)));
+    TabTemp[5]:= (txtIndentation(texteTissu,longueurIndent)+separation+(IntToStr(getTissu)));
+    TabTemp[6]:= (txtIndentation(texteTool,longueurIndent)+separation+(IntToStr(getTool)));
+
+    GetRessourcesTxtValue:=TabTemp[item];
+  end;
 
   function GetTotalItemRessources():Integer;
     begin

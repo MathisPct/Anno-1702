@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <TopLine Value="22"/>
         <CursorPos X="39" Y="38"/>
-        <UsageCount Value="199"/>
+        <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -20,7 +20,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="33"/>
         <CursorPos X="4" Y="64"/>
-        <UsageCount Value="199"/>
+        <UsageCount Value="200"/>
       </Unit1>
       <Unit2>
         <Filename Value="initialisationecran.pas"/>
@@ -28,7 +28,7 @@
         <UnitName Value="initialisationEcran"/>
         <EditorIndex Value="1"/>
         <CursorPos Y="22"/>
-        <UsageCount Value="199"/>
+        <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -38,16 +38,16 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="37"/>
         <CursorPos X="40" Y="48"/>
-        <UsageCount Value="198"/>
+        <UsageCount Value="199"/>
       </Unit3>
       <Unit4>
         <Filename Value="menuinterface.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuInterface"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="38"/>
-        <CursorPos X="22" Y="16"/>
-        <UsageCount Value="196"/>
+        <TopLine Value="68"/>
+        <CursorPos X="78" Y="78"/>
+        <UsageCount Value="197"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -56,7 +56,7 @@
         <UnitName Value="evenementClavier"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="37" Y="23"/>
-        <UsageCount Value="196"/>
+        <UsageCount Value="197"/>
       </Unit5>
       <Unit6>
         <Filename Value="menuaccueil.pas"/>
@@ -65,16 +65,16 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="133"/>
         <CursorPos X="7" Y="142"/>
-        <UsageCount Value="171"/>
+        <UsageCount Value="172"/>
       </Unit6>
       <Unit7>
         <Filename Value="bouclesjeux.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="bouclesJeux"/>
         <EditorIndex Value="10"/>
-        <TopLine Value="210"/>
-        <CursorPos X="10" Y="56"/>
-        <UsageCount Value="171"/>
+        <TopLine Value="208"/>
+        <CursorPos X="31" Y="47"/>
+        <UsageCount Value="172"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -84,7 +84,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="37"/>
         <CursorPos X="11" Y="11"/>
-        <UsageCount Value="168"/>
+        <UsageCount Value="169"/>
       </Unit8>
       <Unit9>
         <Filename Value="personnage.pas"/>
@@ -92,16 +92,17 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="25"/>
         <CursorPos X="26" Y="26"/>
-        <UsageCount Value="165"/>
+        <UsageCount Value="166"/>
       </Unit9>
       <Unit10>
         <Filename Value="smenugestionbatiments.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sMenuGestionBatiments"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
         <TopLine Value="260"/>
-        <CursorPos X="51" Y="266"/>
-        <UsageCount Value="151"/>
+        <CursorPos X="21" Y="266"/>
+        <UsageCount Value="152"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
@@ -110,7 +111,7 @@
         <UnitName Value="sMenuMarchand"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="244" Y="119"/>
-        <UsageCount Value="117"/>
+        <UsageCount Value="118"/>
       </Unit11>
       <Unit12>
         <Filename Value="eventimpromptus.pas"/>
@@ -119,7 +120,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="119"/>
         <CursorPos X="23" Y="135"/>
-        <UsageCount Value="81"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -135,25 +136,24 @@
         <EditorIndex Value="2"/>
         <TopLine Value="303"/>
         <CursorPos Y="327"/>
-        <UsageCount Value="61"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
       </Unit14>
       <Unit15>
         <Filename Value="unitRessources.pas"/>
         <EditorIndex Value="9"/>
-        <TopLine Value="55"/>
-        <CursorPos X="44" Y="69"/>
-        <UsageCount Value="72"/>
+        <TopLine Value="196"/>
+        <CursorPos X="43" Y="207"/>
+        <UsageCount Value="73"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
         <Filename Value="unitbuilding.pas"/>
         <UnitName Value="UnitBuilding"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="313"/>
-        <CursorPos X="33" Y="331"/>
-        <UsageCount Value="62"/>
+        <TopLine Value="311"/>
+        <CursorPos X="147" Y="329"/>
+        <UsageCount Value="63"/>
         <Loaded Value="True"/>
       </Unit16>
       <Unit17>
@@ -161,7 +161,7 @@
         <EditorIndex Value="8"/>
         <TopLine Value="65"/>
         <CursorPos X="45" Y="340"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="59"/>
         <Loaded Value="True"/>
       </Unit17>
       <Unit18>
@@ -169,7 +169,7 @@
         <EditorIndex Value="6"/>
         <TopLine Value="39"/>
         <CursorPos X="30" Y="48"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
@@ -209,123 +209,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="320" Column="33" TopLine="307"/>
+        <Caret Line="261" Column="44" TopLine="252"/>
       </Position1>
       <Position2>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="261" Column="44" TopLine="252"/>
+        <Caret Line="330" Column="19" TopLine="306"/>
       </Position2>
       <Position3>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="330" Column="19" TopLine="306"/>
+        <Caret Line="320" Column="98" TopLine="307"/>
       </Position3>
       <Position4>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="320" Column="98" TopLine="307"/>
+        <Caret Line="277" Column="8" TopLine="265"/>
       </Position4>
       <Position5>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="277" Column="8" TopLine="265"/>
+        <Caret Line="326" Column="24" TopLine="304"/>
       </Position5>
       <Position6>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="326" Column="24" TopLine="304"/>
+        <Caret Line="285" Column="29" TopLine="271"/>
       </Position6>
       <Position7>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="285" Column="29" TopLine="271"/>
+        <Caret Line="286" Column="8" TopLine="283"/>
       </Position7>
       <Position8>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="286" Column="8" TopLine="283"/>
+        <Caret Line="285" Column="75" TopLine="276"/>
       </Position8>
       <Position9>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="285" Column="75" TopLine="276"/>
+        <Caret Line="323" Column="18" TopLine="304"/>
       </Position9>
       <Position10>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="323" Column="18" TopLine="304"/>
+        <Caret Line="434" Column="85" TopLine="416"/>
       </Position10>
       <Position11>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="434" Column="85" TopLine="416"/>
+        <Caret Line="30" Column="41" TopLine="13"/>
       </Position11>
       <Position12>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="30" Column="41" TopLine="13"/>
+        <Caret Line="50" Column="83" TopLine="37"/>
       </Position12>
       <Position13>
-        <Filename Value="unitbuilding.pas"/>
-        <Caret Line="50" Column="83" TopLine="37"/>
+        <Filename Value="population.pas"/>
+        <Caret Line="265" Column="29" TopLine="252"/>
       </Position13>
       <Position14>
         <Filename Value="population.pas"/>
-        <Caret Line="265" Column="29" TopLine="252"/>
+        <Caret Line="274" Column="29" TopLine="261"/>
       </Position14>
       <Position15>
         <Filename Value="population.pas"/>
-        <Caret Line="274" Column="29" TopLine="261"/>
+        <Caret Line="364" Column="29" TopLine="364"/>
       </Position15>
       <Position16>
-        <Filename Value="population.pas"/>
-        <Caret Line="364" Column="29" TopLine="364"/>
+        <Filename Value="smenugestionbatiments.pas"/>
+        <Caret Line="171" Column="85" TopLine="157"/>
       </Position16>
       <Position17>
         <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="171" Column="85" TopLine="157"/>
+        <Caret Line="226" Column="90" TopLine="215"/>
       </Position17>
       <Position18>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="226" Column="90" TopLine="215"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="241" Column="9" TopLine="236"/>
       </Position18>
       <Position19>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="241" Column="9" TopLine="236"/>
+        <Caret Line="251" Column="48" TopLine="227"/>
       </Position19>
       <Position20>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="251" Column="48" TopLine="227"/>
+        <Caret Line="329" Column="62" TopLine="316"/>
       </Position20>
       <Position21>
-        <Filename Value="unitbuilding.pas"/>
-        <Caret Line="329" Column="62" TopLine="316"/>
-      </Position21>
-      <Position22>
         <Filename Value="unitRessources.pas"/>
         <Caret Line="338" Column="27" TopLine="327"/>
-      </Position22>
-      <Position23>
+      </Position21>
+      <Position22>
         <Filename Value="unitbuilding.pas"/>
         <Caret Line="413" Column="15" TopLine="398"/>
-      </Position23>
-      <Position24>
+      </Position22>
+      <Position23>
         <Filename Value="menuinterface.pas"/>
         <Caret Line="176" Column="39" TopLine="164"/>
+      </Position23>
+      <Position24>
+        <Filename Value="smenugestionbatiments.pas"/>
+        <Caret Line="134" Column="32" TopLine="118"/>
       </Position24>
       <Position25>
         <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="134" Column="32" TopLine="118"/>
+        <Caret Line="137" Column="34" TopLine="119"/>
       </Position25>
       <Position26>
         <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="137" Column="34" TopLine="119"/>
+        <Caret Line="135" Column="11" TopLine="121"/>
       </Position26>
       <Position27>
         <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="135" Column="11" TopLine="121"/>
+        <Caret Line="132" Column="56" TopLine="121"/>
       </Position27>
       <Position28>
         <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="132" Column="56" TopLine="121"/>
+        <Caret Line="281" Column="24" TopLine="262"/>
       </Position28>
       <Position29>
         <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="281" Column="24" TopLine="262"/>
+        <Caret Line="266" Column="51" TopLine="260"/>
       </Position29>
       <Position30>
         <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="266" Column="51" TopLine="260"/>
+        <Caret Line="41" Column="45" TopLine="30"/>
       </Position30>
     </JumpHistory>
     <RunParams>

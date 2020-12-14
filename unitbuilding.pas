@@ -326,7 +326,7 @@ implementation
        for numRessource:= 1 to GetTotalItemRessources() do
          begin
             if ( (batiment[numBat].construct[numRessource]) > 0 ) then   // on va retourner seulement les items necessaires à la construction
-                 TempTxt:= TempTxt + GetRessourcesTxt(numRessource) + IntToStr(getBat_Cost_Item_Value(numBat,numRessource)) + '    ';
+                 TempTxt:= txtIndentation(TempTxt + GetRessourcesTxt(numRessource)+': ' + IntToStr(getBat_Cost_Item_Value(numBat,numRessource)),15)+'  ';
          end;
        getBat_Cost_Txt:=TempTxt;
     end;
@@ -367,7 +367,7 @@ implementation
     begin
          Build_Batiment := '';
          RessourcesCount:= 0; //variable entière
-         TempTxtEchec:= 'ressources insuffisantes !';
+         TempTxtEchec:= 'ressources insuffisantes';
          TempTxtReussite:= 'Nouveau batiment ';
 
          for numRessource:= 1 to GetTotalItemRessources() do
