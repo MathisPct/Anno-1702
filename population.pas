@@ -223,7 +223,7 @@ implementation
     var
       texte: String;
     begin
-      if (getNbHabCatePop(1)>0) then
+      if (typeHabitant[1].nbPopCatego>0) then
          texte:=txtConso+ IntToStr(eatFish(1)) + ' poissons '
       else
          texte:='Vous n''avez pas encore de colons sur votre île';
@@ -250,7 +250,7 @@ implementation
       texte: String;
     begin
       if (getNbTotalPop()>0) then
-         texte:= 'Les habitants de l''île vous ont rapporté ' + IntToStr(orRapporte()) + ' d''or'
+         texte:= 'Les habitants de l''île vous ont rapporté '+ IntToStr(orRapporte()) + ' d''or'
       else
          texte:='';
       ecrireTexte(texte,posX,posY);

@@ -80,12 +80,12 @@ implementation
   const
     totalItemsRess= 6;
 
-    texteGold = 'Pieces Or :';
-    texteBois = 'Bois :';
-    texteFish = 'Poisson :';
-    texteLaine ='Laine :';
-    texteTissu ='Tissu :';
-    texteTool = 'Outils :';
+    texteGold = 'Pieces Or';
+    texteBois = 'Bois';
+    texteFish = 'Poisson';
+    texteLaine ='Laine';
+    texteTissu ='Tissu';
+    texteTool = 'Outils';
 
   type
     menuRess = array[1..totalItemsRess] of String;
@@ -328,7 +328,7 @@ implementation
     begin
        for ressource:=gold to tool do
           begin
-            txtAfficheRess:= 'Quantité de '+ typeRessouce[ressource].nom+' gagné ou perdues :'+IntToStr(quantityRessWinTour(ressource));  //concaténation de plusieurs str le text description avec la quantité gagné de chaque item
+            txtAfficheRess:= txtIndentation('Quantité de '+ typeRessouce[ressource].nom+' gagné ou perdues',35)+':'+IntToStr(quantityRessWinTour(ressource));  //concaténation de plusieurs str le text description avec la quantité gagné de chaque item
             ecrireTexte(txtAfficheRess,posX,posYPremierItem); //ecrit le txt description avec la quantité de ress gagné
             posYPremierItem:=posYPremierItem+espacement; //incrément de la posY de l'item suivant
           end;

@@ -84,8 +84,6 @@ implementation
               touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
               setItemChoisie(touche);
               navigationTabMenu(menuTourSuivant,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menucolorierElementActuel();
-              colorierElementActu(10,60,menuTourSuivantX,menuTourSuivantY);  //colorie l'item actuel
-              reintialiserElementAnt(10,60,menuTourSuivantX,menuTourSuivantY); //réintialise la couleur de l'item précedemment choisie
             end;
 
           incrementaNbTourBoucle(); //incrémentation du tour de boucle

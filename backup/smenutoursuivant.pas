@@ -46,7 +46,7 @@ implementation
       affichageOrPop(10,14); //affichage de l'or rapporté par la population
       besoinsColons(10,15);
       besoinsCitoyens(10,16);
-      printBonheurHab(10,18); {procédure qui affiche le niveau de bonheur des 2 catégo d'haben posX et posY}
+      printBonheurHab(10,18); {procédure qui affiche le niveau de bonheur des 2 catégo d'hab en posX et posY}
       printAllRessQuantityGagne(10,22,1); //Affiche la quantité de ressource gagné
       printItemsMenu(totaleItemsMenu,menuTourSuivant,menuTourSuivantX,menuTourSuivantY); //affichage des éléments du menu tour suivant
     end;

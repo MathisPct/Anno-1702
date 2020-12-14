@@ -61,13 +61,13 @@ const
 
   //Ordonnées texte batiments
   txtMaisonY            = 12;
-  txtVillaY             = 13;
-  txtCentreVilleY       = 15;
-  txtChapelleY          = 18;
-  txtCaPecheurY         = 21;
-  txtCaBucheronY        = 24;
-  txtBergerieY          = 27;
-  txtAtelierTisserandY  = 30;
+  txtVillaY             = 15;
+  txtCentreVilleY       = 18;
+  txtChapelleY          = 21;
+  txtCaPecheurY         = 24;
+  txtCaBucheronY        = 27;
+  txtBergerieY          = 30;
+  txtAtelierTisserandY  = 33;
 
   // BATIMENT HABITAT coordonnées
   // ordonnées habitat

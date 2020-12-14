@@ -35,7 +35,7 @@ begin
   initBoucleJeu(); //initialisation de boucleJeu à true
   initEtatEventImpr(); {initialise etatEvent à false: au début pas d'event}
   writeln(getBat_Cost_Txt(1));
-  writeln(getBat_Cost_Item_Value(1,3));
+  writeln(getBat_Cost_Item_Value(1,2));
   readln;
   while (getBoucleJeu()=True) do //tant qu'on est dans le jeu
     begin

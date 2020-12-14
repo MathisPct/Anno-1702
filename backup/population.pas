@@ -223,7 +223,7 @@ implementation
     var
       texte: String;
     begin
-      if (getNbHabCatePop(1)>0) then
+      if (typeHabitant[1].nbPopCatego>0) then
          texte:=txtConso+ IntToStr(eatFish(1)) + ' poissons '
       else
          texte:='Vous n''avez pas encore de colons sur votre île';
@@ -250,7 +250,7 @@ implementation
       texte: String;
     begin
       if (getNbTotalPop()>0) then
-         texte:= 'Les habitants de l''île vous ont rapporté ' + IntToStr(orRapporte()) + ' d''or'
+         texte:= txtIndentation('Les habitants de l''île vous ont rapporté ',45)+ IntToStr(orRapporte()) + ' d''or'
       else
          texte:='';
       ecrireTexte(texte,posX,posY);
@@ -335,33 +335,33 @@ implementation
   {fonction qui retourne true si la quantité des batiments est inférieur ou égale à 5 }
   function getBesoinFishCitoyens(): Boolean;
     begin
-      if (getBat_Prop('INDUSTRIE', 'Cabane de Pecheur', 'quantity')<5) then
+      if (getBat_Prop(2, 'quantity')<5) then
          getBesoinFishCitoyens:=True
-      else if (getBat_Prop('INDUSTRIE', 'Cabane de Pecheur', 'quantity')>=5) then
+      else if (getBat_Prop(2, 'quantity')>=5) then
          getBesoinFishCitoyens:=False;
     end;
 
   function getBesoinBoisCitoyens(): Boolean;
     begin
-      if (getBat_Prop('INDUSTRIE', 'Cabane de Bucheron', 'quantity')<6) then
+      if (getBat_Prop(3, 'quantity')<6) then
          getBesoinBoisCitoyens:=True
-      else if (getBat_Prop('INDUSTRIE', 'Cabane de Bucheron', 'quantity')>=6) then
+      else if (getBat_Prop(3, 'quantity')>=6) then
          getBesoinBoisCitoyens:=False;
     end;
 
   function getBesoinTissusCitoyens(): Boolean;
     begin
-      if (getBat_Prop('INDUSTRIE', 'Atelier de Tisserand', 'quantity')<3) then
+      if (getBat_Prop(5, 'quantity')<3) then
          getBesoinTissusCitoyens:=True
-      else if (getBat_Prop('INDUSTRIE', 'Atelier de Tisserand', 'quantity')>=3) then
+      else if (getBat_Prop(5, 'quantity')>=3) then
          getBesoinTissusCitoyens:=False;
     end;
 
   function getBesoinChappelleCitoyens(): Boolean;
     begin
-      if (getBat_Prop('SOCIAL', 'Chapelle', 'quantity')<2) then
+      if (getBat_Prop(6, 'quantity')<2) then
          getBesoinChappelleCitoyens:=True
-      else if (getBat_Prop('SOCIAL', 'Chapelle', 'quantity')>=2) then
+      else if (getBat_Prop(6, 'quantity')>=2) then
          getBesoinChappelleCitoyens:=False;
     end;
 

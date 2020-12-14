@@ -61,8 +61,8 @@ const
 
   //Ordonnées texte batiments
   txtMaisonY            = 12;
-  txtVillaY             = 13;
-  txtCentreVilleY       = 15;
+  txtVillaY             = 14;
+  txtCentreVilleY       = 16;
   txtChapelleY          = 18;
   txtCaPecheurY         = 21;
   txtCaBucheronY        = 24;
@@ -263,7 +263,7 @@ const
   procedure initItemsMenu2();
     const
        txtCout= ' | cout |   ';
-       longMaxTxt=45;
+       longMaxTxt=20;
     begin
        menu2[1]:=txtIndentation(txtMaison,longMaxTxt)+txtCout+getBat_Cost_Txt(1);
        menu2[2]:=txtIndentation(txtVilla,longMaxTxt) +txtCout+getBat_Cost_Txt(8);
