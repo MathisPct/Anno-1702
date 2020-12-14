@@ -330,12 +330,12 @@ implementation
     end;
 
   // modifie une ressource passée en paramètre / utile pour la construction de batiment
-  procedure setRessource(item: Integer; valeur: Integer);
+  procedure setRessource(numRessource: Integer; valeur: Integer);
     var
        coef: Integer; // sert à multiplier valeur par moins 1 plus proprement
     begin
          coef:= -1;
-         case item of
+         case numRessource of
          1: setGold(coef*valeur);
          2: setWood(coef*valeur);
          3: setFish(coef*valeur);

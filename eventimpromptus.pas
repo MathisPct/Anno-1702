@@ -119,7 +119,7 @@ implementation
   procedure initEImpromDiffNormal();
     begin
       initEImprompGeneral(); {procedure qui initialie les events impromptus : commun à toutes les difficultés }
-      initProbMaxEventImprompt(2); //initialisation apparition d'un event impromptu
+      initProbMaxEventImprompt(3); //initialisation apparition d'un event impromptu
       tabEventImpromptu[pirate].tourFinEvent:= -1; //initialisation tour fin event
       tabEventImpromptu[pirate].probNbTour:=5; //l'event peu durer entre 1 à 5 tours
       tabEventImpromptu[pesteNoir].probNbTour:=5; //l'event peu durer entre 1 à 5 tours
@@ -130,12 +130,6 @@ implementation
   procedure initEtatEventImpr();
     begin
       etatEvent:=False;
-    end;
-
-  {procédure qui modifie etatEvent si l'event est actif ou non}
-  procedure setEtatEvent(valeur:Boolean);
-    begin
-      etatEvent:=valeur;
     end;
 
   {fonction qui renvoie si un event est actif et false si il est pas actif }
@@ -154,7 +148,6 @@ implementation
       else
         begin
          getEtatPiraterie:=False;
-         setEtatEvent(False); //plus d'event actif
         end;
     end;
 
@@ -187,16 +180,13 @@ implementation
     end;
 
   {fonction qui retourne true si l'event ouragan est lancé et false s'il n'est pas lancé}
-  function getEtatOuragan():Boolean;
+  procedure eventOuragan();
     begin
       if (getNbTour()<=tabEventImpromptu[ouragan].tourFinEvent) then
         begin
-          getEtatOuragan:=True;
         end
       else
         begin
-         getEtatOuragan:=False;
-         setEtatEvent(False); //plus d'event actif
         end;
     end;
 
@@ -276,11 +266,10 @@ implementation
     begin
       randomize;
       //si le nombre de tour qu'a fait le joueur est >=10 et le nb aleatoire entre 1 et probaMaxEventImpromptu=1 et que les events sont activés alors faire un choix entre les 3 event
-      if ((random(probaMaxEventImpromptu)=1) and (getNbTour()>=1) and (getNbTour()>getTourReEvent()) ) then
+      if ((random(probaMaxEventImpromptu)=1) and (getNbTour()>=10) and (getNbTour()>getTourReEvent()) ) then
         begin
-             setEtatEvent(True); //les évènements sont actifs
              randomize;
-             nbAleatoire:=RandomRange(3,4); //random entre 1 à 3
+             nbAleatoire:=RandomRange(1,4); //random entre 1 à 3
              writeln(nbAleatoire);
              attendre(1000);
              case (nbAleatoire) of

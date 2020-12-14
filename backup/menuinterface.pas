@@ -21,22 +21,16 @@ implementation
     txtSuivant='Tour suivant'; //constante de type string qui est le 1er item du menu
     txtGestionbatiment='Accéder au menu de gestion des batimênts'; //constante de type string qui est le 2ème item du menu
     txtQuitter='Quitter la partie'; //constante de type string qui est le 3ème item du menu
-    txtTest='Test1';
-    txtTest2='Test2';
 
     //Déclaration des abcisses de notre menu
     txtSuivantX= 15; //abcisse de txtSuivant
     txtGestionbatimentX=15; //abcisse de txtGestionbatiment
     txtQuitterX=15; //abcisse de txtGestionbatiment
-    txtTestX=15;  //abcisse de txtGestionbatiment
-    txtTest2X=15; //abcisse de txtTest2
 
     //Déclaration des ordonnées de notre menu
     txtSuivantY= 40; //ordonnée de txtSuivant
     txtGestionbatimentY=42; //ordonnée de txtGestionbatiment
     txtQuitterY=48; //ordonnée de txtGestionbatiment
-    txtTestY=50;  //ordonnée de txtGestionbatiment
-    txtTest2Y=52; //ordonnée de txtTest2
 
     //absicces ressources
     txtGoldX= 115; //abcisse du text gold
@@ -64,9 +58,9 @@ implementation
 
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
 
-    menuInterfa:array[1..totaleItemsMenu] of String =(txtSuivant,txtGestionbatiment,txtQuitter,txtTest,txtTest2); //tableau qui contient les différents item texte du menu
-    itemsCoordX:array[1..totaleItemsMenu] of Integer = (txtSuivantX,txtGestionbatimentX,txtQuitterX,txtTestX,txtTest2X) ;//tableau qui contient les différents abcisses des items du menu
-    itemsCoordY:array[1..totaleItemsMenu] of Integer= (txtSuivantY,txtGestionbatimentY,txtQuitterY,txtTestY,txtTest2Y); //tableau qui contient les différents ordonnées des items du menu
+    menuInterfa:array[1..totaleItemsMenu] of String =(txtSuivant,txtGestionbatiment,txtQuitter); //tableau qui contient les différents item texte du menu
+    itemsCoordX:array[1..totaleItemsMenu] of Integer = (txtSuivantX,txtGestionbatimentX,txtQuitterX) ;//tableau qui contient les différents abcisses des items du menu
+    itemsCoordY:array[1..totaleItemsMenu] of Integer= (txtSuivantY,txtGestionbatimentY,txtQuitterY); //tableau qui contient les différents ordonnées des items du menu
 
     //tableaux qui contient les coordonnées (x et y) des ressources
     RessourcesCoordX:  tabCoordXItemRessources = (txtGoldX,txtWoodX,txtFishX,txtLaineX,txtTissuX,txtToolX);
@@ -167,16 +161,17 @@ implementation
                   running:=False;   //on sort du menu interface
                   initItemChoisie(); //initialisation de l'itemChoisie
                   updateBonheurColons();
+                  updateBonheurCitoyens();
                   mainSMenuMarchand(getEtatPiraterie()); //appel du menu marchand si l'event piraterie n'est pas actif
                   initiaNbTourBoucle(); //initialisation nbTourBoucle pour affichage etc
                   productionIndustrieTour(); //produire des ressources suivant le nb de batiment qu'on a et les coefs de prod de ressources de chaque bat
                   consommation(); //consommation de ressources par la pop (nbHab*coefNutri)
                   //initialisation système de jeu
-                  //setNbPop(1,getBat_Prop('HABITAT','Maison de Colon','quantity'),getBat_Prop('HABITAT','Maison de Colon','capacity')); //init nb population (type , nbMaison, capacité maison )
-                  setNbCategoPop(1,getMaisonGagne(),getBat_Prop('HABITAT','Maison de Colon','capacity'));  //init nb d'une catégorie de pop
-                  //setNbCategoPop(2,getBat_Prop('HABITAT','Villa de citoyen','quantity'),getBat_Prop('HABITAT','Villa de citoyen','capacity'));  //init nb d'une catégorie de pop
-                  maintSMenuTs(); //affichage du sous menu
+                  maintSMenuTs(); //affichage du sous menu tour suivant
+                  setNbCategoPop(1,getMaisonGagne(),getBat_Prop(1,'capacity'));  //init nb d'une catégorie de pop
+                  setNbCategoPop(2,getVIllaGagne(),getBat_Prop(1,'capacity'));  //init nb d'une catégorie de pop
                   running:=True;
+                  setLogementDebTour(); //procédure qui récupère la quantité de logement en début de tour
                 end;
 
                2:

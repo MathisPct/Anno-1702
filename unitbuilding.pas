@@ -5,46 +5,45 @@ unit UnitBuilding;
 interface
 
   uses
-    unitRessources, Classes, SysUtils, GestionEcran, bouclesJeux ;
+    unitRessources, Classes, SysUtils, GestionEcran, bouclesJeux;
 
   // initialise les batiment en début de partie
   procedure initBuilding();
 
-
   //procédure product de ressources suivant le nb de batiment qu'on a et suivant les coefs de prod de ressources de chaque batiment
   procedure productionIndustrieTour();
 
-  // retourne le nom du batiment passé en paramètre
-  function getBat_Nom(sorte: String; nom: String): String;
-
   // retourne la quantité ou la capacité selon prop d'un batiment passé en paramètre
-  function getBat_Prop(sorte: String; nom: String; prop: String): Integer;
+  function getBat_Prop(numBat:Integer; prop: String): Integer;
 
-  // retourne la valeur de cout de construction pour un item ressource donné pour la construction d'un batiment
-  function getBat_Cost_Item_Value(sorte: String; nom: String; Item: Integer): Integer;
+  //retourne la valeur de cout de construction pour un item ressource donné pour la construction d'un batiment
+  function getBat_Cost_Item_Value(numBat,numRessource:Integer): Integer;
 
   // retourne un string concatené composé de toutes les ressources nécéssaires à l'achat du batiment passé en paramètre
-  function getBat_Cost_Txt(sorte: String; nom: String): String;
+  function getBat_Cost_Txt(numBat:Integer): String;
 
   // retourne la valeur de production d'un item ressource produit ou utilisé par un batiment
-  function getBat_Prod_Item_Value(sorte: String; nom: String; Item: Integer): Integer;
+  function getBat_Prod_Item_Value(numBat,numRessource: Integer): Integer;
 
   // retourne l'utilisation ou la production de ressources d'un batiment ou de tout les batiments selon les paramètres entrés
-  function get_Bat_Prod_Txt(sorte: String; nom: String; production: String; total: String): String;
+  function get_Bat_Prod_Txt(numBat:Integer; production: String; total: String): String;
 
   // permet de modifier la quantité du batiment passé en paramètre
-  procedure SetBat_Quantity(sorte: String; nom: String; valeur: Integer);
+  procedure SetBat_Quantity(numBat,valeur: Integer);
 
   {fonction qui renvoie le nb de maisons au début du tour}
   function getMaisonGagne():Integer;
 
-  {procedure qui récupère la quantité de maisons en début de tour}
-  procedure setMaisonDebTour();
+  {fonction qui renvoie le nb de villa au début du tour}
+  function getVIllaGagne(): Integer;
+
+  {procedure qui récupère la quantité de logement de chaque catégorie de pop en début de tour}
+  procedure setLogementDebTour();
 
   //procedure de construction d'un batiment passé en paramètre
-  function Build_Batiment(sorte: String; nom: String):String;
+  function Build_Batiment(numBat:Integer;etatBesoinsColons:Boolean):String;
 
-  procedure affichageBatiment(sorte: String; nom:String; propriety: String; posX,posY:Integer);
+  procedure affichageBatiment(numBat:Integer; propriety: String; posX,posY:Integer);
 
   //procédure initialise les batiments en difficulté NORMAL
   procedure initBuildingDiffFacile();
@@ -86,6 +85,7 @@ implementation
   var
      batiment : array[1..totalBatiment] of Building; //permet de créer des variations du record building et ainsi de décrire tout les batiments du jeu
      nbMaisonDebTour: Integer; //variable int, pour calculer le nb de maisons gagné durant le tour
+     nbVillaDebTour: Integer; //variable int, pour calculer le nb de villas gagné en début de tour
 
   // initialise les batiment en début de partie
   procedure initBuilding();
@@ -109,11 +109,11 @@ implementation
 
       batiment[B_Villa].sorte  := 'HABITAT';
       batiment[B_Villa].nom    := 'Villa de citoyen';
-      batiment[B_Villa].quantity  := 0;
+      batiment[B_Villa].quantity  := 1;
       batiment[B_Villa].capacity  := 5;
       //cout de construction
       batiment[B_Villa].construct[1] := 50; //cout gold
-      batiment[B_Villa].construct[2] := 100; //cout bois
+      batiment[B_Villa].construct[2] := 50; //cout bois
 
 
   /////////////////////////////////////// S-O-C-I-A-L /////////////////////////////////////////
@@ -236,40 +236,15 @@ implementation
          end;
     end;
 
-  // retourne le nom du batiment passé en paramètre
-  function getBat_Nom(sorte: String; nom: String): String;
-    var
-       x: Integer;        // compteur pour parcourir les batiments
-       nomBat: String;    // nom bat à retourner en habitant du batiment à retourner
-    begin
-         for x:=1 to totalBatiment do  // on parcourt tout les batiments declarés
-             begin
-                  if ((batiment[x].sorte = sorte) AND (batiment[x].nom = nom)) then // si le batiment trouvé est de la sorte et du nom passé en paramètre alors
-                     begin
-                       nomBat:= batiment[x].nom; // affecte le nom  du batiment passé en paramètre
-                     end;
-             end;
-         getBat_Nom:=nomBat;
-    end;
-
   // retourne la quantité ou la capacité selon prop d'un batiment passé en paramètre
-  function getBat_Prop(sorte: String; nom: String; prop: String): Integer;
+  function getBat_Prop(numBat:Integer; prop: String): Integer;
     var
-       x: Integer;                                        // compteur pour parcourir les batiments
        propChoice: Integer;                               // capacité en habitant du batiment à retourner
        capacity, quantity: Integer;
     begin
          propChoice:=0;
-
-         for x:=1 to totalBatiment do             // on parcourt tout les batiments declarés
-           begin
-               if ((batiment[x].sorte = sorte) AND (batiment[x].nom = nom)) then // si le batiment trouvé est de la sorte et du nom passé en paramètre alors
-                   begin
-                     capacity:= batiment[x].capacity; // affecte la CAPACITE du batiment passé en paramètre
-                     quantity:= batiment[x].quantity; // affecte la QUANTITE du batiment passé en paramètre
-                   end;
-           end;
-
+         capacity:= batiment[numBat].capacity; // affecte la CAPACITE du batiment passé en paramètre
+         quantity:= batiment[numBat].quantity; // affecte la QUANTITE du batiment passé en paramètre
          case prop of                                 // retourne soit la QUANTITE soit la CAPACITE selon le propChoice passé en commentaire
            'quantity' : propChoice := quantity;
            'capacity' : propChoice := capacity;
@@ -278,29 +253,20 @@ implementation
     end;
 
   // retourne la valeur de production d'un item ressource produit ou utilisé par un batiment
-  function getBat_Prod_Item_Value(sorte: String; nom: String; Item: Integer): Integer;
+  function getBat_Prod_Item_Value(numBat,numRessource: Integer): Integer;
     var
-       x: Integer;                                       // compteur pour parcourir les batiments
        tempInt: Integer;
     begin
-        for x:=1 to totalBatiment do             // on parcourt tout les batiments declarés
-          begin
-               if ((batiment[x].sorte = sorte) AND (batiment[x].nom = nom)) then // si le batiment trouvé est de la sorte et du nom passé en paramètre alors
-                 begin
-                      tempInt:= batiment[x].production[Item];
-                 end;
-          end;
-        getBat_Prod_Item_Value:=tempInt;
+     tempInt:= batiment[numBat].production[numRessource];
+     getBat_Prod_Item_Value:=tempInt;
     end;
 
-  // retourne l'utilisation ou la production de ressources d'un batiment ou de tout les batiments selon les paramètres entrés
-  function get_Bat_Prod_Txt(sorte: String; nom: String; production: String; total: String): String;
+  // retourne la production de ressources d'un batiment ou de tout les batiments selon les paramètres entrés
+  function get_Bat_Prod_Txt(numBat:Integer; production: String; total: String): String;
     var
-       x: Integer;      // compteur pour parcourir les batiments
-       i: Integer;      // compteur qui sert à parcourir les tableaux de ressources de construction
+       numRessource: Integer;      // compteur qui sert à parcourir les tableaux de ressources de construction
 
        TempTxt: String; // string qui stocke le texte de la production à renvoyer
-       Item: Integer;
        coef: Integer;
 
        {cette fonction retourne la production ou l'utilisation en ressources d'un batiment
@@ -313,102 +279,68 @@ implementation
 
     begin
          TempTxt:='';
-         Item:= GetTotalItemRessources();
-
          case total of
-             'total'  : coef := getBat_Prop(sorte, nom, 'quantity');
+             'total'  : coef := getBat_Prop(numBat, 'quantity');
              'unique' : coef := 1;
          end;
-
-         for x:=1 to totalBatiment do // on parcourt toutes les batiments declarés
-           begin
-             if ((batiment[x].sorte = sorte) AND (batiment[x].nom = nom)) then // si le batiment trouvé est de la sorte et du nom passé en paramètre alors
-             case production of
-               'produit' :
-                           begin
-                               for i:= 1 to Item do
-                                 begin
-                                     if (batiment[x].production[i]) > 0 then                   // on va retourner seulement le nombre de ressources produites par tour
-                                       TempTxt:= TempTxt + GetRessourcesTxt(i) + IntToStr(getBat_Prod_Item_Value(sorte, nom, i)*coef) + '  ';
-                                 end;
-                           end;
-               'necessite':
-                           begin
-                               for i:= 1 to Item do
-                                 begin
-                                     if (batiment[x].production[i]) < 0 then                   // on va retourner seulement le nombre de ressources produites par tour
-                                       TempTxt:= TempTxt + GetRessourcesTxt(i) + IntToStr(getBat_Prod_Item_Value(sorte, nom, i)*coef) + '  ';
-                                 end;
-                           end;
-
-                 end;
-           end;
+         case production of
+           'produit' :
+                       begin
+                           for numRessource:= 1 to GetTotalItemRessources() do
+                             begin
+                                 if (batiment[numBat].production[numRessource]) > 0 then                   // on va retourner seulement le nombre de ressources produites par tour
+                                   TempTxt:= TempTxt + GetRessourcesTxt(numRessource) + IntToStr(getBat_Prod_Item_Value(numBat, numRessource)*coef) + '  ';
+                             end;
+                       end;
+           'necessite':
+                       begin
+                           for numRessource:= 1 to GetTotalItemRessources() do
+                             begin
+                                 if (batiment[numBat].production[numRessource]) < 0 then                   // on va retourner seulement le nombre de ressources produites par tour
+                                   TempTxt:= TempTxt + GetRessourcesTxt(numRessource) + IntToStr(batiment[numBat].production[numRessource]*coef) + '  ';
+                             end;
+                       end;
+             end;
          get_Bat_Prod_Txt:=Temptxt;
     end;
 
   // retourne la valeur de cout de construction pour un item ressource donné pour la construction d'un batiment
-  function getBat_Cost_Item_Value(sorte: String; nom: String; Item: Integer): Integer;
+  function getBat_Cost_Item_Value(numBat,numRessource:Integer): Integer;
     var
        x: Integer;                                       // compteur pour parcourir les batiments
        tempInt: Integer;
     begin
-        for x:=1 to totalBatiment do             // on parcourt tout les batiments declarés
-          begin
-               if ((batiment[x].sorte = sorte) AND (batiment[x].nom = nom)) then // si le batiment trouvé est de la sorte et du nom passé en paramètre alors
-                 begin
-                      tempInt:= batiment[x].construct[Item];
-                 end;
-          end;
+       // on parcourt tout les batiments declarés
+        for x:=1 to totalBatiment do
+            tempInt:= batiment[numBat].construct[numRessource];
         getBat_Cost_Item_Value:=tempInt;
     end;
 
   // retourne un string concatené composé de toutes les ressources nécéssaires à l'achat du batiment passé en paramètre
-  function getBat_Cost_Txt(sorte: String; nom: String): String;
+  function getBat_Cost_Txt(numBat:Integer): String;
     var
-       x: Integer;                                                             // compteur pour parcourir les batiments
-       i: Integer;                                                             // compteur qui sert à parcourir les tableaux de ressources de construction
-       TempTxt: String;                                                        // string qui stocke le texte du prix de construction à renvoyer
-       Item: Integer;
+       numRessource: Integer;  // compteur qui sert à parcourir les tableaux de ressources de construction
+       TempTxt: String;  // string qui stocke le texte du prix de construction à renvoyer
     begin
        TempTxt:='';
-       Item:= GetTotalItemRessources();
-       for x:=1 to totalBatiment do // on parcourt toutes les batiments declarés
-           if ((batiment[x].sorte = sorte) AND (batiment[x].nom = nom)) then // si le batiment trouvé est de la sorte et du nom passé en paramètre alors
-             begin
-                 for i:= 1 to Item do
-                   begin
-                      if (batiment[x].construct[i]) > 0 then                   // on va retourner seulement les items necessaires à la construction
-                         begin
-                           TempTxt:= TempTxt + GetRessourcesTxt(i) + IntToStr(getBat_Cost_Item_Value(sorte, nom, i)) + '    ';
-                         end;
-                   end;
-                 getBat_Cost_Txt:=Temptxt;
-             end;
-    end;
-
-  // permet de modifier la quantité du batiment passé en paramètre
-  procedure SetBat_Quantity(sorte: String; nom: String; valeur: Integer);
-    var
-       x          : Integer;        // compteur pour parcourir les batiments
-       TempSorte  : String;
-       TempNom    : String;
-
-    begin
-       TempSorte  := sorte;
-       TempNom    := nom;
-       for x:=1 to totalBatiment do // on parcourt toutes les batiments declarés
+       for numRessource:= 1 to GetTotalItemRessources() do
          begin
-             if ((batiment[x].sorte = TempSorte) AND (batiment[x].nom = TempNom)) then // si le batiment trouvé est de la sorte et du nom passé en paramètre alors
-               begin
-                    batiment[x].quantity := batiment[x].quantity + valeur;                   // on ajoute la valeur passé en paramètre au nombre de batiment de ce nom et cette sorte
-               end;
+            if (batiment[numBat].construct[numRessource]) > 0 then   // on va retourner seulement les items necessaires à la construction
+                 TempTxt:= TempTxt + GetRessourcesTxt(numRessource) + IntToStr(getBat_Cost_Item_Value(numBat,numRessource)) + '    ';
          end;
     end;
 
-  {procedure qui récupère la quantité de maisons en début de tour}
-  procedure setMaisonDebTour();
+  // permet de modifier la quantité du batiment passé en paramètre
+  procedure SetBat_Quantity(numBat,valeur: Integer);
+    begin
+       batiment[numBat].quantity:= batiment[numBat].quantity+ valeur;
+    end;
+
+  {procedure qui récupère la quantité des logements en début de tour}
+  procedure setLogementDebTour();
     begin
        nbMaisonDebTour:= batiment[B_Maison].quantity;
+       nbVillaDebTour:= batiment[B_Villa].quantity;
     end;
 
   {fonction qui renvoie le nb de maisons au début du tour}
@@ -417,58 +349,54 @@ implementation
       getMaisonGagne:= batiment[B_Maison].quantity-nbMaisonDebTour;
     end;
 
-  //procedure de construction d'un batiment passé en paramètre
-  function Build_Batiment(sorte: String; nom: String):String;
-    var
-       x              : Integer;  // compteur pour parcourir les batiments
-       i              : Integer;  // compteur qui sert à parcourir les tableaux de ressources de construction
-       Item           : Integer;  // correspond au nombre total d'item ressource
-       RessourcesCount: Integer;
-       TempTxtEchec   : String;
-       TempTxtReussite: String;
-       TempSorte      : String;
-       TempNom        : String;
-
+  {fonction qui renvoie le nb de villa au début du tour}
+  function getVIllaGagne(): Integer;
     begin
-         TempSorte  := sorte;
-         TempNom    := nom;
-         Build_Batiment := '';
-         RessourcesCount:= 0;
-         TempTxtEchec:= 'ressources insuffisantes !';
-         TempTxtReussite:= 'Nouveau batiment ';
-         Item:= GetTotalItemRessources();
-
-         for x:=1 to totalBatiment do // on parcourt toutes les batiments declarés
-           begin
-             if ((batiment[x].sorte = TempSorte) AND (batiment[x].nom = TempNom)) then // si le batiment trouvé est de la sorte et du nom passé en paramètre alors
-               begin
-                   for i:= 1 to Item do
-                     begin
-                        if (GetRessourcesValue(i) >= batiment[x].construct[i]) then                   // on va retourner seulement les items necessaires à la construction
-                           begin
-                                RessourcesCount:= RessourcesCount + 1;
-                           end
-                        else
-                            TempTxtEchec:=TempTxtEchec + GetRessourcesTxt(i);
-                     end;
-               end;
-           end;
-
-         if (RessourcesCount = GetTotalItemRessources()) then
-            begin
-                 SetBat_Quantity(TempSorte, TempNom, 1);
-                 for i:= 1 to Item do
-                   begin
-                        setRessource(i, getBat_Cost_Item_Value(TempSorte, TempNom, i));
-                   end;
-                 Build_Batiment:= TempTxtReussite + TempNom
-            end
-         else
-             Build_Batiment:=TempTxtEchec;
+      getVIllaGagne:= batiment[B_Villa].quantity-nbVillaDebTour;
     end;
 
+  //procedure de construction d'un batiment passé en paramètre
+  function Build_Batiment(numBat:Integer;etatBesoinsColons:Boolean):String;
+    var
+         numRessource      : Integer;  // compteur qui sert à parcourir les tableaux de ressources de construction
+         RessourcesCount: Integer;
+         TempTxtEchec   : String;
+         TempTxtReussite: String;
 
-  procedure affichageBatiment(sorte: String; nom:String; propriety: String; posX,posY:Integer);
+    begin
+         Build_Batiment := '';
+         RessourcesCount:= 0; //variable entière
+         TempTxtEchec:= 'ressources insuffisantes !';
+         TempTxtReussite:= 'Nouveau batiment ';
+
+         for numRessource:= 1 to GetTotalItemRessources() do
+           begin
+            if (GetRessourcesValue(numRessource) >= (batiment[numBat].construct[numRessource]) ) then
+                RessourcesCount:= RessourcesCount + 1
+            else
+                TempTxtEchec:=TempTxtEchec + GetRessourcesTxt(numRessource);
+           end;
+         //si on a toutes les ressources suffisantes
+         if (RessourcesCount=GetTotalItemRessources()) then
+           begin
+              SetBat_Quantity(numBat,1);
+              for numRessource:=1 to GetTotalItemRessources() do
+                  setRessource(numRessource,getBat_Cost_Item_Value(numBat,numRessource));
+              Build_Batiment:=TempTxtReussite+batiment[numBat].nom;
+           end
+         //sinon si on a pas toutes les ressources suffisantes
+         else
+           Build_Batiment:=TempTxtEchec;
+    end;
+
+                    {    if (batiment[x].sorte = batiment[B_Villa].sorte) then
+                    if (etatBesoinsColons) then
+                      begin
+                       writeln('Construction impossible');
+                       attendre(1000;);
+                      end;  }
+
+  procedure affichageBatiment(numBat:Integer;propriety: String; posX,posY:Integer);
     var
       posItem: coordonnees; //variable, coordonnées de placement d'un item avec sa position en x et en y
       //marge: Integer;
@@ -476,19 +404,18 @@ implementation
     begin
       //marge:= 3;
       case propriety of
-           'nom'              : txtToDisplay:= getBat_Nom(sorte,nom);
-           'quantity'         : txtToDisplay:= 'Nombre : ' + IntToStr(getBat_Prop(sorte,nom,'quantity'));
-           'nom_quantity'     : txtToDisplay:=  getBat_Nom(sorte,nom) + ' : ' + IntToStr(getBat_Prop(sorte,nom,'quantity'));
-           'construct'        : txtToDisplay:= '[Cout de construction] '  + getBat_Cost_Txt(sorte,nom) + ']';
-           'production'       : txtToDisplay:= '[Production de ressources]  ' + get_Bat_Prod_Txt(sorte,nom,'produit','total');
-           'necessite'        : txtToDisplay:= '[Utilisation de ressources] ' +get_Bat_Prod_Txt(sorte,nom,'necessite','total');
-           'productionUnique' : txtToDisplay:= '[Produit] ' + get_Bat_Prod_Txt(sorte,nom,'produit','unique');
-           'necessiteUnique'  : txtToDisplay:= '[Utilise] ' +get_Bat_Prod_Txt(sorte,nom,'necessite','unique');
+           'nom'              : txtToDisplay:=  batiment[numBat].nom;//getBat_Nom(sorte,nom);
+           'quantity'         : txtToDisplay:= 'Nombre : ' + IntToStr(batiment[numBat].quantity);//IntToStr(getBat_Prop(sorte,nom,'quantity'));
+           'nom_quantity'     : txtToDisplay:=  batiment[numBat].nom + ' : ' + IntToStr(getBat_Prop(numBat,'quantity'));
+           'construct'        : txtToDisplay:= '[Cout de construction] '  + getBat_Cost_Txt(numBat) + ']';
+           'production'       : txtToDisplay:= '[Production de ressources]  ' + get_Bat_Prod_Txt(numBat,'produit','total');
+            //'necessite'        : txtToDisplay:= '[Utilisation de ressources] ' +get_Bat_Prod_Txt(numBat,'necessite','total');
+           'productionUnique' : txtToDisplay:= '[Produit] ' + get_Bat_Prod_Txt(numBat,'produit','unique');
+           //'necessiteUnique'  : txtToDisplay:= '[Utilise] ' +get_Bat_Prod_Txt(numBat,'necessite','unique');
       end;
-           posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
-           posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
-           ecrireEnPosition(posItem,txtToDisplay); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
-
+      posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
+      posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
+      ecrireEnPosition(posItem,txtToDisplay); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
     end;
 
 

@@ -6,7 +6,7 @@ unit sMenuGestionBatiments ;
 interface
 
   uses
-    gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage, unitBuilding; //appel des unités
+    gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage, unitBuilding,population; //appel des unités
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu interface }
   procedure mainSMenuGBat();
@@ -168,13 +168,13 @@ const
          villa   =2;
     begin
           // affichage maison de colon
-          affichageBatiment('HABITAT','Maison de Colon'   ,'nom'         ,CoordX[Maison]          ,CoordY[Maison]             );
-          affichageBatiment('HABITAT','Maison de Colon'   ,'quantity'    ,CoordX[Maison] + margeX ,CoordY[Maison] + (1*margeY));
-          affichageBatiment('HABITAT','Maison de Colon'   ,'necessite'   ,CoordX[Maison] + margeX ,CoordY[Maison] + (2*margeY));
+          affichageBatiment(1,'nom'         ,CoordX[Maison]          ,CoordY[Maison]);
+          affichageBatiment(1,'quantity'    ,CoordX[Maison] + margeX ,CoordY[Maison] + (1*margeY));
+          affichageBatiment(1,'necessite'   ,CoordX[Maison] + margeX ,CoordY[Maison] + (2*margeY));
 
-          affichageBatiment('HABITAT','Villa de citoyen'   ,'nom'         ,CoordX[villa]          ,CoordY[villa]             );
-          affichageBatiment('HABITAT','Villa de citoyen'   ,'quantity'    ,CoordX[villa] + margeX ,CoordY[villa] + (1*margeY));
-          affichageBatiment('HABITAT','Villa de citoyen'   ,'necessite'   ,CoordX[villa] + margeX ,CoordY[villa] + (2*margeY));
+          affichageBatiment(8,'nom'         ,CoordX[villa]          ,CoordY[villa]);
+          affichageBatiment(8,'quantity'    ,CoordX[villa] + margeX ,CoordY[villa] + (1*margeY));
+          //affichageBatiment(8,'necessite'   ,CoordX[villa] + margeX ,CoordY[villa] + (2*margeY));
     end;
 
     procedure affichageItemsBat_Social(CoordX: tabCoordXItemBatSocial; CoordY: tabCoordYItemBatSocial);
@@ -187,13 +187,13 @@ const
          Chapelle     = 2;
     begin
           // affichage centre-ville
-          affichageBatiment('SOCIAL','Centre-Ville'   ,'nom'         ,CoordX[CentreVille]          ,CoordY[CentreVille]             );
-          affichageBatiment('SOCIAL','Centre-Ville'   ,'quantity'    ,CoordX[CentreVille] + margeX ,CoordY[CentreVille] + (1*margeY));
-          affichageBatiment('SOCIAL','Centre-Ville'   ,'necessite'   ,CoordX[CentreVille] + margeX ,CoordY[CentreVille] + (2*margeY));
+          affichageBatiment(7,'nom'         ,CoordX[CentreVille]          ,CoordY[CentreVille]);
+          affichageBatiment(7,'quantity'    ,CoordX[CentreVille] + margeX ,CoordY[CentreVille] + (1*margeY));
+          //affichageBatiment(7,'necessite'   ,CoordX[CentreVille] + margeX ,CoordY[CentreVille] + (2*margeY));
           // affichage chapelle
-          affichageBatiment('SOCIAL','Chapelle'   ,'nom'         ,CoordX[Chapelle]          ,CoordY[Chapelle]             );
-          affichageBatiment('SOCIAL','Chapelle'   ,'quantity'    ,CoordX[Chapelle] + margeX ,CoordY[Chapelle] + (1*margeY));
-          affichageBatiment('SOCIAL','Chapelle'   ,'necessite'   ,CoordX[Chapelle] + margeX ,CoordY[Chapelle] + (2*margeY));
+          affichageBatiment(6,'nom'         ,CoordX[Chapelle]          ,CoordY[Chapelle]);
+          affichageBatiment(6,'quantity'    ,CoordX[Chapelle] + margeX ,CoordY[Chapelle] + (1*margeY));
+          //affichageBatiment(6,'necessite'   ,CoordX[Chapelle] + margeX ,CoordY[Chapelle] + (2*margeY));
     end;
 
   procedure affichageItemsBat_Industrie(CoordX: tabCoordXItemBatIndus; CoordY: tabCoordYItemBatIndus);
@@ -208,25 +208,25 @@ const
          Tiserand    = 4;
     begin
           // affichage cabane de pecheur
-          affichageBatiment('INDUSTRIE','Cabane de Pecheur'   ,'nom'         ,CoordX[cabPecheur]          ,CoordY[cabPecheur]               );
-          affichageBatiment('INDUSTRIE','Cabane de Pecheur'   ,'quantity'    ,CoordX[cabPecheur] + margeX ,CoordY[cabPecheur]   + (1*margeY));
-          affichageBatiment('INDUSTRIE','Cabane de Pecheur'   ,'production'  ,CoordX[cabPecheur] + margeX ,CoordY[cabPecheur]   + (2*margeY));
-          affichageBatiment('INDUSTRIE','Cabane de Pecheur'   ,'necessite'   ,CoordX[cabPecheur] + margeX ,CoordY[cabPecheur]   + (3*margeY));
+          affichageBatiment(2,'nom'         ,CoordX[cabPecheur]          ,CoordY[cabPecheur]);
+          affichageBatiment(2,'quantity'    ,CoordX[cabPecheur] + margeX ,CoordY[cabPecheur]   + (1*margeY));
+          affichageBatiment(2,'production'  ,CoordX[cabPecheur] + margeX ,CoordY[cabPecheur]   + (2*margeY));
+          //affichageBatiment(2,'necessite'   ,CoordX[cabPecheur] + margeX ,CoordY[cabPecheur]   + (3*margeY));
           // affichage cabane de bucheron
-          affichageBatiment('INDUSTRIE','Cabane de Bucheron'  ,'nom'         ,CoordX[cabBucheron]          ,CoordY[cabBucheron]             );
-          affichageBatiment('INDUSTRIE','Cabane de Bucheron'  ,'quantity'    ,CoordX[cabBucheron] + margeX ,CoordY[cabBucheron] + (1*margeY));
-          affichageBatiment('INDUSTRIE','Cabane de Bucheron'  ,'production'  ,CoordX[cabBucheron] + margeX ,CoordY[cabBucheron] + (2*margeY));
-          affichageBatiment('INDUSTRIE','Cabane de Bucheron'  ,'necessite'   ,CoordX[cabBucheron] + margeX ,CoordY[cabBucheron] + (3*margeY));
+          affichageBatiment(3,'nom'         ,CoordX[cabBucheron]          ,CoordY[cabBucheron]);
+          affichageBatiment(3,'quantity'    ,CoordX[cabBucheron] + margeX ,CoordY[cabBucheron] + (1*margeY));
+          affichageBatiment(3,'production'  ,CoordX[cabBucheron] + margeX ,CoordY[cabBucheron] + (2*margeY));
+          //affichageBatiment(3,'necessite'   ,CoordX[cabBucheron] + margeX ,CoordY[cabBucheron] + (3*margeY));
           // affichage bergerie
-          affichageBatiment('INDUSTRIE','Bergerie'  ,'nom'                   ,CoordX[Bergerie]             ,CoordY[Bergerie]                );
-          affichageBatiment('INDUSTRIE','Bergerie'  ,'quantity'              ,CoordX[Bergerie]    + margeX ,CoordY[Bergerie]    + (1*margeY));
-          affichageBatiment('INDUSTRIE','Bergerie'  ,'production'            ,CoordX[Bergerie]    + margeX ,CoordY[Bergerie]    + (2*margeY));
-          affichageBatiment('INDUSTRIE','Bergerie'  ,'necessite'             ,CoordX[Bergerie]    + margeX ,CoordY[Bergerie]    + (3*margeY));
+          affichageBatiment(4,'nom'                   ,CoordX[Bergerie]             ,CoordY[Bergerie] );
+          affichageBatiment(4,'quantity'              ,CoordX[Bergerie]    + margeX ,CoordY[Bergerie]    + (1*margeY));
+          affichageBatiment(4,'production'            ,CoordX[Bergerie]    + margeX ,CoordY[Bergerie]    + (2*margeY));
+          //affichageBatiment(4,'necessite'             ,CoordX[Bergerie]    + margeX ,CoordY[Bergerie]    + (3*margeY));
           // affichage atelier tisserand
-          affichageBatiment('INDUSTRIE','Atelier de Tisserand'  ,'nom'       ,CoordX[Tiserand]             ,CoordY[Tiserand]                );
-          affichageBatiment('INDUSTRIE','Atelier de Tisserand'  ,'quantity'  ,CoordX[Tiserand]    + margeX ,CoordY[Tiserand]    + (1*margeY));
-          affichageBatiment('INDUSTRIE','Atelier de Tisserand'  ,'production',CoordX[Tiserand]    + margeX ,CoordY[Tiserand]    + (2*margeY));
-          affichageBatiment('INDUSTRIE','Atelier de Tisserand'  ,'necessite' ,CoordX[Tiserand]    + margeX ,CoordY[Tiserand]    + (3*margeY));
+          affichageBatiment(5,'nom'       ,CoordX[Tiserand]             ,CoordY[Tiserand]);
+          affichageBatiment(5,'quantity'  ,CoordX[Tiserand]    + margeX ,CoordY[Tiserand]    + (1*margeY));
+          affichageBatiment(5,'production',CoordX[Tiserand]    + margeX ,CoordY[Tiserand]    + (2*margeY));
+          //affichageBatiment(5,'necessite' ,CoordX[Tiserand]    + margeX ,CoordY[Tiserand]    + (3*margeY));
 
     end;
 
@@ -343,41 +343,49 @@ const
                         //choix batiments à construire dans le menu 2
                         Case getItemChoisie() of
                           1: begin
-                                  message:=Build_Batiment('HABITAT', 'Maison de Colon');
+                                  message:=Build_Batiment(1,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
+                          2:
+                            begin
+                                  message:=Build_Batiment(8,getEtatAllBesoinsColons());
+                                  initItemChoisie();
+                                  initiaNbTourBoucle(); //initialisation  nb Tour boucle
+                                  runningMenuSuivant:=False;
+                                  running:=true;
+                            end;
                           3: begin
-                                  message:=Build_Batiment('SOCIAL', 'Centre-Ville');
+                                  message:=Build_Batiment(7,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
                           4: begin
-                                  message:=Build_Batiment('SOCIAL', 'Chapelle');
+                                  message:=Build_Batiment(6,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
                           5: begin
-                                  message:=Build_Batiment('INDUSTRIE', 'Cabane de Pecheur');
+                                  message:=Build_Batiment(2,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
                           6: begin
-                                  message:=Build_Batiment('INDUSTRIE', 'Cabane de Bucheron');
+                                  message:=Build_Batiment(3,getEtatAllBesoinsColons());
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
                           7: begin
-                                  message:=Build_Batiment('INDUSTRIE', 'Bergerie');
+                                  message:=Build_Batiment(4,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
@@ -385,7 +393,7 @@ const
                              end;
 
                           8: begin
-                                  message:=Build_Batiment('INDUSTRIE', 'Atelier de Tisserand');
+                                  message:=Build_Batiment(5,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
