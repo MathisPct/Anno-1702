@@ -6,7 +6,7 @@ unit smenutoursuivant ;
 interface
 
   uses
-    Classes , SysUtils , GestionEcran , bouclesJeux , navigationMenues , Keyboard , population , sMenuMarchand , unitRessources  ;
+    Classes , SysUtils , GestionEcran , bouclesJeux , navigationMenues , Keyboard , population , sMenuMarchand , unitRessources,unitBuilding  ;
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu tour suivant }
   procedure maintSMenuTs();
@@ -47,7 +47,8 @@ implementation
       besoinsColons(10,15);
       besoinsCitoyens(10,16);
       printBonheurHab(10,18); {procédure qui affiche le niveau de bonheur des 2 catégo d'hab en posX et posY}
-      printAllRessQuantityGagne(10,22,1); //Affiche la quantité de ressource gagné
+      afficheMessageProdChaine(50,26,1); //procédure qui affiche les erreurs lors de la prod de chaine industriel
+      printAllRessQuantityGagne(10,26,1); //Affiche la quantité de ressource gagné
       printItemsMenu(totaleItemsMenu,menuTourSuivant,menuTourSuivantX,menuTourSuivantY); //affichage des éléments du menu tour suivant
     end;
 
@@ -71,7 +72,6 @@ implementation
               initialisationItemActuel(1);
               //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
               initialisationItemAnterieur();
-
               //affichage des rectangles, du texte et du menu
               affichage();// affichage des éléments du menu 1
               colorierElementActu(10,60,menuTourSuivantX,menuTourSuivantY);  //initialisation de colorierElementActuel
@@ -84,8 +84,6 @@ implementation
               touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
               setItemChoisie(touche);
               navigationTabMenu(menuTourSuivant,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menucolorierElementActuel();
-              colorierElementActu(10,60,menuTourSuivantX,menuTourSuivantY);  //colorie l'item actuel
-              reintialiserElementAnt(10,60,menuTourSuivantX,menuTourSuivantY); //réintialise la couleur de l'item précedemment choisie
             end;
 
           incrementaNbTourBoucle(); //incrémentation du tour de boucle

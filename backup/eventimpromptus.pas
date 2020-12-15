@@ -6,7 +6,7 @@ unit eventImpromptus ;
 interface
 
   uses
-    Classes , SysUtils , GestionEcran , bouclesJeux, Keyboard , population, math;
+    Classes , SysUtils , GestionEcran , bouclesJeux, Keyboard , population, math,UnitBuilding;
 
   {procédure qui initialise etatEvent à false: au début pas d'event}
   procedure initEtatEventImpr();
@@ -25,6 +25,9 @@ interface
 
   {procédure qui permet de modifier la valeur de la population tant que l'event covid est actif avec un coef de morta}
   procedure epidemieCovid();        //coefMorta: Real
+
+    {procedure event ouragan qui lance la destruction de batiment tant que l'event ouragan est actif (1 seul tour)}
+  procedure eventOuragan();
 
   //Procédure qui affiche le message piraterie si l'event est actif}
   procedure setMessageEvent();
@@ -54,7 +57,7 @@ implementation
     etatEvent: Boolean; //variable boolean qui est initialisé à false et passe à true si un event est actif
     tourReEvent: Integer; //tour avant que les events soit redéclancher
     seuilPopStartCovid: Integer; //variable integer qui est le nombre à partir duquel l'event covidnoir peut se lancer
-
+    txtNbBatDestroyOuragan : String; // texte qui permet d'afficher combien de batiment ont été détruit par l'ouragan
 
   {procédure qui initialise la proba à une valeur qu'un event impromptu survienne}
   procedure initProbMaxEventImprompt(valeur: Integer);
@@ -119,7 +122,7 @@ implementation
   procedure initEImpromDiffNormal();
     begin
       initEImprompGeneral(); {procedure qui initialie les events impromptus : commun à toutes les difficultés }
-      initProbMaxEventImprompt(5); //initialisation apparition d'un event impromptu
+      initProbMaxEventImprompt(3); //initialisation apparition d'un event impromptu
       tabEventImpromptu[pirate].tourFinEvent:= -1; //initialisation tour fin event
       tabEventImpromptu[pirate].probNbTour:=5; //l'event peu durer entre 1 à 5 tours
       tabEventImpromptu[pesteNoir].probNbTour:=5; //l'event peu durer entre 1 à 5 tours
@@ -179,15 +182,13 @@ implementation
         end;
     end;
 
-  {fonction qui retourne true si l'event ouragan est lancé et false s'il n'est pas lancé}
+  {procedure event ouragan qui lance la destruction de batiment tant que l'event ouragan est actif (1 seul tour)}
   procedure eventOuragan();
     begin
       if (getNbTour()<=tabEventImpromptu[ouragan].tourFinEvent) then
-        begin
-        end
+         txtNbBatDestroyOuragan := ouraganBatDestroy()
       else
-        begin
-        end;
+         txtNbBatDestroyOuragan := '';
     end;
 
   {Procédure qui affiche le message de l'evenement si il existe}

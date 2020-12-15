@@ -13,6 +13,9 @@ interface
   //procédure product de ressources suivant le nb de batiment qu'on a et suivant les coefs de prod de ressources de chaque batiment
   procedure productionIndustrieTour();
 
+  //procedure qui affiche les msg d'erreurs des production de chaine contenu dans le tableau msgErreursProdChaine
+  procedure afficheMessageProdChaine(posX,pos1eY,espacement: Integer);
+
   // retourne la quantité ou la capacité selon prop d'un batiment passé en paramètre
   function getBat_Prop(numBat:Integer; prop: String): Integer;
 
@@ -51,6 +54,9 @@ interface
   //procédure initialise les batiments en difficulté HARD
   procedure initBuildingDiffHard();
 
+  // fonction qui détruit des batiments quand l'ouragan se produit et qui retourne un string correspondant au nombre de batiment detruits
+  function ouraganBatDestroy():String;
+
 
   type Building = record
     sorte        : String;
@@ -82,10 +88,14 @@ implementation
     B_Chapelle    = 6;
     B_CentreVille = 7;
 
+    nbMsg = 3;
+
   var
      batiment : array[1..totalBatiment] of Building; //permet de créer des variations du record building et ainsi de décrire tout les batiments du jeu
      nbMaisonDebTour: Integer; //variable int, pour calculer le nb de maisons gagné durant le tour
      nbVillaDebTour: Integer; //variable int, pour calculer le nb de villas gagné en début de tour
+
+     msgErreursProdChaine: Array[1..nbMsg] of String;
 
   // initialise les batiment en début de partie
   procedure initBuilding();
@@ -99,17 +109,10 @@ implementation
        //Cout de construction
        batiment[B_Maison].construct[1]    := 5; // cout GOLD
        batiment[B_Maison].construct[2]    := 5; // cout BOIS
-       // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
-       batiment[B_Maison].production[1]   := 0;   // Gold
-       batiment[B_Maison].production[2]   := 0;   // Wood
-       batiment[B_Maison].production[3]   := 0;   // Fish
-       batiment[B_Maison].production[4]   := 0;   // Laine
-       batiment[B_Maison].production[5]   :=-2;  // Tissu
-       batiment[B_Maison].production[6]   := 4;   // Outils
 
       batiment[B_Villa].sorte  := 'HABITAT';
       batiment[B_Villa].nom    := 'Villa de citoyen';
-      batiment[B_Villa].quantity  := 0;
+      batiment[B_Villa].quantity  := 1;
       batiment[B_Villa].capacity  := 5;
       //cout de construction
       batiment[B_Villa].construct[1] := 50; //cout gold
@@ -121,7 +124,7 @@ implementation
        //------------------------------------------------------------------------- C H A P E L L E
        batiment[B_Chapelle].sorte           := 'SOCIAL';
        batiment[B_Chapelle].nom             := 'Chapelle';
-       batiment[B_Chapelle].quantity        := 2;
+       batiment[B_Chapelle].quantity        := 0;
        batiment[B_Chapelle].capacity        := 0;
        //Cout de construction
        batiment[B_Chapelle].construct[1]    := 1000; // cout GOLD
@@ -130,32 +133,22 @@ implementation
        batiment[B_Chapelle].construct[4]    := 0; // cout Laine
        batiment[B_Chapelle].construct[5]    := 5; // cout Tissu
        batiment[B_Chapelle].construct[6]    := 0; // cout Outils
-       // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
-       batiment[B_Chapelle].production[1]   := 0;   // Gold
-       //batiment[B_Chapelle].production[2]   := -5;  // Wood
-       batiment[B_Chapelle].production[3]   := 0;   // Fish
-       batiment[B_Chapelle].production[4]   := 0;   // Laine
-       batiment[B_Chapelle].production[5]   := 0;   // Tissu
-       //batiment[B_Chapelle].production[6]   := -5; // Outils
 
        //------------------------------------------------------------------------- Centre-Ville
        batiment[B_CentreVille].sorte           := 'SOCIAL';
        batiment[B_CentreVille].nom             := 'Centre-Ville';
-       batiment[B_CentreVille].quantity        := 1;
+       batiment[B_CentreVille].quantity        := 0;
        batiment[B_CentreVille].capacity        := 0;
        //Cout de construction
        batiment[B_CentreVille].construct[1]    := 500; // cout GOLD
        batiment[B_CentreVille].construct[2]    := 100; // cout BOIS
-       //batiment[B_CentreVille].construct[6]    := 15; // cout Outils
-       // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
-      // batiment[B_CentreVille].production[6]   := -2; // Outils
 
   ///////////////////////////////////////I-N-D-U-S-T-R-I-E////////////////////////////////////////////
 
        //-------------------------------------------------------- C A B A N E   D E   P E C H E U R
        batiment[B_Fisher].sorte           := 'INDUSTRIE';
        batiment[B_Fisher].nom             := 'Cabane de Pecheur';
-       batiment[B_Fisher].quantity        := 3;
+       batiment[B_Fisher].quantity        := 0;
        batiment[B_Fisher].capacity        := 0;
        // COUT DE CONSTRUCTION [update l'unité ressources seulement à l'achat]
        batiment[B_Fisher].construct[1]    := 15;  // coute Gold
@@ -167,7 +160,7 @@ implementation
        //----------------------------------------------------------C A B A N E   D E   B U C H E R O N ----------------------------------
        batiment[B_Bucheron].sorte           := 'INDUSTRIE';
        batiment[B_Bucheron].nom             := 'Cabane de Bucheron';
-       batiment[B_Bucheron].quantity        := 3;
+       batiment[B_Bucheron].quantity        := 0;
        batiment[B_Bucheron].capacity        := 3;
        // COUT DE CONSTRUCTION [update l'unité ressources seulement à l'achat]
        batiment[B_Bucheron].construct[1]    := 25;  // coute Gold
@@ -175,23 +168,23 @@ implementation
        batiment[B_Bucheron].construct[2]    := 7;   // coute Fish
 
        // PRODUIT / NECESSITE ressources [update l'unité ressources chaque tour]
-       batiment[B_Bucheron].production[2]   := 3;   // Wood
+       batiment[B_Bucheron].production[2]   := 3;   // production de wood
 
        //---------------------------------------------------------- B E R G E R I E ----------------------------------
        batiment[B_Bergerie].sorte           := 'INDUSTRIE';
        batiment[B_Bergerie].nom             := 'Bergerie';
-       batiment[B_Bergerie].quantity        := 3;
+       batiment[B_Bergerie].quantity        := 0;
        batiment[B_Bergerie].capacity        := 1;
        //Cout de construction
        batiment[B_Bergerie].construct[1]    := 25;  // coute Gold
        batiment[B_Bergerie].construct[2]    := 10;  // coute Wood
 
        // production de ressources
-       batiment[B_Bergerie].production[4]   := 5;   // Laine
+       batiment[B_Bergerie].production[4]   := 5;   // production de Laine
        //---------------------------------------------------------- T I S S E R A N D ----------------------------------
        batiment[B_Tisserand].sorte           := 'INDUSTRIE';
        batiment[B_Tisserand].nom             := 'Atelier de Tisserand';
-       batiment[B_Tisserand].quantity        := 3;
+       batiment[B_Tisserand].quantity        := 1;
        batiment[B_Tisserand].capacity        := 1;
        //Cout de construction
        batiment[B_Tisserand].construct[1]    := 35;  // coute Gold
@@ -200,7 +193,7 @@ implementation
 
        // production de ressources
        batiment[B_Tisserand].production[4]   := -1; // nécéssite de la Laine pour produire
-       batiment[B_Tisserand].production[5]   := 3;   // Tissu
+       batiment[B_Tisserand].production[5]   := 3;   // produit du Tissu
   end;
 
   //procédure initialise les batiments en difficulté normal
@@ -224,16 +217,36 @@ implementation
        setFish(batiment[B_Fisher].quantity     * batiment[B_Fisher].production[3]); //prod de poissons par la cabane de pêcheur
        setWood(batiment[B_Bucheron].quantity   * batiment[B_Bucheron].production[2]); //prod de bois par la cabane de bucherons
        setLaine(batiment[B_Bergerie].quantity  * batiment[B_Bergerie].production[4]); //prod de laine par la cabane de bucherons
-       //si assez de laine alors productions de tissus
-       if (getLaine() + batiment[B_Tisserand].production[4]>0 ) then
+
+       //Chaine de productions
+       //si un batiment TISSERAND est construit et si assez de laine alors productions de tissus
+       if ( (batiment[B_Tisserand].quantity>0) and (getLaine() + batiment[B_Tisserand].production[4]>=0) ) then
          begin
-              setTissu(batiment[B_Tisserand].quantity * batiment[B_Tisserand].production[5] ) ;
+            setTissu(batiment[B_Tisserand].quantity * batiment[B_Tisserand].production[5] );
+            msgErreursProdChaine[1]:=''; //init du msg erreur (pas de msg d'erreurs)
          end
-       else
-         begin
-             //afficher msg event
-            writeln('Vous n''avez pas assez de laines pour produire du tissus');
-         end;
+       //sinon si pas assez de laine alors msg erreur
+       else if ( (batiment[B_Tisserand].quantity>0) and (getLaine() + batiment[B_Tisserand].production[4]<0) ) then
+            msgErreursProdChaine[1]:='Vous n''avez pas assez de laines pour produire du tissus'; //init du msg d'erreur =>erreur
+
+    end;
+
+  //procedure qui affiche les msg d'erreurs des production de chaine contenu dans le tableau msgErreursProdChaine
+  procedure afficheMessageProdChaine(posX,pos1eY,espacement: Integer);
+    var
+       numMsg: Integer;
+       posY: Integer;
+    begin
+       posY:=pos1eY;
+      //on parcourt le tableau pour afficher les messages d'erreurs s'ils existent
+      for numMsg := Low(msgErreursProdChaine) to High(msgErreursProdChaine) do
+        begin
+           if msgErreursProdChaine[numMsg]<>'' then
+             begin
+              ecrireTexte(msgErreursProdChaine[numMsg],posX,posY);
+              posY:=posY+espacement; //si le msg erreur existe alors rajouté espacement sinon non
+             end;
+        end;
     end;
 
   // retourne la quantité ou la capacité selon prop d'un batiment passé en paramètre
@@ -375,10 +388,10 @@ implementation
          for numRessource:= 1 to GetTotalItemRessources() do
            begin
               //si ressources de notre inventaire suffisante ou que le batiment choisie et la villa de colons et que les besoins des colons sont satisfait
-              if ( ((GetRessourcesValue(numRessource) >= ( (batiment[numBat].construct[numRessource]))) and (numBat<>B_Villa) ) or ( (numBat=B_Villa) and (etatBesoinsColons) and (GetRessourcesValue(numRessource) >= ( (batiment[numBat].construct[numRessource]))) ) ) then
+              if ( ( (GetRessourcesValue(numRessource) >= ((batiment[numBat].construct[numRessource]))) and (numBat<>B_Villa)) or ( (numBat=B_Villa) and (etatBesoinsColons) and (GetRessourcesValue(numRessource) >= ( (batiment[numBat].construct[numRessource]))) ) ) then
                   RessourcesCount:= RessourcesCount + 1
               //sinon si ressources insuffisante ou que le bat choisi est villa de citoyen et que les besoins des colons sont satisfait
-              else if ( ( (not(GetRessourcesValue(numRessource) >= ( (batiment[numBat].construct[numRessource])))) and (numBat<>B_Villa) ) or ((numBat=B_Villa) and (etatBesoinsColons) and (not(GetRessourcesValue(numRessource) >= ( (batiment[numBat].construct[numRessource]))) ))  ) then
+              else
                   begin
                     TempTxtEchec:='ressources insuffisantes';
                     TempTxtEchec:= TempTxtEchec + GetRessourcesTxt(numRessource);
@@ -423,6 +436,33 @@ implementation
       posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
       posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
       ecrireEnPosition(posItem,txtToDisplay); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
+    end;
+
+  // fonction qui détruit des batiments quand l'ouragan se produit et qui retourne un string correspondant au nombre de batiment detruits
+  function ouraganBatDestroy():String;
+    var
+      numBat       : Integer;  // compteur pour parcourir les batiments
+      randInteger  : Integer;
+      cptBatDestroyed : Integer; // compteur de batiment détruits
+      resistanceBat : Integer;   // coefficient utile pour proteger les batiments sociaux (plus solide et surtout plus cher à racheter)
+
+    begin
+           randInteger      := 0;
+           cptBatDestroyed  := 0;
+           resistanceBat    := 0;
+
+           for numBat:=1 to totalBatiment do
+           begin
+                if batiment[numBat].sorte = 'SOCIAL' then
+                resistanceBat := 2
+                else
+                resistanceBat := 1;
+
+                randInteger := (random(getBat_Prop(numBat, 'quantity')) DIV resistanceBat);
+                SetBat_Quantity(numBat, randInteger*-1); // déstruction aléatoir de batiment avec coefficient special pour les batiments sociaux
+                cptBatDestroyed := cptBatDestroyed + randInteger;
+           end;
+      ouraganBatDestroy := IntToStr(cptBatDestroyed) + ' batiments ont ' + chr(0233)+ 't' + chr(0233) + ' d' + chr(0233) + 'truits par l''ouragan...';
     end;
 
 

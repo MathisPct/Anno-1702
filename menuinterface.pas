@@ -68,7 +68,7 @@ implementation
 
     joueur: perso; //variable de type perso (record issu de l'unité personnage)
 
-  {  affiche tous les txt des ressources en position X et Y  }
+  {affiche tous les txt des ressources en position X et Y }
   procedure affichageItemsRess(totalItem: Integer; CoordX:tabCoordXItemRessources;CoordY: tabCoordXItemRessources);
   var
     itemRess: Integer; //variable entière, compteur de la boucle d'affichage (index tableau)
@@ -136,6 +136,7 @@ implementation
                   initialisationItemAnterieur();
                   setEventImpromptu(); //possibilité d'event impromptu suivant la probabilité
                   epidemieCovid(); //baisse de la pop si l'event covid est actif
+                  eventOuragan(); // détruit des batiment si l'envent est actif
                   //affichage des rectangles, du texte et du menu
                   affichage();// affichage des rectangles du nom du menu et de tous les items du menu
                   setMessageEvent();

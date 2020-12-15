@@ -16,7 +16,8 @@ implementation
 const
   //nb d'items dans le sous menu
   totalItemsMenuGetBat    = 2;
-  totalItemsMenuConstru   = 9;
+  totalItemsMenuConstruColons   = 9;
+  totalItemsMenuConstruCitoyen = 10;
 
   //nb d'item de batiments
   totalItemBatiments        = 8;
@@ -48,6 +49,7 @@ const
   txtCaBucheron         ='Cabane de bucheron';
   txtBergerie           ='Bergerie';
   txtAtelierTisserand   ='Atelier Tisserand';
+  txtTest = 'Test citoyen'; //string qui apparait que si les citoyens sont débloqués
 
   //Abcisses texte batiments
   txtMaisonX            = 20;
@@ -59,6 +61,8 @@ const
   txtBergerieX          = 20;
   txtAtelierTisserandX  = 20;
 
+  txtTestX = 20; //coord X de txtTest qui apparait que si les citoyens sont débloqués
+
   //Ordonnées texte batiments
   txtMaisonY            = 12;
   txtVillaY             = 15;
@@ -68,6 +72,8 @@ const
   txtCaBucheronY        = 27;
   txtBergerieY          = 30;
   txtAtelierTisserandY  = 33;
+
+  txtTestY =36; //coord Y de txtTest qui apparait que si les citoyens sont débloqués
 
   // BATIMENT HABITAT coordonnées
   // ordonnées habitat
@@ -129,16 +135,23 @@ const
 
    //tableaux qui contient les textes des menu
    menu1: array[1..totalItemsMenuGetBat] of String = (txtConsBat, txtMenuPrec);
-   menu2: array[1..totalItemsMenuConstru] of String  = (txtMaison,txtVilla,txtCentreVille,txtChapelle, txtCaPecheur,txtCaBucheron, txtBergerie,txtAtelierTisserand,txtMenuPrec);
+   //tableau qui contient les items présent dans le menu construction lorsqu'il y a juste des colons
+   menu2ConstruColons: array[1..totalItemsMenuConstruColons] of String  = (txtMenuPrec,txtMaison,txtVilla,txtCentreVille,txtChapelle, txtCaPecheur,txtCaBucheron, txtBergerie,txtAtelierTisserand);
+   //tableau qui contient les items présent dans le menu construction lorsque les citoyens ont été débloqué
+   menu2ConstruCitoyens: array[1..totalItemsMenuConstruCitoyen] of String = (txtMenuPrec,txtMaison,txtVilla,txtCentreVille,txtChapelle, txtCaPecheur,txtCaBucheron, txtBergerie,txtAtelierTisserand,txtTest);
+
 
    //tableau contient coordonnées des items du menu1
    menu1X: array[1..totalItemsMenuGetBat] of Integer = (consBatX,menuPrecX);
    menu1Y: array[1..totalItemsMenuGetBat] of Integer = (consBatY,menuPrecY);
 
-   //tableau qui contient les coordonnées des items du menu2
-   menu2X: array[1..totalItemsMenuConstru] of Integer  = (txtMaisonX,txtVillaX,txtCentreVilleX,txtChapelleX, txtCaPecheurX,txtCaBucheronX, txtBergerieX,txtAtelierTisserandX,menuPrecX);
-   menu2Y: array[1..totalItemsMenuConstru] of Integer = (txtMaisonY,txtVillaY,txtCentreVilleY,txtChapelleY, txtCaPecheurY,txtCaBucheronY, txtBergerieY,txtAtelierTisserandY,menuPrecY);
+   //tableau qui contient les coordonnées des items du menu construction colons   (apparait lorsque les citoyens ne sont pas débloqués)
+   menu2ConstruColonsX: array[1..totalItemsMenuConstruColons] of Integer  = (menuPrecX,txtMaisonX,txtVillaX,txtCentreVilleX,txtChapelleX, txtCaPecheurX,txtCaBucheronX, txtBergerieX,txtAtelierTisserandX);
+   menu2ConstruColonsY: array[1..totalItemsMenuConstruColons] of Integer = (menuPrecY,txtMaisonY,txtVillaY,txtCentreVilleY,txtChapelleY, txtCaPecheurY,txtCaBucheronY, txtBergerieY,txtAtelierTisserandY);
 
+   //tableau qui contient les coordonnées des items du menu construction citoyens (apparait lorsque les citoyens sont débloqués)
+   menu2ConstruCitoyensX: array[1..totalItemsMenuConstruCitoyen] of Integer  = (menuPrecX,txtMaisonX,txtVillaX,txtCentreVilleX,txtChapelleX, txtCaPecheurX,txtCaBucheronX, txtBergerieX,txtAtelierTisserandX,txtTestX);
+   menu2ConstruCitoyensY: array[1..totalItemsMenuConstruCitoyen] of Integer = (menuPrecY,txtMaisonY,txtVillaY,txtCentreVilleY,txtChapelleY, txtCaPecheurY,txtCaBucheronY, txtBergerieY,txtAtelierTisserandY,txtTestY);
 
    //tableau qui contient les textes des items batiments
    itemsBat:tabItemBatiments=(txtCentreVille,txtChapelle, txtCaPecheur,txtCaBucheron, txtBergerie,txtAtelierTisserand,txtMaison,txtVilla);
@@ -265,14 +278,26 @@ const
        txtCout= ' | cout |   ';
        longMaxTxt=20;
     begin
-       menu2[1]:=txtIndentation(txtMaison,longMaxTxt)+txtCout+getBat_Cost_Txt(1);
-       menu2[2]:=txtIndentation(txtVilla,longMaxTxt) +txtCout+getBat_Cost_Txt(8);
-       menu2[3]:=txtIndentation(txtCentreVille,longMaxTxt)+txtCout+getBat_Cost_Txt(7);
-       menu2[4]:=txtIndentation(txtChapelle,longMaxTxt)+txtCout+getBat_Cost_Txt(6);
-       menu2[5]:=txtIndentation(txtCaPecheur,longMaxTxt)+txtCout+getBat_Cost_Txt(2);
-       menu2[6]:=txtIndentation(txtCaBucheron,longMaxTxt)+txtCout+getBat_Cost_Txt(3);
-       menu2[7]:=txtIndentation(txtBergerie,longMaxTxt)+txtCout+getBat_Cost_Txt(4);
-       menu2[8]:=txtIndentation(txtAtelierTisserand,longMaxTxt)+txtCout+getBat_Cost_Txt(5);
+       menu2ConstruColons[2]:=txtIndentation(txtMaison,longMaxTxt)+txtCout+getBat_Cost_Txt(1);
+       menu2ConstruColons[3]:=txtIndentation(txtVilla,longMaxTxt) +txtCout+getBat_Cost_Txt(8);
+       menu2ConstruColons[4]:=txtIndentation(txtCentreVille,longMaxTxt)+txtCout+getBat_Cost_Txt(7);
+       menu2ConstruColons[5]:=txtIndentation(txtChapelle,longMaxTxt)+txtCout+getBat_Cost_Txt(6);
+       menu2ConstruColons[6]:=txtIndentation(txtCaPecheur,longMaxTxt)+txtCout+getBat_Cost_Txt(2);
+       menu2ConstruColons[7]:=txtIndentation(txtCaBucheron,longMaxTxt)+txtCout+getBat_Cost_Txt(3);
+       menu2ConstruColons[8]:=txtIndentation(txtBergerie,longMaxTxt)+txtCout+getBat_Cost_Txt(4);
+       menu2ConstruColons[9]:=txtIndentation(txtAtelierTisserand,longMaxTxt)+txtCout+getBat_Cost_Txt(5);
+
+       menu2ConstruCitoyens[2]:=txtIndentation(txtMaison,longMaxTxt)+txtCout+getBat_Cost_Txt(1);
+       menu2ConstruCitoyens[3]:=txtIndentation(txtVilla,longMaxTxt) +txtCout+getBat_Cost_Txt(8);
+       menu2ConstruCitoyens[4]:=txtIndentation(txtCentreVille,longMaxTxt)+txtCout+getBat_Cost_Txt(7);
+       menu2ConstruCitoyens[5]:=txtIndentation(txtChapelle,longMaxTxt)+txtCout+getBat_Cost_Txt(6);
+       menu2ConstruCitoyens[6]:=txtIndentation(txtCaPecheur,longMaxTxt)+txtCout+getBat_Cost_Txt(2);
+       menu2ConstruCitoyens[7]:=txtIndentation(txtCaBucheron,longMaxTxt)+txtCout+getBat_Cost_Txt(3);
+       menu2ConstruCitoyens[8]:=txtIndentation(txtBergerie,longMaxTxt)+txtCout+getBat_Cost_Txt(4);
+       menu2ConstruCitoyens[9]:=txtIndentation(txtAtelierTisserand,longMaxTxt)+txtCout+getBat_Cost_Txt(5);
+       //si les citoyens sont débloqués => init de l'affichage des coûts des bats spécifique à leur arrivée
+       if (getNbHabCatePop(2)>0) then
+         menu2ConstruCitoyens[10]:= txtTest+' test Affichage coût';
     end;
 
   {procédure qui fait appel à toutes les procédures d'affichage => affichage de tous les éléments du menu2}
@@ -281,8 +306,18 @@ const
       rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
       cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
       afficheNomMenu('Construction batiments'); //procédure écrit nom menu
-      printItemsMenu(totalItemsMenuConstru,menu2,menu2X,menu2Y); //procédure qui affiche tous les items du menu en position X et Y
+      //si les citoyens ne sont pas débloqué
+      if (getNbHabCatePop(2)<1) then
+        printItemsMenu(totalItemsMenuConstruColons,menu2ConstruColons,menu2ConstruColonsX,menu2ConstruColonsY) //procédure qui affiche tous les items du menu en position X et Y
+      else //sinon affichage des items du menu quand les citoyens sont débloqués
+        printItemsMenu(totalItemsMenuConstruCitoyen,menu2ConstruCitoyens,menu2ConstruCitoyensX,menu2ConstruCitoyensY);
     end;
+
+  {fonction qui renvoi un menu suivant si les citoyens sont débloqués ou non
+  function getMenuAffiche():Array of String;
+    begin
+       if (nbCi
+    end;}
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu interface }
   procedure mainSMenuGBat();
@@ -324,6 +359,7 @@ const
 
               //choix dans le menu 1
               Case getItemChoisie() of
+                //choix 1=> menu construction
                 1:
                   begin
                     //menu construction
@@ -337,36 +373,58 @@ const
                           begin
                               initItemsMenu2();
                               //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
-                              initialisationItemActuel(1);
+                              initialisationItemActuel(2);
                               //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
                               initialisationItemAnterieur();
                               initItemChoisie();  //initia item choisie
                               //affichage
                               affichageMenu2(); //affichage de tous les éléments du menu2
-                              colorierElementActu(2,80,menu2X,menu2Y);
+                              //si citoyens débloqués => menu citoyens
+                              if (getNbHabCatePop(2)>0) then
+                                 colorierElementActu(2,80,menu2ConstruCitoyensX,menu2ConstruCitoyensY)
+                              //si citoyens non débloqués => menu colons
+                              else
+                                 colorierElementActu(2,80,menu2ConstruColonsX,menu2ConstruColonsY);
                           end
                         else if (getNbTourBoucle>=1) then
                           begin
                               touche:= GetKeyEvent; //GetKeyEvent est une fonction de l'unité Keyboard qui renvoit les évènements du clavier
                               touche:= TranslateKeyEvent(touche); //retourne la valeur unicode de la touche si elle est pressée . Variable de type int
                               setItemChoisie(touche);
-                              navigationTabMenu(menu2,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu, tant qu'on a pas choisi une option dans le menu, on reste dans le menucolorierElementActuel();
-                              colorierElementActu(2,80,menu2X,menu2Y);
-                              reintialiserElementAnt(2,80,menu2X,menu2Y); //réintialise la couleur de l'item précedemment choisie
+                              //si citoyens débloqués => menu citoyens
+                              if (getNbHabCatePop(2)>0) then
+                                begin
+                                 navigationTabMenu(menu2ConstruCitoyens,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu
+                                 colorierElementActu(2,80,menu2ConstruCitoyensX,menu2ConstruCitoyensY);
+                                 reintialiserElementAnt(2,80,menu2ConstruCitoyensX,menu2ConstruCitoyensY); //réintialise la couleur de l'item précedemment choisie
+                                end
+                              //si citoyens non débloqués => menu colons
+                              else
+                                begin
+                                 navigationTabMenu(menu2ConstruColons,touche,getItemActuel());//appel de la procédure qui permet de naviguer dans le tableau du menu
+                                 colorierElementActu(2,80,menu2ConstruColonsX,menu2ConstruColonsY);
+                                 reintialiserElementAnt(2,80,menu2ConstruColonsX,menu2ConstruColonsY); //réintialise la couleur de l'item précedemment choisie
+                                end;
                           end;
                         incrementaNbTourBoucle(); //incrémentation du tour de boucle
 
                         //choix batiments à construire dans le menu 2
                         Case getItemChoisie() of
-                          1: begin
+                          1: //item 1 du menu => menu précédent
+                             begin
+                                 initiaNbTourBoucle(); //initialisation  nb Tour boucle
+                                 initItemChoisie();
+                                 runningMenuSuivant:=False;
+                                 running:=true;
+                             end;
+                          2: begin
                                   message:=Build_Batiment(1,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          //besoins des citoyens
-                          2:
+                          3:
                             begin
                                   message:=Build_Batiment(8,getEtatAllBesoinsColons());
                                   initItemChoisie();
@@ -374,34 +432,34 @@ const
                                   runningMenuSuivant:=False;
                                   running:=true;
                             end;
-                          3: begin
+                          4: begin
                                   message:=Build_Batiment(7,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          4: begin
+                          5: begin
                                   message:=Build_Batiment(6,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          5: begin
+                          6: begin
                                   message:=Build_Batiment(2,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          6: begin
+                          7: begin
                                   message:=Build_Batiment(3,getEtatAllBesoinsColons());
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          7: begin
+                          8: begin
                                   message:=Build_Batiment(4,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
@@ -409,19 +467,16 @@ const
                                   running:=true;
                              end;
 
-                          8: begin
+                          9: begin
                                   message:=Build_Batiment(5,getEtatAllBesoinsColons());
                                   initItemChoisie();
                                   initiaNbTourBoucle(); //initialisation  nb Tour boucle
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
-                          9: //item 8 du menu => menu précédent
+                          10: //item 8 du menu => menu précédent
                              begin
-                                 initiaNbTourBoucle(); //initialisation  nb Tour boucle
-                                 initItemChoisie();
-                                 runningMenuSuivant:=False;
-                                 running:=true;
+                                  writeln(menu2ConstruCitoyens[10]);
                              end;
                         end; //fin case of
 
