@@ -109,7 +109,7 @@ implementation
 
       batiment[B_Villa].sorte  := 'HABITAT';
       batiment[B_Villa].nom    := 'Villa de citoyen';
-      batiment[B_Villa].quantity  := 1;
+      batiment[B_Villa].quantity  := 0;
       batiment[B_Villa].capacity  := 5;
       //cout de construction
       batiment[B_Villa].construct[1] := 50; //cout gold
@@ -121,7 +121,7 @@ implementation
        //------------------------------------------------------------------------- C H A P E L L E
        batiment[B_Chapelle].sorte           := 'SOCIAL';
        batiment[B_Chapelle].nom             := 'Chapelle';
-       batiment[B_Chapelle].quantity        := 0;
+       batiment[B_Chapelle].quantity        := 2;
        batiment[B_Chapelle].capacity        := 0;
        //Cout de construction
        batiment[B_Chapelle].construct[1]    := 1000; // cout GOLD
@@ -141,7 +141,7 @@ implementation
        //------------------------------------------------------------------------- Centre-Ville
        batiment[B_CentreVille].sorte           := 'SOCIAL';
        batiment[B_CentreVille].nom             := 'Centre-Ville';
-       batiment[B_CentreVille].quantity        := 0;
+       batiment[B_CentreVille].quantity        := 1;
        batiment[B_CentreVille].capacity        := 0;
        //Cout de construction
        batiment[B_CentreVille].construct[1]    := 500; // cout GOLD
@@ -155,7 +155,7 @@ implementation
        //-------------------------------------------------------- C A B A N E   D E   P E C H E U R
        batiment[B_Fisher].sorte           := 'INDUSTRIE';
        batiment[B_Fisher].nom             := 'Cabane de Pecheur';
-       batiment[B_Fisher].quantity        := 0;
+       batiment[B_Fisher].quantity        := 3;
        batiment[B_Fisher].capacity        := 0;
        // COUT DE CONSTRUCTION [update l'unité ressources seulement à l'achat]
        batiment[B_Fisher].construct[1]    := 15;  // coute Gold
@@ -167,8 +167,8 @@ implementation
        //----------------------------------------------------------C A B A N E   D E   B U C H E R O N ----------------------------------
        batiment[B_Bucheron].sorte           := 'INDUSTRIE';
        batiment[B_Bucheron].nom             := 'Cabane de Bucheron';
-       batiment[B_Bucheron].quantity        := 0;
-       batiment[B_Bucheron].capacity        := 0;
+       batiment[B_Bucheron].quantity        := 3;
+       batiment[B_Bucheron].capacity        := 3;
        // COUT DE CONSTRUCTION [update l'unité ressources seulement à l'achat]
        batiment[B_Bucheron].construct[1]    := 25;  // coute Gold
        batiment[B_Bucheron].construct[2]    := 5;   // coute Wood
@@ -180,7 +180,7 @@ implementation
        //---------------------------------------------------------- B E R G E R I E ----------------------------------
        batiment[B_Bergerie].sorte           := 'INDUSTRIE';
        batiment[B_Bergerie].nom             := 'Bergerie';
-       batiment[B_Bergerie].quantity        := 0;
+       batiment[B_Bergerie].quantity        := 3;
        batiment[B_Bergerie].capacity        := 1;
        //Cout de construction
        batiment[B_Bergerie].construct[1]    := 25;  // coute Gold
@@ -191,7 +191,7 @@ implementation
        //---------------------------------------------------------- T I S S E R A N D ----------------------------------
        batiment[B_Tisserand].sorte           := 'INDUSTRIE';
        batiment[B_Tisserand].nom             := 'Atelier de Tisserand';
-       batiment[B_Tisserand].quantity        := 0;
+       batiment[B_Tisserand].quantity        := 3;
        batiment[B_Tisserand].capacity        := 1;
        //Cout de construction
        batiment[B_Tisserand].construct[1]    := 35;  // coute Gold
@@ -326,7 +326,7 @@ implementation
        for numRessource:= 1 to GetTotalItemRessources() do
          begin
             if ( (batiment[numBat].construct[numRessource]) > 0 ) then   // on va retourner seulement les items necessaires à la construction
-                 TempTxt:= txtIndentation(TempTxt + GetRessourcesTxt(numRessource)+': ' + IntToStr(getBat_Cost_Item_Value(numBat,numRessource)),10)+'  ';
+                 TempTxt:= txtIndentation(TempTxt + GetRessourcesTxt(numRessource)+': ' + IntToStr(getBat_Cost_Item_Value(numBat,numRessource)),15)+'  ';
          end;
        getBat_Cost_Txt:=TempTxt;
     end;
@@ -359,24 +359,38 @@ implementation
   //procedure de construction d'un batiment passé en paramètre
   function Build_Batiment(numBat:Integer;etatBesoinsColons:Boolean):String;
     var
-         numRessource      : Integer;  // compteur qui sert à parcourir les tableaux de ressources de construction
+         numRessource: Integer;  // compteur qui sert à parcourir les tableaux de ressources de construction
          RessourcesCount: Integer;
-         TempTxtEchec   : String;
+         TempTxtEchec,txtEchecVilla: String;
          TempTxtReussite: String;
+         txtEchec: String;
 
     begin
-         Build_Batiment := '';
          RessourcesCount:= 0; //variable entière
-         TempTxtEchec:= 'ressources insuffisantes';
+         TempTxtEchec:= '';
          TempTxtReussite:= 'Nouveau batiment ';
+         txtEchecVilla := 'Besoins colons non satisfait';
+         txtEchec := '';
 
          for numRessource:= 1 to GetTotalItemRessources() do
            begin
-            if (GetRessourcesValue(numRessource) >= (batiment[numBat].construct[numRessource]) ) then
-                RessourcesCount:= RessourcesCount + 1
-            else
-                TempTxtEchec:=TempTxtEchec + GetRessourcesTxt(numRessource);
-           end;
+              //si ressources de notre inventaire suffisante ou que le batiment choisie et la villa de colons et que les besoins des colons sont satisfait
+              if ( ((GetRessourcesValue(numRessource) >= ( (batiment[numBat].construct[numRessource]))) and (numBat<>B_Villa) ) or ( (numBat=B_Villa) and (etatBesoinsColons) and (GetRessourcesValue(numRessource) >= ( (batiment[numBat].construct[numRessource]))) ) ) then
+                  RessourcesCount:= RessourcesCount + 1
+              //sinon si ressources insuffisante ou que le bat choisi est villa de citoyen et que les besoins des colons sont satisfait
+              else if ( ( (not(GetRessourcesValue(numRessource) >= ( (batiment[numBat].construct[numRessource])))) and (numBat<>B_Villa) ) or ((numBat=B_Villa) and (etatBesoinsColons) and (not(GetRessourcesValue(numRessource) >= ( (batiment[numBat].construct[numRessource]))) ))  ) then
+                  begin
+                    TempTxtEchec:='ressources insuffisantes';
+                    TempTxtEchec:= TempTxtEchec + GetRessourcesTxt(numRessource);
+                  end;
+              //si bat choisie = B_Villales besoins des colons ne sont pas satisfait => construction de villa impossible
+              if ( (numBat=B_Villa) and (not(etatBesoinsColons)) ) then
+                  begin
+                     TempTxtEchec:='';
+                     TempTxtEchec:=txtEchecVilla;
+                  end;
+            end;
+
          //si on a toutes les ressources suffisantes
          if (RessourcesCount=GetTotalItemRessources()) then
            begin
@@ -389,13 +403,6 @@ implementation
          else
            Build_Batiment:=TempTxtEchec;
     end;
-
-                    {    if (batiment[x].sorte = batiment[B_Villa].sorte) then
-                    if (etatBesoinsColons) then
-                      begin
-                       writeln('Construction impossible');
-                       attendre(1000;);
-                      end;  }
 
   procedure affichageBatiment(numBat:Integer;propriety: String; posX,posY:Integer);
     var

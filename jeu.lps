@@ -8,7 +8,8 @@
       <Unit0>
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="76" Y="36"/>
+        <TopLine Value="19"/>
+        <CursorPos X="13" Y="3"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -26,6 +27,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="initialisationEcran"/>
         <EditorIndex Value="1"/>
+        <TopLine Value="4"/>
         <CursorPos Y="22"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -44,9 +46,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuInterface"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="174"/>
-        <CursorPos X="78" Y="78"/>
-        <UsageCount Value="198"/>
+        <TopLine Value="175"/>
+        <CursorPos X="49" Y="183"/>
+        <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -55,7 +57,7 @@
         <UnitName Value="evenementClavier"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="37" Y="23"/>
-        <UsageCount Value="198"/>
+        <UsageCount Value="200"/>
       </Unit5>
       <Unit6>
         <Filename Value="menuaccueil.pas"/>
@@ -64,7 +66,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="133"/>
         <CursorPos X="7" Y="142"/>
-        <UsageCount Value="173"/>
+        <UsageCount Value="177"/>
       </Unit6>
       <Unit7>
         <Filename Value="bouclesjeux.pas"/>
@@ -73,7 +75,7 @@
         <EditorIndex Value="10"/>
         <TopLine Value="208"/>
         <CursorPos X="31" Y="47"/>
-        <UsageCount Value="173"/>
+        <UsageCount Value="177"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -83,7 +85,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="37"/>
         <CursorPos X="11" Y="11"/>
-        <UsageCount Value="170"/>
+        <UsageCount Value="174"/>
       </Unit8>
       <Unit9>
         <Filename Value="personnage.pas"/>
@@ -91,16 +93,16 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="25"/>
         <CursorPos X="26" Y="26"/>
-        <UsageCount Value="167"/>
+        <UsageCount Value="171"/>
       </Unit9>
       <Unit10>
         <Filename Value="smenugestionbatiments.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sMenuGestionBatiments"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="347"/>
-        <CursorPos X="56" Y="57"/>
-        <UsageCount Value="153"/>
+        <TopLine Value="371"/>
+        <CursorPos X="68" Y="385"/>
+        <UsageCount Value="157"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
@@ -109,7 +111,7 @@
         <UnitName Value="sMenuMarchand"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="244" Y="119"/>
-        <UsageCount Value="119"/>
+        <UsageCount Value="123"/>
       </Unit11>
       <Unit12>
         <Filename Value="eventimpromptus.pas"/>
@@ -118,7 +120,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="119"/>
         <CursorPos X="23" Y="135"/>
-        <UsageCount Value="83"/>
+        <UsageCount Value="87"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -132,43 +134,43 @@
         <Filename Value="gestionecran.pas"/>
         <UnitName Value="GestionEcran"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="303"/>
+        <TopLine Value="246"/>
         <CursorPos Y="327"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="64"/>
         <Loaded Value="True"/>
       </Unit14>
       <Unit15>
         <Filename Value="unitRessources.pas"/>
         <EditorIndex Value="9"/>
-        <TopLine Value="321"/>
-        <CursorPos X="116" Y="331"/>
-        <UsageCount Value="73"/>
+        <TopLine Value="168"/>
+        <CursorPos X="12" Y="56"/>
+        <UsageCount Value="75"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
         <Filename Value="unitbuilding.pas"/>
         <UnitName Value="UnitBuilding"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="311"/>
-        <CursorPos X="29" Y="332"/>
-        <UsageCount Value="63"/>
+        <TopLine Value="164"/>
+        <CursorPos X="49" Y="170"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="population.pas"/>
         <EditorIndex Value="8"/>
-        <TopLine Value="327"/>
-        <CursorPos X="62" Y="253"/>
-        <UsageCount Value="59"/>
+        <TopLine Value="289"/>
+        <CursorPos X="26" Y="306"/>
+        <UsageCount Value="61"/>
         <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="smenutoursuivant.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <TopLine Value="80"/>
         <CursorPos X="239" Y="86"/>
-        <UsageCount Value="55"/>
+        <UsageCount Value="57"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
@@ -205,127 +207,123 @@
         <UsageCount Value="10"/>
       </Unit23>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="277" Column="8" TopLine="265"/>
+        <Caret Line="329" Column="62" TopLine="316"/>
       </Position1>
       <Position2>
-        <Filename Value="unitbuilding.pas"/>
-        <Caret Line="326" Column="24" TopLine="304"/>
+        <Filename Value="unitRessources.pas"/>
+        <Caret Line="338" Column="27" TopLine="327"/>
       </Position2>
       <Position3>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="285" Column="29" TopLine="271"/>
+        <Caret Line="413" Column="15" TopLine="398"/>
       </Position3>
       <Position4>
-        <Filename Value="unitbuilding.pas"/>
-        <Caret Line="286" Column="8" TopLine="283"/>
+        <Filename Value="menuinterface.pas"/>
+        <Caret Line="176" Column="39" TopLine="164"/>
       </Position4>
       <Position5>
-        <Filename Value="unitbuilding.pas"/>
-        <Caret Line="285" Column="75" TopLine="276"/>
+        <Filename Value="smenugestionbatiments.pas"/>
+        <Caret Line="134" Column="32" TopLine="118"/>
       </Position5>
       <Position6>
-        <Filename Value="unitbuilding.pas"/>
-        <Caret Line="323" Column="18" TopLine="304"/>
+        <Filename Value="smenugestionbatiments.pas"/>
+        <Caret Line="137" Column="34" TopLine="119"/>
       </Position6>
       <Position7>
-        <Filename Value="unitbuilding.pas"/>
-        <Caret Line="434" Column="85" TopLine="416"/>
+        <Filename Value="smenugestionbatiments.pas"/>
+        <Caret Line="135" Column="11" TopLine="121"/>
       </Position7>
       <Position8>
-        <Filename Value="unitbuilding.pas"/>
-        <Caret Line="30" Column="41" TopLine="13"/>
+        <Filename Value="smenugestionbatiments.pas"/>
+        <Caret Line="132" Column="56" TopLine="121"/>
       </Position8>
       <Position9>
-        <Filename Value="unitbuilding.pas"/>
-        <Caret Line="50" Column="83" TopLine="37"/>
+        <Filename Value="smenugestionbatiments.pas"/>
+        <Caret Line="281" Column="24" TopLine="262"/>
       </Position9>
       <Position10>
-        <Filename Value="population.pas"/>
-        <Caret Line="265" Column="29" TopLine="252"/>
+        <Filename Value="smenugestionbatiments.pas"/>
+        <Caret Line="266" Column="51" TopLine="260"/>
       </Position10>
       <Position11>
-        <Filename Value="population.pas"/>
-        <Caret Line="274" Column="29" TopLine="261"/>
+        <Filename Value="smenugestionbatiments.pas"/>
+        <Caret Line="41" Column="45" TopLine="30"/>
       </Position11>
       <Position12>
-        <Filename Value="population.pas"/>
-        <Caret Line="364" Column="29" TopLine="364"/>
+        <Filename Value="smenutoursuivant.pas"/>
+        <Caret Line="44" Column="37" TopLine="39"/>
       </Position12>
       <Position13>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="171" Column="85" TopLine="157"/>
+        <Filename Value="smenutoursuivant.pas"/>
+        <Caret Line="46" Column="16" TopLine="36"/>
       </Position13>
       <Position14>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="226" Column="90" TopLine="215"/>
+        <Filename Value="smenutoursuivant.pas"/>
+        <Caret Line="86" Column="48" TopLine="77"/>
       </Position14>
       <Position15>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="241" Column="9" TopLine="236"/>
+        <Caret Line="375" Column="110" TopLine="360"/>
       </Position15>
       <Position16>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="251" Column="48" TopLine="227"/>
+        <Caret Line="383" Column="29" TopLine="360"/>
       </Position16>
       <Position17>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="329" Column="62" TopLine="316"/>
+        <Caret Line="389" Column="35" TopLine="367"/>
       </Position17>
       <Position18>
-        <Filename Value="unitRessources.pas"/>
-        <Caret Line="338" Column="27" TopLine="327"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="386" Column="67" TopLine="367"/>
       </Position18>
       <Position19>
         <Filename Value="unitbuilding.pas"/>
-        <Caret Line="413" Column="15" TopLine="398"/>
+        <Caret Line="374" TopLine="362"/>
       </Position19>
       <Position20>
-        <Filename Value="menuinterface.pas"/>
-        <Caret Line="176" Column="39" TopLine="164"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="367" Column="35" TopLine="352"/>
       </Position20>
       <Position21>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="134" Column="32" TopLine="118"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="382" Column="46" TopLine="366"/>
       </Position21>
       <Position22>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="137" Column="34" TopLine="119"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="377" Column="51" TopLine="375"/>
       </Position22>
       <Position23>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="135" Column="11" TopLine="121"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="389" Column="58" TopLine="372"/>
       </Position23>
       <Position24>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="132" Column="56" TopLine="121"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="387" Column="74" TopLine="370"/>
       </Position24>
       <Position25>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="281" Column="24" TopLine="262"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="388" Column="147" TopLine="370"/>
       </Position25>
       <Position26>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="266" Column="51" TopLine="260"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="390" Column="44" TopLine="371"/>
       </Position26>
       <Position27>
-        <Filename Value="smenugestionbatiments.pas"/>
-        <Caret Line="41" Column="45" TopLine="30"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="397" Column="54" TopLine="387"/>
       </Position27>
       <Position28>
-        <Filename Value="smenutoursuivant.pas"/>
-        <Caret Line="44" Column="37" TopLine="39"/>
+        <Filename Value="menuinterface.pas"/>
+        <Caret Line="180" Column="33" TopLine="169"/>
       </Position28>
       <Position29>
-        <Filename Value="smenutoursuivant.pas"/>
-        <Caret Line="46" Column="16" TopLine="36"/>
+        <Filename Value="unitbuilding.pas"/>
+        <Caret Line="378" Column="118" TopLine="368"/>
       </Position29>
-      <Position30>
-        <Filename Value="smenutoursuivant.pas"/>
-        <Caret Line="86" Column="48" TopLine="77"/>
-      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

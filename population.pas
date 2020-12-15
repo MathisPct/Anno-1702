@@ -325,8 +325,9 @@ implementation
     var
       temp:Boolean;
     begin
-      temp:=False;
-      if ((not(getBesoinChap())) and (not(getBesoinCity()=True)) and (not(getBesoinTissus())) and(not(getBesoinWood())) and (not(getBesoinFish())) )then
+      temp:=False;  //si les besoins des colons sont non satisfait
+      //si tous les besoins des colons sont satisfait
+      if ( (not(getBesoinChap)) and (not(getBesoinCity)) and (not(getBesoinTissus)) and (not(getBesoinWood)) and (not(getBesoinFish)) )then
          temp:=True;
       getEtatAllBesoinsColons:=temp;
     end;

@@ -61,13 +61,13 @@ const
 
   //Ordonnées texte batiments
   txtMaisonY            = 12;
-  txtVillaY             = 14;
-  txtCentreVilleY       = 16;
-  txtChapelleY          = 18;
-  txtCaPecheurY         = 21;
-  txtCaBucheronY        = 24;
-  txtBergerieY          = 27;
-  txtAtelierTisserandY  = 30;
+  txtVillaY             = 15;
+  txtCentreVilleY       = 18;
+  txtChapelleY          = 21;
+  txtCaPecheurY         = 24;
+  txtCaBucheronY        = 27;
+  txtBergerieY          = 30;
+  txtAtelierTisserandY  = 33;
 
   // BATIMENT HABITAT coordonnées
   // ordonnées habitat
@@ -122,6 +122,8 @@ const
    message: String; // message pour le joueur
 
    touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
+
+   allBesoinsColons: Boolean; //variable booleenne qui prend la valeur de getEtatAllBesoinsColons()
 
    //marges
    margeGauche:Integer;
@@ -365,6 +367,7 @@ const
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
+                          //besoins des citoyens
                           2:
                             begin
                                   message:=Build_Batiment(8,getEtatAllBesoinsColons());

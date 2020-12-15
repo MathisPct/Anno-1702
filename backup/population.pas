@@ -250,7 +250,7 @@ implementation
       texte: String;
     begin
       if (getNbTotalPop()>0) then
-         texte:= txtIndentation('Les habitants de l''île vous ont rapporté ',45)+ IntToStr(orRapporte()) + ' d''or'
+         texte:= 'Les habitants de l''île vous ont rapporté '+ IntToStr(orRapporte()) + ' d''or'
       else
          texte:='';
       ecrireTexte(texte,posX,posY);
@@ -326,7 +326,8 @@ implementation
       temp:Boolean;
     begin
       temp:=False;
-      if ((not(getBesoinChap())) and (not(getBesoinCity()=True)) and (not(getBesoinTissus())) and(not(getBesoinWood())) and (not(getBesoinFish())) )then
+      //si tous les besoins des colons sont satisfait
+      if ( (not(getBesoinChap)) and (not(getBesoinCity)) and (not(getBesoinTissus)) and (not(getBesoinWood)) and (not(getBesoinFish)) )then
          temp:=True;
       getEtatAllBesoinsColons:=temp;
     end;

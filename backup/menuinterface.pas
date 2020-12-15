@@ -13,7 +13,7 @@ implementation
   //déclaration des constantes connues de toute l'unité
   const
     //nb d'item dans le menu
-    totaleItemsMenu=5;
+    totaleItemsMenu=3;
     //nb de ressources (affichage x et y)
     totaleItemsRessources=6;
 
@@ -176,6 +176,7 @@ implementation
 
                2:
                 begin
+                  besoinsColons(0,0);
                   mainSMenuGBat();//affichage sous menu bat
                   initiaNbTourBoucle(); //initialisation nbTour boucle
                   running:=True; //quand on sort du menu batiments

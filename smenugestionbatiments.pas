@@ -365,6 +365,7 @@ const
                                   runningMenuSuivant:=False;
                                   running:=true;
                              end;
+                          //besoins des citoyens
                           2:
                             begin
                                   message:=Build_Batiment(8,getEtatAllBesoinsColons());
