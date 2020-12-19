@@ -38,7 +38,7 @@ begin
       mainMenuAccueil(); //appel de la procédure qui lance le menuAccueil
       mainMenuCreaPartie(); //appel de la procédure qui lance le menu de création de partie
       mainMenuIntro(); //appel de la procédure de l'unit menuIntro qui affiche le menu intro
-      mainMenuIle(); //appel de la procédure de l'unit menuIle
+      mainMenuIle(); //appel de la procédure de l'unit menuIle qui affiche une description de l'ile
       mainMenuInterface(); //appel de la procédure de l'unit menuInterface qui lance l'interface de l'ile
     end;
   //fin du jeu

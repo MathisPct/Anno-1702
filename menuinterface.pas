@@ -5,7 +5,7 @@ unit menuInterface;
 
 interface
 
-  uses sysutils,gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments, smenutoursuivant ,population , UnitBuilding ,sMenuMarchand, eventImpromptus; //appel des unités
+  uses sysutils,gestionecran,navigationMenues,Keyboard,bouclesJeux,personnage,unitRessources,sMenuGestionBatiments, smenutoursuivant ,population , UnitBuilding ,sMenuMarchand, eventImpromptus; //appel des unités
 
   procedure mainMenuInterface(); {Procédure qui appelle toutes les fonctions et procédures pour afficher le menu interface }
 

@@ -4,8 +4,8 @@
 tant que le jeu est lancé.}
 program jeu;
 uses Keyboard , menuNouvellePartie , menuInterface ,
-  evenementClavier , GestionEcran , menuAccueil , bouclesJeux ,
-  menuCreationPartie , sMenuGestionBatiments , unitRessources , unitBuilding ,
+  GestionEcran , menuAccueil , bouclesJeux ,menuCreationPartie ,
+  sMenuGestionBatiments , unitRessources , unitBuilding ,
   sysutils , population , sMenuMarchand , eventImpromptus , menuIntro, menuile;
 
 //glossaire

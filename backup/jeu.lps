@@ -9,7 +9,7 @@
         <Filename Value="jeu.lpr"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="12"/>
-        <CursorPos X="86" Y="27"/>
+        <CursorPos X="3" Y="30"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -44,7 +44,7 @@
         <Filename Value="menuinterface.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuInterface"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="83"/>
         <CursorPos Y="161"/>
         <UsageCount Value="200"/>
@@ -62,11 +62,12 @@
         <Filename Value="menuaccueil.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="menuAccueil"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="41"/>
-        <CursorPos X="27" Y="55"/>
-        <FoldState Value=" T3iP4,3 T0kZ8{Pb"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="128" Y="9"/>
+        <FoldState Value=" T3iP4,2C"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="bouclesjeux.pas"/>
@@ -90,7 +91,7 @@
       <Unit9>
         <Filename Value="personnage.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="14"/>
         <CursorPos X="16" Y="21"/>
         <UsageCount Value="200"/>
@@ -100,7 +101,7 @@
         <Filename Value="smenugestionbatiments.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sMenuGestionBatiments"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="387"/>
         <CursorPos X="105" Y="436"/>
         <UsageCount Value="200"/>
@@ -110,8 +111,7 @@
         <Filename Value="smenumarchand.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sMenuMarchand"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="23"/>
         <CursorPos X="29" Y="39"/>
         <FoldState Value=" T3iZ2h19"/>
@@ -122,9 +122,9 @@
         <Filename Value="eventimpromptus.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="eventImpromptus"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="134"/>
-        <CursorPos Y="215"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="10"/>
+        <CursorPos Y="24"/>
         <UsageCount Value="153"/>
         <Loaded Value="True"/>
       </Unit12>
@@ -162,7 +162,7 @@
       <Unit17>
         <Filename Value="unitbuilding.pas"/>
         <UnitName Value="UnitBuilding"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="111"/>
         <CursorPos X="45" Y="135"/>
         <UsageCount Value="95"/>
@@ -170,7 +170,7 @@
       </Unit17>
       <Unit18>
         <Filename Value="population.pas"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="400"/>
         <CursorPos X="75" Y="428"/>
         <UsageCount Value="93"/>
@@ -220,7 +220,7 @@
       <Unit25>
         <Filename Value="menuile.pas"/>
         <UnitName Value="menuIle"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <CursorPos X="61" Y="49"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>

@@ -43,7 +43,7 @@ const
    begin
        //tant que le nom a pas été saisie on reste à la position x et y
        repeat
-         //déplacer curseur à la position ou l'user entre le nom du perso
+         //déplacer curseur à la position où l'user entre le nom du perso
         deplacerCurseurXY(txtNomPersoX+20,txtNomPersoY);
         nouveauPerso(demandeNom()); //Fonction (issu de personnage) qui créer un nouveau personnage dont le nom est donné en paramètre
        until (getNomJoueur <>'');

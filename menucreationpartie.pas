@@ -5,7 +5,7 @@ unit menuCreationPartie;
 
 interface
 
-uses gestionecran,navigationMenues,evenementClavier,Keyboard,bouclesJeux,personnage; //appel des unités
+uses gestionecran,navigationMenues,Keyboard,bouclesJeux,personnage; //appel des unités
 
 {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu de création de partie }
 procedure mainMenuCreaPartie();

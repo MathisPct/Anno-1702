@@ -170,7 +170,7 @@ implementation
       affichageItemsRess(GetTotalItemRessources(),RessourcesCoordX, RessourcesCoordY);
       dessinerCadreLsHab(); {Procédure qui dessine le cadre dans lequel on afficha la liste des habitants}
       dessinerCadreDescription(); {Procédure qui dessine le cadre dans lequel on afficha la description}
-      afficheInfosIle(); //procédure qui affiche les infos de l'ile (nom du joueur, nom ile, date decouverte)
+      afficheInfosIle(15,13); //procédure qui affiche les infos de l'ile (nom du joueur, nom ile, date decouverte)
       afficheNbHabCatego(1,15,27);
     end;
 
