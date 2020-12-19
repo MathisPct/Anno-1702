@@ -26,17 +26,6 @@ const
     //Déclaration des ordonnées de notre menu
     txtNomPersoY= 10; //ordonnée de txtNomPerso
 
-    //type connue de toute l'unité
-  type
-     //déclaration type menu qui est un type qui sert à contenir les différents items de notre menu
-     menu = array[1..totaleItemsMenu] of String;
-
-     //déclaration type tabCoordXItem qui est un type qui sert à contenir les différentes abcisses où sont placées les items de notre menu
-     tabCoordXItem = array[1..totaleItemsMenu] of Integer;
-
-     //déclaration type tabCoordYItem qui est un type qui sert à contenir les différentes ordonnées où sont placées les items de notre menu
-     tabCoordYItem = array[1..totaleItemsMenu] of Integer;
-
  //déclaration des variables connues de toute l'unité
  var
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard

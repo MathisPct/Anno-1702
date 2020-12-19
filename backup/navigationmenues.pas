@@ -4,48 +4,48 @@ unit navigationMenues;
 
 interface
 
-uses Keyboard, GestionEcran ,bouclesJeux ;
+  uses Keyboard, GestionEcran ,bouclesJeux ;
 
-//procédure qui permet de naviguer dans un tableau grâce aux touches du clavier
-//retourne la position de l'élément dans le tableau sur lequel l'user est
-procedure navigationTabMenu(menu:Array Of String;touche: TkeyEvent;itemActuel:Integer);
+  //procédure qui permet de naviguer dans un tableau grâce aux touches du clavier
+  //retourne la position de l'élément dans le tableau sur lequel l'user est
+  procedure navigationTabMenu(menu:Array Of String;touche: TkeyEvent;itemActuel:Integer);
 
-procedure initialisationItemActuel(valeur:Integer);  //cette procedure initialise l'itemActuel quand on lance le menu
+  procedure initialisationItemActuel(valeur:Integer);  //cette procedure initialise l'itemActuel quand on lance le menu
 
-//fonction quie renvoie la valeur de la variable itemActuel
-function getItemActuel():Integer;
+  //fonction quie renvoie la valeur de la variable itemActuel
+  function getItemActuel():Integer;
 
-//procedure qui modifie la valeur de la variable itemActuel
-procedure SetItemActuel(valeur:Integer);
-
-
-
-//procédure qui initialise l'item choisie: quand rien n'est choisie il est égale à 0
-procedure initItemChoisie();
-
-//fonction qui renvoie l'item choisie si l'user appuie sur entrée
-function getItemChoisie():Integer;
-
-//procédure qui modifie la valeur de l'item choisie si l'user appuie sur entrée
-procedure setItemChoisie(touche: TkeyEvent);
+  //procedure qui modifie la valeur de la variable itemActuel
+  procedure SetItemActuel(valeur:Integer);
 
 
-//procédure qui initialise l'intem Anterieur à l'initialisation de l'itemActuel-1
-procedure initialisationItemAnterieur();
 
-//procédure qui modifie la valeur de la variable itemAnterieur
-procedure SetItemAnterieur(valeur:Integer);
+  //procédure qui initialise l'item choisie: quand rien n'est choisie il est égale à 0
+  procedure initItemChoisie();
 
-//fonction qui renvoie la valeur de la variable itemAnterieur
-function getItemAnterieur():Integer;
+  //fonction qui renvoie l'item choisie si l'user appuie sur entrée
+  function getItemChoisie():Integer;
 
-{Procédure qui colorier l'élément actuel sur lequel est placé l'utilisateur}
-procedure colorierElementActu(margeGauche,margeDroite: integer;itemsCoordX,itemsCoordY:Array of Integer);
+  //procédure qui modifie la valeur de l'item choisie si l'user appuie sur entrée
+  procedure setItemChoisie(touche: TkeyEvent);
 
-procedure reintialiserElementAnt(margeGauche,margeDroite: integer;itemsCoordX, itemsCoordY:Array of Integer);
 
-{Procédure qui affiche tous les items d'un menu en position X et Y  }
-procedure printItemsMenu(totalItems:Integer;menuItemsTxt:Array of String;menuItemsCoordX,menuItemsCoordY:Array of Integer);
+  //procédure qui initialise l'intem Anterieur à l'initialisation de l'itemActuel-1
+  procedure initialisationItemAnterieur();
+
+  //procédure qui modifie la valeur de la variable itemAnterieur
+  procedure SetItemAnterieur(valeur:Integer);
+
+  //fonction qui renvoie la valeur de la variable itemAnterieur
+  function getItemAnterieur():Integer;
+
+  {Procédure qui colorier l'élément actuel sur lequel est placé l'utilisateur}
+  procedure colorierElementActu(margeGauche,margeDroite: integer;itemsCoordX,itemsCoordY:Array of Integer);
+
+  procedure reintialiserElementAnt(margeGauche,margeDroite: integer;itemsCoordX, itemsCoordY:Array of Integer);
+
+  {Procédure qui affiche tous les items d'un menu en position X et Y  }
+  procedure printItemsMenu(totalItems:Integer;menuItemsTxt:Array of String;menuItemsCoordX,menuItemsCoordY:Array of Integer);
 
 
 implementation
@@ -64,13 +64,13 @@ implementation
      end;
 
    //procédure qui initialise l'intem Anterieur à l'initialisation de l'itemActuel-1
-   procedure initialisationItemAnterieur();
+  procedure initialisationItemAnterieur();
      begin
        itemAnterieur:=getItemActuel()-1; // initialisation de l'item antérieur à l'intem actuel quand on rentre dans le boucle
      end;
 
-   //procédure qui modifie la valeur de la variable itemAnterieur
-   procedure SetItemAnterieur(valeur:Integer);
+  //procédure qui modifie la valeur de la variable itemAnterieur
+  procedure SetItemAnterieur(valeur:Integer);
    begin
       itemAnterieur:=valeur; //incrémentation ou décrémentation suivant les valeurs des touches du clavier
    end;
@@ -94,38 +94,35 @@ implementation
     end;
 
   //procédure qui permet de naviguer dans un tableau grâce aux touches du clavier  'haut' 'bas'
-  //retourne la position de l'élément dans le tableau sur lequel l'user est
   procedure navigationTabMenu(menu:Array Of String; touche: TkeyEvent;itemActuel:Integer);
-     var
+    const
+      flecheBas=33619751;
+      flecheHaut=33619745;
+    var
       totaleItems:Integer; //variable entière qui est la taille du menu
     begin
       totaleItems:=Length(menu); //initialisation de totaleItem  à la longueur du menu
-      if (touche=33619751) then //si toucheClavier = touche du bas pressée alors on passe à l'élément suivant du tableau
+      if (touche=flecheBas) then //si toucheClavier = touche du bas pressée alors on passe à l'élément suivant du tableau
          begin
            //itemActuel:=itemActuel+1; //incrémentation de index
             SetItemActuel(1); //incrémentation de l'index du menu
             SetItemAnterieur(getItemActuel()-1);
          end
-      else if (touche=33619745) then //si toucheClavier = touche du haut pressée alors on passe à l'élément précédent du tableau
+      else if (touche=flecheHaut) then //si toucheClavier = touche du haut pressée alors on passe à l'élément précédent du tableau
          begin
-            //itemActuel:=itemActuel-1; //décrémentation de index
             SetItemActuel(-1); //décrémentation de index du menu
             SetItemAnterieur(getItemActuel()+1);
          end;
       {si la position est inférieur à 1 cela veut dire qu'on sort du tableau, donc pour patche ce soucis on revient au dernier élément du tableau}
       if (getItemActuel()<1) then
          begin
-         //itemActuel:=totaleItems //revient au dernier élément du menu
          SetItemActuel(totaleItems); //revient au dernier élément du menu
          SetItemAnterieur(1);
          end
       {si la position est supérieur à; la taille du tableau cela veut dire qu'on sort du tableau, donc pour patche ce soucis on revient au
       premier élément du tableau}
       else if (getItemActuel()>totaleItems) then
-         begin
-         //itemActuel:=1;  //revient au premier élément du menu
          initialisationItemActuel(1); //revient au premier élément du menu
-         end;
     end;
 
   //procédure qui initialise l'item choisie: quand rien n'est choisie il est égale à 0
@@ -163,6 +160,14 @@ implementation
         9 : ColorierZone(1,15,itemsCoordX[8]-margeGauche,itemsCoordX[8]+margeDroite,itemsCoordY[8]) ; //colorie le 5eme item
         10 : ColorierZone(1,15,itemsCoordX[9]-margeGauche,itemsCoordX[9]+margeDroite,itemsCoordY[9]) ; //colorie le 5eme item
         11 : ColorierZone(1,15,itemsCoordX[10]-margeGauche,itemsCoordX[10]+margeDroite,itemsCoordY[10]) ; //colorie le 5eme item
+        12 : ColorierZone(1,15,itemsCoordX[11]-margeGauche,itemsCoordX[11]+margeDroite,itemsCoordY[11]) ; //colorie le 5eme item
+        13 : ColorierZone(1,15,itemsCoordX[12]-margeGauche,itemsCoordX[12]+margeDroite,itemsCoordY[12]) ; //colorie le 5eme item
+        14 : ColorierZone(1,15,itemsCoordX[13]-margeGauche,itemsCoordX[13]+margeDroite,itemsCoordY[13]) ; //colorie le 5eme item
+        15 : ColorierZone(1,15,itemsCoordX[14]-margeGauche,itemsCoordX[14]+margeDroite,itemsCoordY[14]) ; //colorie le 5eme item
+        16 : ColorierZone(1,15,itemsCoordX[15]-margeGauche,itemsCoordX[15]+margeDroite,itemsCoordY[15]) ; //colorie le 5eme item
+        17 : ColorierZone(1,15,itemsCoordX[16]-margeGauche,itemsCoordX[16]+margeDroite,itemsCoordY[16]) ; //colorie le 5eme item
+        18 : ColorierZone(1,15,itemsCoordX[17]-margeGauche,itemsCoordX[17]+margeDroite,itemsCoordY[17]) ; //colorie le 5eme item
+        19 : ColorierZone(1,15,itemsCoordX[18]-margeGauche,itemsCoordX[18]+margeDroite,itemsCoordY[18]) ; //colorie le 5eme item
       end
     end;
 
@@ -181,6 +186,14 @@ implementation
         9 : ColorierZone(0,15,itemsCoordX[8]-margeGauche,itemsCoordX[8]+margeDroite,itemsCoordY[8]) ; //colorie le 5eme item
         10 : ColorierZone(0,15,itemsCoordX[9]-margeGauche,itemsCoordX[9]+margeDroite,itemsCoordY[9]) ; //colorie le 5eme item
         11 : ColorierZone(0,15,itemsCoordX[10]-margeGauche,itemsCoordX[10]+margeDroite,itemsCoordY[10]) ; //colorie le 5eme item
+        12 : ColorierZone(0,15,itemsCoordX[11]-margeGauche,itemsCoordX[11]+margeDroite,itemsCoordY[11]) ; //colorie le 5eme item
+        13 : ColorierZone(0,15,itemsCoordX[12]-margeGauche,itemsCoordX[12]+margeDroite,itemsCoordY[12]) ; //colorie le 5eme item
+        14 : ColorierZone(0,15,itemsCoordX[13]-margeGauche,itemsCoordX[13]+margeDroite,itemsCoordY[13]) ; //colorie le 5eme item
+        15 : ColorierZone(0,15,itemsCoordX[14]-margeGauche,itemsCoordX[14]+margeDroite,itemsCoordY[14]) ; //colorie le 5eme item
+        16 : ColorierZone(0,15,itemsCoordX[15]-margeGauche,itemsCoordX[15]+margeDroite,itemsCoordY[15]) ; //colorie le 5eme item
+        17 : ColorierZone(0,15,itemsCoordX[16]-margeGauche,itemsCoordX[16]+margeDroite,itemsCoordY[16]) ; //colorie le 5eme item
+        18 : ColorierZone(0,15,itemsCoordX[17]-margeGauche,itemsCoordX[17]+margeDroite,itemsCoordY[17]) ; //colorie le 5eme item
+        19 : ColorierZone(0,15,itemsCoordX[18]-margeGauche,itemsCoordX[18]+margeDroite,itemsCoordY[18]) ; //colorie le 5eme item
       end;
     end;
 

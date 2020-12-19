@@ -1,4 +1,8 @@
 {$codepage utf8}
+{Contient tout ce qui concerne le lancement des événements impromptus
+(piraterie, covid noir, ouragan) avec une logique qui permet de faire durer
+les évènements sur plusieurs tours.
+}
 unit eventImpromptus ;
 
 {$mode objfpc}{$H+}
@@ -14,11 +18,11 @@ interface
   {procédure setEventImpromptu}
   procedure setEventImpromptu();
 
-  {Procédure qui affiche le message evenement piraterie si l'event est actif}
-  //procedure setMessagePiraterie();
-
   {procedure qui initialise les event en difficulté normale}
   procedure initEImpromDiffNormal();
+
+  {procedure qui initialise les event en difficulté hard}
+  procedure initEImpromDiffHard();
 
   {fonction qui retourne true si l'event piraterie est lancé et false s'il n'est pas lancé}
   function getEtatPiraterie():Boolean;
@@ -95,11 +99,6 @@ implementation
       tabEventImpromptu[pirate].nom:='pirate';
       tabEventImpromptu[pesteNoir].nom:='peste noir';
       tabEventImpromptu[ouragan].nom:='ouragan';
-      tabEventImpromptu[pirate].txtScenarioPara1:='La piraterie n''est jamais fini !(Camarades), ' ;
-      tabEventImpromptu[pirate].txtScenarioPara2:='vos marchands se font attaqués par des pirates sans pitié...' ;
-      tabEventImpromptu[pirate].txtScenarioPara3:='Vous êtes désormais dans l''incapacité de faire appel à eux mais soyez patient ils finiront bien par revenir...';
-      tabEventImpromptu[pesteNoir].txtScenarioPara1:='Peste noir !Un terrible virus circule en ville, il s''agit de la terrible peste noir ! Malheureusement de nombreux colons et habitants sont tombés malades et ont perdu la vie...';
-      tabEventImpromptu[ouragan].txtScenarioPara1:='Prenez garde ! Un terrible ouragan a frappé votre ville ! Vos bâtiments sont en périls...';
     end;
 
   {procedure qui initialie les events impromptus : commun à toutes les difficultés }
@@ -122,11 +121,22 @@ implementation
   procedure initEImpromDiffNormal();
     begin
       initEImprompGeneral(); {procedure qui initialie les events impromptus : commun à toutes les difficultés }
-      initProbMaxEventImprompt(3); //initialisation apparition d'un event impromptu
+      initProbMaxEventImprompt(6); //initialisation apparition d'un event impromptu
       tabEventImpromptu[pirate].tourFinEvent:= -1; //initialisation tour fin event
       tabEventImpromptu[pirate].probNbTour:=5; //l'event peu durer entre 1 à 5 tours
+      tabEventImpromptu[pesteNoir].probNbTour:=3; //l'event peu durer entre 1 à 5 tours
+      tabEventImpromptu[ouragan].probNbTour:=1; //l'event peu durer entre 1 à 5 tours
+    end;
+
+  {procedure qui initialise les event en difficulté hard}
+  procedure initEImpromDiffHard();
+    begin
+      initEImprompGeneral(); {procedure qui initialie les events impromptus : commun à toutes les difficultés }
+      initProbMaxEventImprompt(4); //initialisation apparition d'un event impromptu   (apparait  plus fréquemment en hard)
+      tabEventImpromptu[pirate].tourFinEvent:= -1; //initialisation tour fin event
+      tabEventImpromptu[pirate].probNbTour:=8; //l'event peu durer entre 1 à 8 tours
       tabEventImpromptu[pesteNoir].probNbTour:=5; //l'event peu durer entre 1 à 5 tours
-      tabEventImpromptu[ouragan].probNbTour:=5; //l'event peu durer entre 1 à 5 tours
+      tabEventImpromptu[ouragan].probNbTour:=1; //l'event peu durer entre 1 à 5 tours
     end;
 
   {procédure qui initialise etatEvent à false: au début pas d'event}
@@ -210,7 +220,7 @@ implementation
       if (getNbTour()<=tabEventImpromptu[pirate].tourFinEvent) then //si le tour est inférieur à la fin du tour de l'event on affiche le msg
         printMessageEvent(tabEventImpromptu[pirate].nom) //affiche le message d'évènement
       else if (getNbTour()<=tabEventImpromptu[ouragan].tourFinEvent) then
-        printMessageEvent(tabEventImpromptu[ouragan].nom)
+        ecrireTexte(txtNbBatDestroyOuragan,10,5)
       else if (getNbTour()<=tabEventImpromptu[pesteNoir].tourFinEvent) then
         printMessageEvent(tabEventImpromptu[pesteNoir].nom);
     end;
@@ -227,7 +237,6 @@ implementation
              effacerEcran(); //efface ecran pour affiche txt scenario
              paragraphe:='La piraterie n''est jamais fini !'#13#10'(Camarades), vos marchands se font attaqués par des pirates sans pitié...'#13#10'Vous êtes désormais dans l''incapacité de faire appel à eux mais soyez patient ils finiront bien par revenir...';
              ecrireTexte(paragraphe,5,5);
-             text:='L''évènement va durer jusqu''au: '+IntToStr(tabEventImpromptu[pirate].tourFinEvent)+ 'e tours.'+' L''event pourra être réactivé au tour '+IntToStr(getTourReEvent());
              ecrireTexte(text,5,10);
         end;
     end;
@@ -271,13 +280,11 @@ implementation
         begin
              randomize;
              nbAleatoire:=RandomRange(1,4); //random entre 1 à 3
-             writeln(nbAleatoire);
-             attendre(1000);
              case (nbAleatoire) of
                    1:
                      begin
-                         writeln('pirate');
-                         attendre(1000);
+                         //writeln('pirate');
+                         //attendre(1000);
                          setTourReEvent(10,10); //les events seronts redéclancher dans 10 à 20 tours
                          tabEventImpromptu[pirate].tourDebEvent:=getNbTour();  //init de début du tour quand commence l'event
                          tabEventImpromptu[pirate].tourFinEvent:= getNbTour()+5+random(tabEventImpromptu[pirate].probNbTour); //init durée tour event entre 5 à 5+probNbTour
@@ -290,8 +297,8 @@ implementation
                      end;
                    2:
                      begin
-                         writeln('ouragan');
-                         attendre(1000);
+                         //writeln('ouragan');
+                         //attendre(1000);
                          setTourReEvent(10,10); //les events seronts redéclancher dans 10 à 20 tours
                          tabEventImpromptu[ouragan].nbTourNotEvent:=getTourReEvent()+10; //init pas d'event pirate pendant 10 tours après la fin de getTournotevent
                          tabEventImpromptu[ouragan].tourDebEvent:=getNbTour();  //init de début du tour quand commence l'event
@@ -308,8 +315,8 @@ implementation
                         //si assez d'hab pour que l'epidemie se developpe
                         if (getNbTotalPop>seuilPopStartCovid) then
                           begin
-                            writeln('peste noire');
-                            attendre(1000);
+                            //writeln('covid noire');
+                            //attendre(1000);
                             setTourReEvent(10,10); //les events seronts redéclancher dans 10 à 20 tours
                             tabEventImpromptu[pesteNoir].nbTourNotEvent:=getTourReEvent()+10;//init pas d'event peste noire pendant 10 tours après la fin de getTournotevent
                             tabEventImpromptu[pesteNoir].tourDebEvent:=getNbTour();  //init de début du tour quand commence l'event
@@ -321,7 +328,6 @@ implementation
                             InitKeyboard;
                           end;
                      end;
-
              end;
         end;
     end;

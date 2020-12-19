@@ -1,3 +1,4 @@
+{$codepage utf8}
 unit sMenuMarchand ;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit sMenuMarchand ;
 interface
 
   uses
-    Classes , SysUtils , bouclesJeux, gestionEcran , Keyboard , navigationMenues , unitRessources ;
+    Classes , SysUtils , bouclesJeux, gestionEcran , Keyboard , navigationMenues , unitRessources, personnage;
 
   procedure mainSMenuMarchand(piraterie:Boolean);
   procedure initTauxAppaMarchand(valeur: Integer);
@@ -31,19 +32,19 @@ implementation
     txtNoPay                ='Ne rien acheter';
 
     //Déclaration des abcisses de notre menu
-    txtPayWoodX           =15; //abcisse de txtSuivant
-    txtPayFishX           =15; //abcisse de txtGestionbatiment
-    txtPayLaineX          =15; //abcisse de txtGestionbatiment
-    txtPayTissuX          =15;  //abcisse de txtGestionbatiment
-    txtPayToolX           =15; //abcisse de txtTest2
+    txtPayWoodX           =60; //abcisse de txtSuivant
+    txtPayFishX           =60; //abcisse de txtGestionbatiment
+    txtPayLaineX          =60; //abcisse de txtGestionbatiment
+    txtPayTissuX          =60;  //abcisse de txtGestionbatiment
+    txtPayToolX           =60; //abcisse de txtTest2
 
-    txtSendWoodX          =100; //constante de type string qui est le 1er item du menu
-    txtSendFishX          =100; //constante de type string qui est le 2ème item du menu
-    txtSendLaineX         =100; //constante de type string qui est le 3ème item du menu
-    txtSendTissuX         =100;
-    txtSendToolX          =100;
+    txtSendWoodX          =120; //constante de type string qui est le 1er item du menu
+    txtSendFishX          =120; //constante de type string qui est le 2ème item du menu
+    txtSendLaineX         =120; //constante de type string qui est le 3ème item du menu
+    txtSendTissuX         =120;
+    txtSendToolX          =120;
 
-    txtNoPayX             =90;
+    txtNoPayX             =92;
 
     //Déclaration des ordonnées de notre menu
     txtPayWoodY           =10; //ordonnée de txtSuivant
@@ -58,7 +59,7 @@ implementation
     txtSendTissuY         =16;
     txtSendToolY          =18;
 
-    txtNoPayY             =50;
+    txtNoPayY             =48;
 
   var
     touche: TkeyEvent; //Variable de type TkeyEvent issue de l'unité Keyboard
@@ -74,15 +75,65 @@ implementation
        nbTauxAppaMenu:= valeur;
     end;
 
+  //procedure qui affiche le paragraphe que dit le marchand lors de son arrivée
+  procedure afficheScenarioMarchand(interligne: integer);
+    const
+      p1v1='Un homme mystérieux est de passage sur votre île... :';
+      p2v1='OYE mon brave! Je me présente, je suis un marchand et il se trouve que je suis de passage sur votre île';
+      p3v1='durant mon voyage.';
+      p4v1='Vous savez j''ai toutes sortes de marchandises dans mon sac ! Seriez vous intéressé par un échange ? ';
+      p5v1='Bien évidemment je ne souhaite pas vous importuner, je me contenterais de partir en cas de refus...';
+
+      p1v2='Un homme mystérieux est de passage sur votre île... :';
+      p2v2='OYE mon brave! Je me présente, je suis un marchand et il se trouve que je suis de passage sur votre île durant mon voyage';
+      p3v2='Vous savez j''ai toutes sortes de marchandises dans mon sac ! Seriez vous intéressé par un échange ? ';
+      p4v2='Bien évidemment je ne souhaite pas vous importuner, je me contenterais de partir en cas de refus...';
+
+      txtTotalVariante=2; //total txt variante
+    var
+      numParagra:Integer;
+      posX,posY: Integer;
+      arrTxtMarchandV1: Array[1..5] of String=(p1v1,p2v1,p3v1,p4v1,p5v1); //tableau contenant les différents paragraphes
+      arrTxtMarchandV2: Array[1..4] of String=(p1v2,p2v2,p3v2,p4v2);
+      numAleaTxt: Integer; //nb de variantes de texte (aléatoire à l'affichage)
+    begin
+      randomize; //init de random
+      posX:=20;
+      posY:=10;
+      numAleaTxt:=1+random(txtTotalVariante); //nb aléatoire entre 1 et 2 (choix du texte à afficher)
+      case numAleaTxt of
+        1:
+          begin
+             for numParagra:=1 to High(arrTxtMarchandV1) do
+               begin
+                 ecrireTexte(arrTxtMarchandV1[numParagra],posX,posY);
+                 posY:=posY+interligne;
+               end;
+          end;
+        2:
+          begin
+             for numParagra:=1 to High(arrTxtMarchandV2) do
+               begin
+                 ecrireTexte(arrTxtMarchandV2[numParagra],posX,posY);
+                 posY:=posY+interligne;
+               end;
+          end;
+      end;
+    end;
+
   procedure affichage();
     begin
+      DoneKeyboard; //pas d'event clavier
+      afficheScenarioMarchand(2);
+      readln; //attente event user
+      InitKeyboard;
       rectangleZoneJeu; //appel de la procédure: on dessine le rectangle sur l'écran
       cadreTxtNomMenu; //procédure qui dessine le cadre qui entoure le texte en haut au milieu
       afficheNomMenu('Le marchand'); //procédure écrit nom menu
-      //affichageItemsMenu();
       printItemsMenu(totalItemsMenu,menuMarchand,itemsCoordX,itemsCoordY);
     end;
 
+  //procédure qui est lancé si piraterie est pas actif
   procedure mainSMenuMarchand(piraterie:Boolean);
     var
       running: Boolean;
@@ -125,86 +176,120 @@ implementation
                    case (getItemChoisie()) of
                      1:
                       begin
-                        writeln(menuMarchand[1]);
-                        setWood(5);
-                        setGold(-getPriceRessource(wood));
-                        initItemChoisie(); //initialisation de l'itemChoisie
-                        running:=False;
+                        if (getGold()-getPriceRessource(2)>=0) then
+                            begin
+                              setWood(5);
+                              setGold(-getPriceRessource(2));
+                              initItemChoisie(); //initialisation de l'itemChoisie
+                              running:=False;
+                            end;
+                        ecrireTexte('Vous n''avez pas assez d''or      ',80,45);
                       end;
                      2:
                       begin
-                        writeln(menuMarchand[2]);
-                        setFish(5);
-                        setGold(-getPriceRessource(fish));
-                        initItemChoisie(); //initialisation de l'itemChoisie
-                        running:=False;
+                        if (getGold()-getPriceRessource(3)>=0) then
+                            begin
+                              setFish(5);
+                              setGold(-getPriceRessource(3));
+                              initItemChoisie(); //initialisation de l'itemChoisie
+                              running:=False;
+                            end;
+                        ecrireTexte('Vous n''avez pas assez d''or      ',80,45);
                       end;
 
                      3:
                       begin
-                        writeln(menuMarchand[3]);
-                        setLaine(5);
-                        setGold(-getPriceRessource(laine));
-                        initItemChoisie(); //initialisation de l'itemChoisie
-                        running:=False;
+                        if (getGold()-getPriceRessource(4)>=0) then
+                            begin
+                              setLaine(5);
+                              setGold(-getPriceRessource(4));
+                              initItemChoisie(); //initialisation de l'itemChoisie
+                              running:=False;
+                            end;
+                        ecrireTexte('Vous n''avez pas assez d''or      ',80,45);
                       end;
 
                      4:
                       begin
-                        writeln(menuMarchand[4]);
-                        setTissu(5);
-                        setGold(-getPriceRessource(tissu));
-                        initItemChoisie(); //initialisation de l'itemChoisie
-                        running:=False;
+                        if (getGold()-getPriceRessource(5)>=0) then
+                            begin
+                              setTissu(5);
+                              setGold(-getPriceRessource(5));
+                              initItemChoisie(); //initialisation de l'itemChoisie
+                              running:=False;
+                            end;
+                        ecrireTexte('Vous n''avez pas assez d''or       ',80,45);
                       end;
 
                      5:
                       begin
-                        writeln(menuMarchand [5]);
-                        setTool(5);
-                        setGold(-getPriceRessource(tool));
-                        initItemChoisie(); //initialisation de l'itemChoisie
-                        running:=False;
+                        if (getGold()-getPriceRessource(6)>=0) then
+                            begin
+                              setTool(5);
+                              setGold(-getPriceRessource(6));
+                              initItemChoisie(); //initialisation de l'itemChoisie
+                              running:=False;
+                            end;
+                        ecrireTexte('Vous n''avez pas assez d''or       ',80,45);
                       end;
                      6:
                       begin
-                        writeln(menuMarchand [6]);
-                        setWood(-5);
-                        setGold(getPriceRessource(wood));
-                        initItemChoisie(); //initialisation de l'itemChoisie
+                        if (getWood()>=5) then
+                          begin
+                            setWood(-5);
+                            setGold(getPriceRessource(2));
+                            initItemChoisie(); //initialisation de l'itemChoisie
+                            running:=False;
+                          end;
+                        ecrireTexte('Vous n''avez pas assez de bois        ',80,45);
                       end;
                      7:
                       begin
-                        writeln(menuMarchand [7]);
-                        setFish(-5);
-                        setGold(getPriceRessource(fish));
-                        initItemChoisie(); //initialisation de l'itemChoisie
-                        running:=False;
+                        if (getFish()>=5) then
+                            begin
+                              setFish(-5);
+                              setGold(getPriceRessource(3));
+                              initItemChoisie(); //initialisation de l'itemChoisie
+                              running:=False;
+                           end;
+                        ecrireTexte('Vous n''avez pas assez de poissons    ',80,45);
                       end;
 
                      8:
                       begin
-                        writeln(menuMarchand [8]);
-                        setLaine(-5);
-                        setGold(getPriceRessource(laine));
-                        initItemChoisie(); //initialisation de l'itemChoisie
-                        running:=False;
+                        if (getLaine()>=5) then
+                          begin
+                            setLaine(-5);
+                            setGold(getPriceRessource(4));
+                            initItemChoisie(); //initialisation de l'itemChoisie
+                            running:=False;
+                          end;
+                        ecrireTexte('Vous n''avez pas assez de laine       ',80,45);
                       end;
                      9:
                       begin
-                        writeln(menuMarchand [9]);
-                        setTissu(-5);
-                        setGold(getPriceRessource(tissu));
-                        initItemChoisie(); //initialisation de l'itemChoisie
-                        running:=False;
+                        //si assez de tissus
+                        if (getTissu()>=5) then
+                          begin
+                            setTissu(-5);
+                            setGold(getPriceRessource(5));
+                            initItemChoisie(); //initialisation de l'itemChoisie
+                            running:=False;
+                          end;
+                        //sinon pas assez de tissus
+                        ecrireTexte('Vous n''avez pas assez de tissus      ',80,45);
                       end;
                      10:
                       begin
-                        writeln(menuMarchand [10]);
-                        setTool(-5);
-                        setGold(getPriceRessource(tool));
-                        initItemChoisie(); //initialisation de l'itemChoisie
-                        running:=False;
+                        //si assez d'outils
+                        if(getTool>=5) then
+                            begin
+                              setTool(-5);
+                              setGold(getPriceRessource(6));
+                              initItemChoisie(); //initialisation de l'itemChoisie
+                              running:=False;
+                            end;
+                        ecrireTexte('Vous n''avez pas assez d''outils      ',80,45);
                       end;
                      11: running:=False;
                    end;

@@ -6,7 +6,7 @@ unit menuAccueil;
 interface
 
 uses
-  SysUtils, GestionEcran, Keyboard,bouclesJeux,navigationMenues, unitRessources , sMenuMarchand , unitBuilding ; //appel des unités
+  SysUtils, GestionEcran, Keyboard,bouclesJeux,navigationMenues, unitRessources , sMenuMarchand , unitBuilding, eventImpromptus ; //appel des unités
 
 procedure mainMenuAccueil(); {Procédure qui appelle toutes les fonctions et procédures du menu accueil }
 
@@ -14,43 +14,43 @@ implementation
 
   //déclaration des constantes connues de toute l'unité
   const
-    //Nombre d'item dans les menus
-    //nb d'item dans le menu
-    totaleItemsMenu=3;
+      //Nombre d'item dans les menus
+      //nb d'item dans le menu
+      totaleItemsMenu=3;
 
-    totalDifficultes=4;
+      totalDifficultes=4;
 
-    //Déclaration des items de notre menu initial
-    txtNewPartie='Nouvelle Partie'; //constante de type string qui est le 1er item du menu
-    txtOptionDifficultes='Difficultés'; //constante de type string qui est le 2ème item du menu
-    txtQuitter='Quitter'; //constante de type string qui est le 3ème item du menu
+      //Déclaration des items de notre menu initial
+      txtNewPartie='Nouvelle Partie'; //constante de type string qui est le 1er item du menu
+      txtOptionDifficultes='Difficultés'; //constante de type string qui est le 2ème item du menu
+      txtQuitter='Quitter'; //constante de type string qui est le 3ème item du menu
 
-    //déclaration des items du menu difficulté
-    txtDiffFacile='Difficulté facile';
-    txtxtDiffNormale='Difficulté normale';
-    txtDiffHard='Difficulté hard';
-    txtMenuPrecedent='Menu Précédent';
+      //déclaration des items du menu difficulté
+      txtDiffFacile='Difficulté facile';
+      txtxtDiffNormale='Difficulté normale';
+      txtDiffHard='Difficulté hard';
+      txtMenuPrecedent='Menu Précédent';
 
 
-    //Déclaration des abcisses de notre menu
-    txtNewPartieX= 10; //abcisse de txtSuivant à 30px
-    txtDiffX=10;
-    txtQuitterX=10; //abcisse de txtGestionbatiment à 10px
-    //Déclaration des ordonnées de notre menu
-    txtNewPartieY= 48; //ordonnée de txtSuivant à 20px
-    txtDiffY=49;
-    txtQuitterY=50; //ordonnée de txtGestionbatiment à 30px
+      //Déclaration des abcisses de notre menu
+      txtNewPartieX= 10; //abcisse de txtSuivant à 30px
+      txtDiffX=10;
+      txtQuitterX=10; //abcisse de txtGestionbatiment à 10px
+      //Déclaration des ordonnées de notre menu
+      txtNewPartieY= 48; //ordonnée de txtSuivant à 20px
+      txtDiffY=49;
+      txtQuitterY=50; //ordonnée de txtGestionbatiment à 30px
 
-    //abcisses des items du sous-Menu difficultés
-    txtDiffFacileX=90;
-    txtxtDiffNormaleX=90;
-    txtDiffHardX=90;
-    txtMenuPrecedentX=90;
-    //ordonnées des items du sous-Menu difficultés
-    txtDiffFacileY=20;
-    txtxtDiffNormaleY=22;
-    txtDiffHardY=24;
-    txtMenuPrecedentY=50;
+      //abcisses des items du sous-Menu difficultés
+      txtDiffFacileX=90;
+      txtxtDiffNormaleX=90;
+      txtDiffHardX=90;
+      txtMenuPrecedentX=90;
+      //ordonnées des items du sous-Menu difficultés
+      txtDiffFacileY=20;
+      txtxtDiffNormaleY=22;
+      txtDiffHardY=24;
+      txtMenuPrecedentY=50;
 
    //déclaration des variables connues de toute l'unité
     var
@@ -166,13 +166,13 @@ implementation
           //si on vient d'arriver sur le menu on initialise l'affichage des éléments du menu, initialisation de l'item actuel à 1 etc
           if (getNbTourBoucle()=0) then
             begin
-            effacerEcran; //raffraichissement de l'écran car on vient d'arriver sur un autre menu
-            initItemChoisie(); //initialisation de l'itemChoisie
-            initialisationItemActuel(1); //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
-            initialisationItemAnterieur(); //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
-            //affichage des rectangles, du texte et du menu
-            affichage();// affichage des rectangles du nom du menu et de tous les items du menu
-            colorierElementActu(0,60,itemsCoordX,itemsCoordY); //colorie l'item actuel sur lequel l'user est
+              effacerEcran; //raffraichissement de l'écran car on vient d'arriver sur un autre menu
+              initItemChoisie(); //initialisation de l'itemChoisie
+              initialisationItemActuel(1); //initialisation de l'item actuel au 1er item du menu quand on arrive sur le menu
+              initialisationItemAnterieur(); //initialisation de l'item antérieur à itemActuel-1 quand on arrive sur le menu
+              //affichage des rectangles, du texte et du menu
+              affichage();// affichage des rectangles du nom du menu et de tous les items du menu
+              colorierElementActu(0,60,itemsCoordX,itemsCoordY); //colorie l'item actuel sur lequel l'user est
             end
 
           //sinon on capte à tout instant les touches du clavier pour savoir s'il faut se déplacer dans le menu etc
@@ -221,7 +221,6 @@ implementation
                   case (getItemChoisie) of
                     1: //si difficulté choisie = facile
                       begin
-                        writeln(menuDiff[1]);
                         initBuildingDiffFacile(); //init bulding difficulté facile
                         initRessourceDiffFacile(); //init ressources difficulté facile
                         initTauxAppaMarchand(2); //initialisation taux apparition marchand difficulté facile
@@ -232,7 +231,7 @@ implementation
                       end;
                     2: //si difficulté choisie = normale
                       begin
-                        writeln(menuDiff[2]);
+                        initEImpromDiffNormal(); //init event impromptus en mode normal
                         initBuilding(); //init building en difficulté normal
                         initRessourceDiffNormal(); //init ressources diff normal
                         initTauxAppaMarchand(5); //initialisation taux apparition marchand
@@ -243,7 +242,7 @@ implementation
                       end;
                     3: //si difficulté choisie = hard
                       begin
-                        writeln(menuDiff[3]);
+                        initEImpromDiffHard(); {procedure qui initialise les event en difficulté hard}
                         initBuildingDiffHard(); //init building difficulté hard
                         initRessourceDiffHard(); //init ressources diff hard
                         initTauxAppaMarchand(10); //initialisation taux apparition marchand

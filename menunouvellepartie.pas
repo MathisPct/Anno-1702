@@ -20,12 +20,6 @@ implementation
 
   //déclaration des constantes connues de toute l'unité
   const
-      //nb d'item dans le menu
-      totaleItemsMenu=1;
-
-      //Déclaration des items de notre menu Nouvelle Partie
-
-
       //Déclaration de l'item qui est le nom du menu (affiché tout en haut au milieu de l'écran et encadrée)
       txtNomMenu='Création de la partie'; //constante de type string
 

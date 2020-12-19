@@ -23,11 +23,8 @@ implementation
       //nb d'item dans le menu
       totaleItemsMenu=1;
 
-      //Déclaration des items de notre menu Nouvelle Partie
-
-
       //Déclaration de l'item qui est le nom du menu (affiché tout en haut au milieu de l'écran et encadrée)
-      txtNomMenu='Création de la partie';
+      txtNomMenu='Création de la partie'; //constante de type string
 
   {Procédure qui dessine le rectangle de la zone du jeu}
   procedure rectangleZoneJeu();

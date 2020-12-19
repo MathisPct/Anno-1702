@@ -6,7 +6,7 @@ unit smenutoursuivant ;
 interface
 
   uses
-    Classes , SysUtils , GestionEcran , bouclesJeux , navigationMenues , Keyboard , population , sMenuMarchand , unitRessources,unitBuilding  ;
+    Classes , SysUtils , GestionEcran , bouclesJeux , navigationMenues , Keyboard , population , sMenuMarchand , unitRessources, unitBuilding  ;
 
   {Procédure qui appelle toutes les fonctions et procédures pour afficher et interragir avec le menu tour suivant }
   procedure maintSMenuTs();
@@ -43,12 +43,12 @@ implementation
       afficheNomMenu('Tour suivant'); //procédure écrit nom menu
       affichageRessourcesConsoColons(10,12);  //affichage ressources consommées par les colons en pos x et y
       affichageRessourcesConsoCitoyens(10,13);  //affichage ressources consommées par les citoyens  en pos x et y
-      affichageOrPop(10,14); //affichage de l'or rapporté par la population
-      besoinsColons(10,15);
-      besoinsCitoyens(10,16);
+      besoinsColons(10,15); //procédure qui affiche les besoins des colons
+      besoinsCitoyens(10,16); //procedure qui affiche les besoins des citoyens
       printBonheurHab(10,18); {procédure qui affiche le niveau de bonheur des 2 catégo d'hab en posX et posY}
       afficheMessageProdChaine(100,26,1); //procédure qui affiche les erreurs lors de la prod de chaine industriel
-      printAllRessQuantityGagne(10,26,1); //Affiche la quantité de ressource gagné
+      affichageOrPop(10,14); //affichage de l'or rapporté par la population
+      printAllRessQuantityGagne(10,26,1); //Affiche la quantité de ressource gagné ou perdu
       printItemsMenu(totaleItemsMenu,menuTourSuivant,menuTourSuivantX,menuTourSuivantY); //affichage des éléments du menu tour suivant
     end;
 

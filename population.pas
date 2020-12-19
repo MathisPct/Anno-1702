@@ -29,13 +29,13 @@ interface
   procedure consommation();
 
   {procedure qui affiche les différents nb d'habitants de chaque catégorie en position x et y}
-   procedure afficheNbHabCatego(espacement,posX,posYPremierItem:Integer);
+  procedure afficheNbHabCatego(espacement,posX,posYPremierItem:Integer);
 
-   {fonction qui retourne le nombre total de personnes d'une catégorie de pop}
-   function getNbHabCatePop(numType: Integer):Integer;
+  {fonction qui retourne le nombre total de personnes d'une catégorie de pop}
+  function getNbHabCatePop(numType: Integer):Integer;
 
-   {Fonction qui renvoie le nb total d'une population}
-   function getNbTotalPop():Integer;
+  {Fonction qui renvoie le nb total d'une population}
+  function getNbTotalPop():Integer;
 
   {procédure : modifie la valeur du nb totale de la pop }
   procedure setNbHab(valeur,numType: Integer);
@@ -44,7 +44,7 @@ interface
   function eatFish(numType:Integer):Integer;
 
   {fonction qui renvoie la laine consommée}
-  function consoLaine(numType:Integer):Integer;
+  function consoTissu(numType:Integer):Integer;
 
   {Procédure qui affiche les ressources consommées par les colons durant le tour en position x et y}
   procedure affichageRessourcesConsoColons(posX,posY:Integer);
@@ -85,13 +85,6 @@ implementation
     nbTotalPop: Integer; //variable integer nb total de la population
     coefTravail: Real; //coef de travail commun à toute pop qui permet de rapporter de l'or
 
-    //besoins colons
-    besoinFishColons: Boolean;
-    besoinWoodColons: Boolean;
-    besoinLaineColons: Boolean;
-    besoinVilleColons: Boolean;
-    besoinChappelleColons: Boolean;
-
   {Procédure qui initialise les différentes catégories de population}
   procedure initCaractPop();
     begin
@@ -110,7 +103,7 @@ implementation
       typeHabitant[2].coefConfort := 0.3; //initialisation du coef de confort citoyens
       typeHabitant[2].nbPopMort:=0;
       typeHabitant[2].bonheur:='malheureux'; //initialisation du niv de bonheur des citoyens
-      coefTravail:= 0.5;
+      coefTravail:= 0.5; //coef servant pour rapporter de l'or suivant le nb de la pop
     end;
 
   {fonction qui modifie le coef de reproduction d'un type d'habitant en fonction de son niv de bonheur}
@@ -133,13 +126,6 @@ implementation
       typeHabitant[numType].nbPopCatego:=typeHabitant[numType].nbPopCatego+round(quantiteMaisonGagne*capacite*typeHabitant[numType].coefReprod); //modifie la valeur du nb d'une catégorie
     end;
 
-  {
-    {procédure qui modifie et calcul la valeur du nombre de la population}
-  procedure setNbCategoPop(numType,quantiteMaisonDebTour,capaMaison:Integer);
-    begin
-      typeHabitant[numType].nbPopCatego:=typeHabitant[numType].nbPopCatego+(quantiteMaison*capaMaison)-typeHabitant[numType].nbPopMort; //modifie la valeur du nb d'une catégorie
-    end;
-    }
 
   {procedure qui modifie le nombre d'une population en lui affectant les morts}
   procedure setNbMortCatego(numType,nbMort: Integer);
@@ -151,11 +137,10 @@ implementation
   function getNbTotalPop():Integer;
     var
       numType: Integer; //numéro type d'une catégorie d'une population
-      nbTotalPop: Integer; //nombre totale de la population
     begin
       nbTotalPop:=0;
       for numType:=1 to nbTotalTypeHabitant do
-        nbTotalPop:=nbTotalPop + typeHabitant[numType].nbPopCatego; //ajoute le nombre d'habitant d'une catégorie à nbTotalPop
+        nbTotalPop:=nbTotalPop+typeHabitant[numType].nbPopCatego; //ajoute le nombre d'habitant d'une catégorie à nbTotalPop
       getNbTotalPop:=nbTotalPop;
     end;
 
@@ -191,13 +176,13 @@ implementation
        eatFish:=round((typeHabitant[numType].nbPopCatego * typeHabitant[numType].coefNutrition)); //calcul du nombre de poissons mangés par la pop
     end;
 
-  {fonction qui renvoie la laine consommée par une catégorie de population}
-  function consoLaine(numType: Integer):Integer;
+  {fonction qui renvoie le tissu consommée par une catégorie de population}
+  function consoTissu(numType: Integer):Integer;
     begin
-       consoLaine:=round((typeHabitant[1].nbPopCatego  * typeHabitant[numType].coefConfort)); //calcul du nombre de laines mangés par la pop
+       consoTissu:=round((typeHabitant[numType].nbPopCatego  * typeHabitant[numType].coefConfort)); //calcul du nombre de laines mangés par la pop
     end;
 
-  {Fonction qui renvoie l'or rapporté par une catégorie de population}
+  {Fonction qui renvoie l'or rapporté par la population population}
   function orRapporte(): Integer;
     begin
       orRapporte:= round(getNbTotalPop()*coefTravail); //calcul du nombre d'or rapportés par la pop
@@ -211,8 +196,11 @@ implementation
       // parcourt des différents types de pop et affectation des consommation de chaque ressources
       for numTypePop:=1 to nbTotalTypeHabitant do
         begin
-          setFish(-eatFish(numTypePop)); //soustraction de fishEat à la quantité de poissons
-          setGold(orRapporte()); //ajout or à la quantité d'or en stock
+          if getFish>0 then setFish(-eatFish(numTypePop)); //soustraction de fishEat à la quantité de poissons si assez de poissons
+          if getFish<0 then replaceRessourcesValue(3,0); //replace la valeur de fish à 0  si la conso fait que cette valeur est négative
+          if getTissu>0 then setTissu(-consoTissu(numTypePop)); //soustration de conso de tissu à la quantité de tissus si assez de tissus
+          if getTissu<0 then replaceRessourcesValue(5,0); //replace la valeur de tissus à 0 si la conso fait que cette valeur est négative
+          setGold(orRapporte()); //or rapporté par la population=> ajout  à la quantité d'or en stock
         end;
     end;
 
@@ -238,7 +226,7 @@ implementation
       texte: String;
     begin
       if (getNbHabCatePop(2)>0) then
-         texte:=txtConso+ IntToStr(eatFish(2)) + ' poissons ' + IntToStr(consoLaine(2)) + ' laines'
+         texte:=txtConso+ IntToStr(eatFish(2)) + ' poissons ' + IntToStr(consoTissu(2)) + ' laines'
       else
          texte:='Vous n''avez pas encore de citoyens sur votre île';
       ecrireTexte(texte,posX,posY);
@@ -249,56 +237,61 @@ implementation
     var
       texte: String;
     begin
+      texte:='';
       if (getNbTotalPop()>0) then
-         texte:= 'Les habitants de l''île vous ont rapporté '+ IntToStr(orRapporte()) + ' d''or'
-      else
-         texte:='';
+         texte:= 'Les habitants de l''île vous ont rapporté '+ IntToStr(orRapporte()) + ' d''or';
       ecrireTexte(texte,posX,posY);
+    end;
+
+  //Besoins de toute la pop
+  //fonction qui retourne true si la quantité de poissons =0 et faux si non
+  function getBesoinFish(): Boolean;
+    begin
+      if getFish<1 then getBesoinFish:=True //besoins non satisfait
+      else getBesoinFish:=False; //besoins satisfait
+    end;
+
+  {fonction qui retourne si le la quantité de laines=0 et faux si non}
+  function getBesoinTissus(): Boolean;
+    begin
+      if getTissu()<1 then getBesoinTissus:= True  //besoin insatisfait
+      else getBesoinTissus:= False; //besoin satisfait
     end;
 
   //Besoins des colons
   {fonction qui retourne si le besoin de poissons pour les colons est vrai ou faux s'il est satisfait}
-  function getBesoinFish(): Boolean;
+  function getBesoinBatFish(): Boolean;
     begin
-      if (getBat_Prop(2, 'quantity')<1) then
-         getBesoinFish:= True  //besoin insatisfait
-      else if (getBat_Prop(2, 'quantity')>=1) then
-         getBesoinFish:= False; //besoin satisfait
+      if (getBat_Prop(5, 'quantity')<1) then
+         getBesoinBatFish:= True  //besoin insatisfait
+      else if (getBat_Prop(5, 'quantity')>=1) then
+         getBesoinBatFish:= False; //besoin satisfait
     end;
 
   {fonction qui retourne si le besoin de bois pour les colons est vrai ou faux s'il est satisfait}
-  function getBesoinWood(): Boolean;
+  function getBesoinBatWood(): Boolean;
     begin
-      if (getBat_Prop(3, 'quantity')<3) then
-         getBesoinWood:= True  //besoin insatisfait
-      else if (getBat_Prop(3, 'quantity')>=3) then
-         getBesoinWood:= False; //besoin satisfait
-    end;
-
-  {fonction qui retourne si le besoin de tissus pour les colons est vrai ou faux s'il est satisfait}
-  function getBesoinTissus(): Boolean;
-    begin
-      if (getBat_Prop(5, 'quantity')<1) then
-         getBesoinTissus:= True  //besoin insatisfait
-      else if (getBat_Prop(5, 'quantity')>=1) then
-         getBesoinTissus:= False; //besoin satisfait
+      if (getBat_Prop(6, 'quantity')<3) then
+         getBesoinBatWood:= True  //besoin insatisfait
+      else if (getBat_Prop(6, 'quantity')>=3) then
+         getBesoinBatWood:= False; //besoin satisfait
     end;
 
    {Fonction qui retourne true si une ville a besoin d'être construite pour la pop}
   function getBesoinCity():Boolean;
     begin
-      if (getBat_Prop(7, 'quantity')<1) then
+      if (getBat_Prop(4, 'quantity')<1) then
          getBesoinCity:=True
-      else if (getBat_Prop(7, 'quantity')>=1) then
+      else if (getBat_Prop(4, 'quantity')>=1) then
          getBesoinCity:=False;
     end;
 
   {fonction qui retourne true si une chappelle n'est pas construite}
   function getBesoinChap():Boolean;
     begin
-      if (getBat_Prop(6, 'quantity')<1) then
+      if (getBat_Prop(3, 'quantity')<1) then
          getBesoinChap:=True
-      else if (getBat_Prop(6, 'quantity')>=1) then
+      else if (getBat_Prop(3, 'quantity')>=1) then
          getBesoinChap:=False;
     end;
 
@@ -307,16 +300,23 @@ implementation
     begin
       if (getNbHabCatePop(1)>0)   then
          begin
-            if (getBesoinFish()) then
-               ecrireTexte('Vos colons vous demande plus de poissons!',posX,posY);
-            if ((getBesoinWood()) and not(getBesoinFish()) ) then
-               ecrireTexte('Vos colons vous demande plus de bois',posX,posY);
-            if ((getBesoinTissus()) and(not(getBesoinWood())) and (not(getBesoinFish())) ) then
-               ecrireTexte('Vos colons vous demande du tissus',posX,posY);
-            if ((getBesoinCity()) and (not(getBesoinTissus())) and(not(getBesoinWood())) and (not(getBesoinFish())) ) then
-               ecrireTexte('La population vous demande un centre-ville!',posX,posY);
-            if ((getBesoinChap()) and (not(getBesoinCity()=True)) and (not(getBesoinTissus())) and(not(getBesoinWood())) and (not(getBesoinFish())) )then
-               ecrireTexte('Votre population aimerait bien une chappelle!',posX,posY);
+           //si quantité de poissons =0
+            if getBesoinFish then
+               ecrireTexte('Vos colons vous demande plus de poissons sinon ils vont connaître la famine',posX,posY);
+            if( (getBesoinTissus) and (not(getBesoinFish)) ) then
+               ecrireTexte('Vos colons vous demande plus de tissus pour leur confort',posX,posY);
+            //si les besoins primaires sont satisfait
+            if ( not(getBesoinFish) and not(getBesoinTissus) ) then
+               begin
+                  if ( (getBesoinBatFish) ) then
+                     ecrireTexte('Vos colons vous demande plus de batiments de pecheurs!',posX,posY);
+                  if ( (getBesoinBatWood) and not(getBesoinBatFish) ) then
+                     ecrireTexte('Vos colons vous demande plus de batiments de bucherons',posX,posY);
+                  if ((getBesoinCity()) and (not(getBesoinBatWood())) and (not(getBesoinBatFish())) ) then
+                     ecrireTexte('La population vous demande un centre-ville!',posX,posY);
+                  if ((getBesoinChap()) and (not(getBesoinCity()=True)) and (not(getBesoinBatWood())) and (not(getBesoinBatFish())) )then
+                     ecrireTexte('Votre population aimerait bien une chappelle!',posX,posY);
+               end;
          end;
     end;
 
@@ -327,60 +327,74 @@ implementation
     begin
       temp:=False;  //si les besoins des colons sont non satisfait
       //si tous les besoins des colons sont satisfait
-      if ( (not(getBesoinChap)) and (not(getBesoinCity)) and (not(getBesoinTissus)) and (not(getBesoinWood)) and (not(getBesoinFish)) )then
+      if ( (not(getBesoinChap)) and (not(getBesoinCity)) and (not(getBesoinTissus)) and (not(getBesoinBatWood)) and (not(getBesoinBatFish)) and (not(getBesoinTissus)) )then
          temp:=True;
       getEtatAllBesoinsColons:=temp;
     end;
 
   //besoins citoyens
-  {fonction qui retourne true si la quantité des batiments est inférieur ou égale à 5 }
-  function getBesoinFishCitoyens(): Boolean;
+  {fonction qui retourne true si la quantité des batiments fish est inférieur ou égale à 5 }
+  function getBesoinBatFishCitoyens(): Boolean;
     begin
-      if (getBat_Prop(2, 'quantity')<5) then
-         getBesoinFishCitoyens:=True
-      else if (getBat_Prop(2, 'quantity')>=5) then
-         getBesoinFishCitoyens:=False;
+      if (getBat_Prop(5, 'quantity')<5) then
+         getBesoinBatFishCitoyens:=True
+      else if (getBat_Prop(5, 'quantity')>=5) then
+         getBesoinBatFishCitoyens:=False;
     end;
 
-  function getBesoinBoisCitoyens(): Boolean;
+  function getBesoinBatBoisCitoyens(): Boolean;
     begin
-      if (getBat_Prop(3, 'quantity')<6) then
-         getBesoinBoisCitoyens:=True
-      else if (getBat_Prop(3, 'quantity')>=6) then
-         getBesoinBoisCitoyens:=False;
-    end;
-
-  function getBesoinTissusCitoyens(): Boolean;
-    begin
-      if (getBat_Prop(5, 'quantity')<3) then
-         getBesoinTissusCitoyens:=True
-      else if (getBat_Prop(5, 'quantity')>=3) then
-         getBesoinTissusCitoyens:=False;
+      if (getBat_Prop(6, 'quantity')<6) then
+         getBesoinBatBoisCitoyens:=True
+      else if (getBat_Prop(6, 'quantity')>=6) then
+         getBesoinBatBoisCitoyens:=False;
     end;
 
   function getBesoinChappelleCitoyens(): Boolean;
     begin
-      if (getBat_Prop(6, 'quantity')<2) then
+      if (getBat_Prop(3, 'quantity')<2) then
          getBesoinChappelleCitoyens:=True
-      else if (getBat_Prop(6, 'quantity')>=2) then
+      else if (getBat_Prop(3, 'quantity')>=2) then
          getBesoinChappelleCitoyens:=False;
     end;
 
-  //function getBesoi
+  //fonction qui retourne true si les citoyens ne possèdent pas de métal
+  function getBesoinMetal():Boolean;
+    begin
+       if getMetal()<1 then getBesoinMetal:=True
+       else getBesoinMetal:=False
+    end;
+
+  //fonction qui retourne true si les citoyens ne possèdent pas encore de rhum
+  function getBesoinRhum():Boolean;
+    begin
+      if getRhum()<1 then getBesoinRhum:=True
+      else getBesoinRhum:=False;
+    end;
 
   {procedure qui écrit les besoins de la pop dans le menu tour suivant en posX et posY}
   procedure besoinsCitoyens(posX,posY: Integer);
     begin
       if (getNbHabCatePop(2)>0) then
            begin
-              if (getBesoinFishCitoyens()) then
-                 ecrireTexte('Vos citoyens vous demande plus de poissons!',posX,posY);
-              if ((getBesoinBoisCitoyens()) and not(getBesoinFishCitoyens()) ) then
-                 ecrireTexte('Vos citoyens vous demande plus de bois',posX,posY);
-              if ((getBesoinTissusCitoyens()) and (not(getBesoinFishCitoyens)) and (not(getBesoinBoisCitoyens)) ) then
-                 ecrireTexte('Vos citoyens vous demande plus de laines',posX,posY);
-              if ((getBesoinChappelleCitoyens) and (not(getBesoinTissusCitoyens)) and (not(getBesoinFishCitoyens)) and (not(getBesoinBoisCitoyens))) then
-                 ecrireTexte('Vos citoyens vous demande de construire plus de chapelles',posX,posY);
+              if getBesoinFish() then
+                 ecrireTexte('Vos citoyens vous demande plus de poissons sinon ils vont connaître la famine',posX,posY);
+              if ( (getBesoinTissus) and (not(getBesoinFish)) ) then
+                 ecrireTexte('Vos citoyens vous demande plus de tissus pour leur confort',posX,posY);
+              //sinon si les besoins sont satisfait
+              if ((not(getBesoinTissus)) and (not(getBesoinFish)) ) then
+                begin
+                  if (getBesoinBatFishCitoyens()) then
+                     ecrireTexte('Vos citoyens vous demande plus de batiments de pecheurs!',posX,posY);
+                  if ((getBesoinBatBoisCitoyens()) and (not(getBesoinBatFishCitoyens)) ) then
+                     ecrireTexte('Vos citoyens vous demande plus de batiments de bucherons',posX,posY);
+                  if ( (getBesoinChappelleCitoyens) and (not(getBesoinBatFishCitoyens)) and (not(getBesoinBatBoisCitoyens))) then
+                     ecrireTexte('Vos citoyens vous demande de construire plus de chapelles',posX,posY);
+                  if ( getBesoinMetal() and (not(getBesoinChappelleCitoyens)) and (not(getBesoinBatFishCitoyens)) and (not(getBesoinBatBoisCitoyens)) ) then
+                     ecrireTexte('Il serait peut être temps de passer à l''âge du métal!',posX,posY);
+                  if ( getBesoinRhum() and (not(getBesoinChappelleCitoyens)) and (not(getBesoinBatFishCitoyens)) and (not(getBesoinBatBoisCitoyens)) and (not(getBesoinMetal)) ) then
+                     ecrireTexte('Il serait peut être temps d''abreuver vos citoyens avec du bon rhum',posX,posY);
+                end;
            end;
     end;
 
@@ -389,30 +403,40 @@ implementation
     begin
       if (typeHabitant[1].nbPopCatego>0) then
          begin
-            if ( (getBesoinChap) and (getBesoinCity) and (getBesoinTissus) and (getBesoinWood) and (getBesoinFish) )  then
+            //si tous les besoins sont non satisfait ou que les habitant n'ont pas leurs besoins primaires satisfaits
+            if ( ( (getBesoinChap) and (getBesoinCity) and (getBesoinBatWood) and (getBesoinBatFish) ) or (getBesoinFish) or (getBesoinTissus) )  then
                typeHabitant[1].bonheur:='malheureux';
-            if ( (not(getBesoinFish)) or (not(getBesoinWood)) or (not(getBesoinTissus)) or (not(getBesoinChap)) or (not(getBesoinCity)) ) then
-               typeHabitant[1].bonheur:= 'satisfait';
-            if ( (not(getBesoinChap)) or (not(getBesoinCity)) or ( (not(getBesoinFish)) and (not(getBesoinWood)) and (not(getBesoinTissus)) ) ) then
-               typeHabitant[1].bonheur:= 'content';
-            if ( (not(getBesoinFish)) and (not(getBesoinWood)) and (not(getBesoinTissus)) and (not(getBesoinChap)) and (not(getBesoinCity)) )then
-               typeHabitant[1].bonheur:= 'heureux';
+            if ( (not(getBesoinFish)) and (not(getBesoinTissus)) ) then
+               begin
+                  typeHabitant[1].bonheur:= 'satisfait';
+                  if ( (not(getBesoinChap)) or (not(getBesoinCity)) or ( (not(getBesoinBatFish)) and (not(getBesoinBatWood))  ) ) then
+                     typeHabitant[1].bonheur:= 'content';
+                  //si tous les besoins sont satisfaits
+                  if ( (not(getBesoinBatWood)) and (not(getBesoinChap)) and (not(getBesoinCity)) and (not(getBesoinBatFish)) )then
+                     typeHabitant[1].bonheur:= 'heureux';
+               end;
          end;
     end;
 
   {procédure qui update le niveau de bonheur des citoyens suivant les besoins accomplies}
   procedure updateBonheurCitoyens();
     begin
+      //si il existe des citoyens
       if (typeHabitant[2].nbPopCatego>0) then
          begin
-           if ( (getBesoinChappelleCitoyens) and (getBesoinTissusCitoyens) and (getBesoinFishCitoyens) and (getBesoinBoisCitoyens)) then
-              typeHabitant[2].bonheur := 'malheureux';
-           if ( (not(getBesoinFishCitoyens)) or (not(getBesoinBoisCitoyens)) or (not(getBesoinTissusCitoyens)) or (not(getBesoinChappelleCitoyens)) ) then
-              typeHabitant[2].bonheur := 'satisfait';
-           if ( (not(getBesoinChappelleCitoyens)) or ( (not(getBesoinFishCitoyens)) and (not(getBesoinBoisCitoyens)) and (not(getBesoinChappelleCitoyens)) ) ) then
-              typeHabitant[2].bonheur := 'content';
-           if ( (not(getBesoinChappelleCitoyens)) and (not(getBesoinFishCitoyens)) and (not(getBesoinBoisCitoyens)) and (not(getBesoinChappelleCitoyens)) ) then
-              typeHabitant[1].bonheur:= 'heureux';
+            //si tous les besoins ne sont pas encore satisfait ou que les habitants n'ont pas leur besoins primaires satisfait
+           if ( ( (getBesoinChappelleCitoyens) and (getBesoinBatFishCitoyens) and (getBesoinBatBoisCitoyens) ) or (getBesoinFish) or (getBesoinTissus) ) then
+              typeHabitant[2].bonheur := 'malheureux'
+           else
+             begin
+               if ( (not(getBesoinBatFishCitoyens)) or (not(getBesoinBatBoisCitoyens)) or (not(getBesoinChappelleCitoyens)) ) then
+                  typeHabitant[2].bonheur := 'satisfait';
+               if ( (not(getBesoinChappelleCitoyens)) or ( (not(getBesoinBatFishCitoyens)) and (not(getBesoinBatBoisCitoyens))  ) ) then
+                  typeHabitant[2].bonheur := 'content';
+               //si tous les besoins des citoyens sont satisfait
+               if ( (not(getBesoinRhum)) and (not(getBesoinMetal)) and (not(getBesoinChappelleCitoyens)) and (not(getBesoinBatFishCitoyens)) and (not(getBesoinBatBoisCitoyens)) ) then
+                  typeHabitant[2].bonheur:= 'heureux';
+             end;
          end;
     end;
 

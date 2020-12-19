@@ -9,62 +9,59 @@ interface
 uses
   SysUtils,GestionEcran ; //appel des unités
 
-{Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
-procedure initiaNbTourBoucle();
+  {Procédure qui initialise le nb de tour de boucle: permet d'initialiser le menu quand on arrive dessus}
+  procedure initiaNbTourBoucle();
 
-{Procédure qui modifie le nbTourBoucle : incrémente de 1 le nb de tour de boucle }
-procedure incrementaNbTourBoucle();
+  {Procédure qui modifie le nbTourBoucle : incrémente de 1 le nb de tour de boucle }
+  procedure incrementaNbTourBoucle();
 
-//Cette fonction renvoie la valeur de la variable nbTourBoucle
-function getNbTourBoucle(): Integer;
-
-
-{Procédure qui initialise la boucle du Jeu à True quand le programme est lancé}
-procedure initBoucleJeu();
-
-//Procédure qui sert à affecter True ou False à la variable boucleJeu
-procedure setBoucleJeu(valeur:Boolean);
-
-//Fonction qui sert à renvoyer la valeur de la variable boucleJeu
-function getBoucleJeu():Boolean;
+  //Cette fonction renvoie la valeur de la variable nbTourBoucle
+  function getNbTourBoucle(): Integer;
 
 
-{Procédure qui dessine le rectangle de la zone du jeu}
- procedure rectangleZoneJeu();
+  {Procédure qui initialise la boucle du Jeu à True quand le programme est lancé}
+  procedure initBoucleJeu();
 
- {Procédure qui affiche le cadre entourant le texte Bienvenue sur 'NomIle'}
- procedure cadreTxtNomMenu();
+  //Procédure qui sert à affecter True ou False à la variable boucleJeu
+  procedure setBoucleJeu(valeur:Boolean);
 
- {Procédure: écrit le nom du menu en pos x et y (en haut de l'écran)}
- procedure afficheNomMenu(nom:String);
+  //Fonction qui sert à renvoyer la valeur de la variable boucleJeu
+  function getBoucleJeu():Boolean;
 
- procedure ecrireTexte(nom:String; x:Integer; y:Integer);
+  {Procédure qui dessine le rectangle de la zone du jeu}
+   procedure rectangleZoneJeu();
 
- {Procédure qui affiche un item présents dans le menu en position X et Y}
-procedure affichageItem(item:String;posX,posY:Integer);
+   {Procédure qui affiche le cadre entourant le texte Bienvenue sur 'NomIle'}
+   procedure cadreTxtNomMenu();
 
+   {Procédure: écrit le nom du menu en pos x et y (en haut de l'écran)}
+   procedure afficheNomMenu(nom:String);
 
-//STYLE DES TEXTES
-// retourne des espaces vides dans un string selon le nombre d'espace passé en paramètre
-function emptySpace(nbEspace: Integer):String;
+   procedure ecrireTexte(nom:String; x:Integer; y:Integer);
 
-// fonction qui retourne un texte completé d'espace vide selon la longueur demandée afin d'indenter les textes de ressources
-function txtIndentation(txt: String; longueurVoulue: Integer):String;
+   {Procédure qui affiche un item présents dans le menu en position X et Y}
+   procedure affichageItem(item:String;posX,posY:Integer);
 
+  //STYLE DES TEXTES INDENTATION
+  // retourne des espaces vides dans un string selon le nombre d'espace passé en paramètre
+  function emptySpace(nbEspace: Integer):String;
 
-//Liste procédures fonctions pour nbTour
+  // fonction qui retourne un texte completé d'espace vide selon la longueur demandée afin d'indenter les textes de ressources
+  function txtIndentation(txt: String; longueurVoulue: Integer):String;
 
-//procédure qui sert à initialiser le nombre de tour
-procedure initNombreDeTour();
+  //Liste procédures fonctions pour nbTour
 
-//procédure qui sert à affecter le nombre de tour
-procedure setBoucleNbTour(valeur:Integer);
+  //procédure qui sert à initialiser le nombre de tour
+  procedure initNombreDeTour();
 
-//fonction qui retourne la valeur du nb de tour
-function getNbTour():Integer;
+  //procédure qui sert à affecter le nombre de tour
+  procedure setBoucleNbTour(valeur:Integer);
 
-//procédure qui écrit le nb de tour à une position x et y
-procedure printNbTour(posX,posY:Integer);
+  //fonction qui retourne la valeur du nb de tour
+  function getNbTour():Integer;
+
+  //procédure qui écrit le nb de tour à une position x et y
+  procedure printNbTour(posX,posY:Integer);
 
 implementation
   //variables connues de toute l'unité
@@ -92,8 +89,6 @@ implementation
   begin
        getNbTourBoucle := nbTourBoucle;
   end;
-
-
 
   {Procédure qui initialise la boucle du Jeu à True quand le programme est lancé}
   procedure initBoucleJeu();
@@ -175,7 +170,7 @@ implementation
       ecrireEnPosition(posNomMenu,nom); //fonction de l'unité Gestion Ecran qui affiche le nom à la position posNomMenu
     end;
 
-    procedure ecrireTexte(nom:String; x:Integer; y:Integer);
+  procedure ecrireTexte(nom:String; x:Integer; y:Integer);
     var
       posTexte: coordonnees; //variable, coordonnées de placement du texte nom en paramètre
     begin
@@ -184,20 +179,15 @@ implementation
       ecrireEnPosition(posTexte,nom); //fonction de l'unité Gestion Ecran qui affiche le nom à la position posNomMenu
     end;
 
-   //--------------FIN Procédures qui servent à décorer la zone de jeu---------------//
-
-
-   //--------------DEBUT Procédures qui servent pour les items---------------------//
-
   {Procédure qui affiche un item présents dans le menu en position X et Y}
   procedure affichageItem(item:String;posX,posY:Integer);
-  var
-    posItem: coordonnees; //variable, coordonnées de placement d'un item avec sa position en x et en y
-  begin
-    posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
-    posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
-    ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
-  end;
+    var
+      posItem: coordonnees; //variable, coordonnées de placement d'un item avec sa position en x et en y
+    begin
+      posItem.x:=posX; //initialisation du placement en x de l'item (permet de placer l'item en tout point x passé en paramètre)
+      posItem.y:=posY; //initialisation du placement en y de l'item (permet de placer l'item en tout point y passé en paramètre)
+      ecrireEnPosition(posItem,item); //fonction de l'unité Gestion Ecran qui affiche l'item du menu à la position PosItem
+    end;
 
   // retourne des espaces vides dans un string selon le nombre d'espace passé en paramètre
   function emptySpace(nbEspace: Integer):String;
@@ -212,8 +202,6 @@ implementation
          end;
          emptySpace:=TxtVideTemp; // on retourne un string rempli du nombre d'espace désiré passé en paramètre
     end;
-
-
 
   // fonction qui retourne un texte completé d'espace vide selon la longueur demandée afin d'indenter les textes de ressources
   function txtIndentation(txt: String; longueurVoulue: Integer):String;
