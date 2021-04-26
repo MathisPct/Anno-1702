@@ -6,7 +6,7 @@ unit sMenuMarchand ;
 interface
 
   uses
-    Classes , SysUtils , bouclesJeux, gestionEcran , Keyboard , navigationMenues , unitRessources, personnage;
+    Classes , SysUtils , bouclesJeux, gestionEcran , Keyboard , navigationMenues , unitRessources, personnage,math;
 
   procedure mainSMenuMarchand(piraterie:Boolean);
   procedure initTauxAppaMarchand(valeur: Integer);
@@ -29,7 +29,7 @@ implementation
     txtSendTissu            ='Vendre 5 tissu';
     txtSendTool             ='Vendre 5 Outils';
 
-    txtNoPay                ='Ne rien acheter';
+    txtNoPay                ='Passer le menu';
 
     //Déclaration des abcisses de notre menu
     txtPayWoodX           =60; //abcisse de txtSuivant
@@ -78,34 +78,51 @@ implementation
   //procedure qui affiche le paragraphe que dit le marchand lors de son arrivée
   procedure afficheScenarioMarchand(interligne: integer);
     const
-      p1v1='Un homme mystérieux est de passage sur votre île... :';
-      p2v1='OYE mon brave! Je me présente, je suis un marchand et il se trouve que je suis de passage sur votre île';
+      p1v1='Un homme mystérieux est de passage sur votre île...';
+      p2v1='OYE mon brave! Je me présente, Mariveau Senport, marchand sérieux de Chesticaste. Il se trouve que je suis de passage sur votre île';
       p3v1='durant mon voyage.';
-      p4v1='Vous savez j''ai toutes sortes de marchandises dans mon sac ! Seriez vous intéressé par un échange ? ';
+      p4v1='Vous savez j''ai toutes sortes de marchandises dans ma calle ! Seriez-vous intéressé par un échange ? ';
       p5v1='Bien évidemment je ne souhaite pas vous importuner, je me contenterais de partir en cas de refus...';
 
-      p1v2='Un homme mystérieux est de passage sur votre île... :';
-      p2v2='OYE mon brave! Je me présente, je suis un marchand et il se trouve que je suis de passage sur votre île durant mon voyage';
-      p3v2='Vous savez j''ai toutes sortes de marchandises dans mon sac ! Seriez vous intéressé par un échange ? ';
-      p4v2='Bien évidemment je ne souhaite pas vous importuner, je me contenterais de partir en cas de refus...';
+      p1v2='Un bateau marchand accoste sur l''île...';
+      p2v2='Qui aurait cru faire du commerce aujourd''hui ?';
+      p3v2='Ces marchands venus de l''Est de Gateros arborent un fier navire qui inspire confiance ! Peut-être que vous serez partant pour une affaire ? ';
+      p4v2='Vous êtes bien sûr en droit de refuser, bien qu''il puisse être stratégique pour vous de vendre ou acheter des biens! Réfléchissez bien ...';
 
-      txtTotalVariante=2; //total txt variante
+      p1v3='Un navire marchand a jeté l''ancre sur vos côtes...';
+      p2v3='Salutations à vous, nous sommes les fiers commerçants du Nord de Pertochesse, nous venons de l''île de Poneletaque!';
+      p3v3='Seriez vous interressé par un échange commercial avec notre flote? Refusez si vous le souhaiter, libre à vous de repousser nos productions qualitatives!';
+      p4v3='Mais grâce divine, n''hésitez pas très longtemps! Notre chemin pour gagner l''archipel de Pinator est encore long!';
+
+      p1v4='On dirait que c''est l''heure de faire des affaires avec un drôle de marin...';
+      p2v4='Bien lé bonjourrr, yé souis malechand dél bon Katchinaaaaaa, zé navigué dulement pour alliver ici!';
+      p3v4='Faaaaaisons oune échanché dé plou commercialé, né soyez pas timide, vous n''allé paaaas étreee déçuuuuuuu! ';
+      p4v4='hehehehe, qué vous êtesss charmand sur votré pétite île, cé gomment qué ça sou passe li dedans? *toux grasse*';
+
+      txtTotalVariante=4; //total txt variante
     var
       numParagra:Integer;
       posX,posY: Integer;
       arrTxtMarchandV1: Array[1..5] of String=(p1v1,p2v1,p3v1,p4v1,p5v1); //tableau contenant les différents paragraphes
       arrTxtMarchandV2: Array[1..4] of String=(p1v2,p2v2,p3v2,p4v2);
+      arrTxtMarchandV3: Array[1..4] of String=(p1v3,p2v3,p3v3,p4v3);
+      arrTxtMarchandV4: Array[1..4] of String=(p1v4,p2v4,p3v4,p4v4);
       numAleaTxt: Integer; //nb de variantes de texte (aléatoire à l'affichage)
     begin
       randomize; //init de random
       posX:=20;
       posY:=10;
-      numAleaTxt:=1+random(txtTotalVariante); //nb aléatoire entre 1 et 2 (choix du texte à afficher)
+      numAleaTxt:=RandomRange(1,txtTotalVariante+1); //nb aléatoire entre 1 et 2 (choix du texte à afficher)
       case numAleaTxt of
         1:
           begin
              for numParagra:=1 to High(arrTxtMarchandV1) do
                begin
+                 if numParagra = 2 then
+                     begin
+                       posY:=posY+interligne;
+                       posX:=posX+8;
+                     end;
                  ecrireTexte(arrTxtMarchandV1[numParagra],posX,posY);
                  posY:=posY+interligne;
                end;
@@ -114,7 +131,38 @@ implementation
           begin
              for numParagra:=1 to High(arrTxtMarchandV2) do
                begin
+                 if numParagra = 2 then
+                     begin
+                       posY:=posY+interligne;
+                       posX:=posX+8;
+                     end;
                  ecrireTexte(arrTxtMarchandV2[numParagra],posX,posY);
+                 posY:=posY+interligne;
+               end;
+          end;
+        3:
+          begin
+             for numParagra:=1 to High(arrTxtMarchandV3) do
+               begin
+                 if numParagra = 2 then
+                     begin
+                       posY:=posY+interligne;
+                       posX:=posX+8;
+                     end;
+                 ecrireTexte(arrTxtMarchandV3[numParagra],posX,posY);
+                 posY:=posY+interligne;
+               end;
+          end;
+        4:
+          begin
+             for numParagra:=1 to High(arrTxtMarchandV4) do
+               begin
+                 if numParagra = 2 then
+                     begin
+                       posY:=posY+interligne;
+                       posX:=posX+8;
+                     end;
+                 ecrireTexte(arrTxtMarchandV4[numParagra],posX,posY);
                  posY:=posY+interligne;
                end;
           end;
@@ -181,9 +229,10 @@ implementation
                               setWood(5);
                               setGold(-getPriceRessource(2));
                               initItemChoisie(); //initialisation de l'itemChoisie
-                              running:=False;
-                            end;
-                        ecrireTexte('Vous n''avez pas assez d''or      ',80,45);
+                              ecrireTexte('Vous avez reçu 5 de bois      ',80,45);
+                            end
+                        else
+                         ecrireTexte('Vous n''avez pas assez d''or      ',80,45);
                       end;
                      2:
                       begin
@@ -192,9 +241,10 @@ implementation
                               setFish(5);
                               setGold(-getPriceRessource(3));
                               initItemChoisie(); //initialisation de l'itemChoisie
-                              running:=False;
-                            end;
-                        ecrireTexte('Vous n''avez pas assez d''or      ',80,45);
+                              ecrireTexte('Vous avez reçu 5 de poissons      ',80,45);
+                            end
+                        else
+                            ecrireTexte('Vous n''avez pas assez d''or      ',80,45);
                       end;
 
                      3:
@@ -204,9 +254,10 @@ implementation
                               setLaine(5);
                               setGold(-getPriceRessource(4));
                               initItemChoisie(); //initialisation de l'itemChoisie
-                              running:=False;
-                            end;
-                        ecrireTexte('Vous n''avez pas assez d''or      ',80,45);
+                              ecrireTexte('Vous avez reçu 5 de laines      ',80,45);
+                            end
+                        else
+                            ecrireTexte('Vous n''avez pas assez d''or      ',80,45);
                       end;
 
                      4:
@@ -216,9 +267,10 @@ implementation
                               setTissu(5);
                               setGold(-getPriceRessource(5));
                               initItemChoisie(); //initialisation de l'itemChoisie
-                              running:=False;
-                            end;
-                        ecrireTexte('Vous n''avez pas assez d''or       ',80,45);
+                              ecrireTexte('Vous avez reçu 5 de tissus      ',80,45);
+                            end
+                        else
+                            ecrireTexte('Vous n''avez pas assez d''or       ',80,45);
                       end;
 
                      5:
@@ -228,9 +280,10 @@ implementation
                               setTool(5);
                               setGold(-getPriceRessource(6));
                               initItemChoisie(); //initialisation de l'itemChoisie
-                              running:=False;
-                            end;
-                        ecrireTexte('Vous n''avez pas assez d''or       ',80,45);
+                              ecrireTexte('Vous avez reçu 5 d''outils      ',80,45);
+                            end
+                        else
+                            ecrireTexte('Vous n''avez pas assez d''or       ',80,45);
                       end;
                      6:
                       begin
@@ -239,9 +292,10 @@ implementation
                             setWood(-5);
                             setGold(getPriceRessource(2));
                             initItemChoisie(); //initialisation de l'itemChoisie
-                            running:=False;
-                          end;
-                        ecrireTexte('Vous n''avez pas assez de bois        ',80,45);
+                            ecrireTexte('Vous avez vendu 5 de bois              ',80,45);
+                          end
+                        else
+                            ecrireTexte('Vous n''avez pas assez de bois        ',80,45);
                       end;
                      7:
                       begin
@@ -250,9 +304,10 @@ implementation
                               setFish(-5);
                               setGold(getPriceRessource(3));
                               initItemChoisie(); //initialisation de l'itemChoisie
-                              running:=False;
-                           end;
-                        ecrireTexte('Vous n''avez pas assez de poissons    ',80,45);
+                              ecrireTexte('Vous avez vendu 5 de poissons              ',80,45);
+                           end
+                        else
+                            ecrireTexte('Vous n''avez pas assez de poissons    ',80,45);
                       end;
 
                      8:
@@ -262,9 +317,10 @@ implementation
                             setLaine(-5);
                             setGold(getPriceRessource(4));
                             initItemChoisie(); //initialisation de l'itemChoisie
-                            running:=False;
-                          end;
-                        ecrireTexte('Vous n''avez pas assez de laine       ',80,45);
+                            ecrireTexte('Vous avez vendu 5 de laines              ',80,45);
+                          end
+                        else
+                            ecrireTexte('Vous n''avez pas assez de laine       ',80,45);
                       end;
                      9:
                       begin
@@ -274,8 +330,9 @@ implementation
                             setTissu(-5);
                             setGold(getPriceRessource(5));
                             initItemChoisie(); //initialisation de l'itemChoisie
-                            running:=False;
-                          end;
+                            ecrireTexte('Vous avez vendu 5 de tissus              ',80,45);
+                          end
+                        else
                         //sinon pas assez de tissus
                         ecrireTexte('Vous n''avez pas assez de tissus      ',80,45);
                       end;
@@ -287,9 +344,10 @@ implementation
                               setTool(-5);
                               setGold(getPriceRessource(6));
                               initItemChoisie(); //initialisation de l'itemChoisie
-                              running:=False;
-                            end;
-                        ecrireTexte('Vous n''avez pas assez d''outils      ',80,45);
+                              ecrireTexte('Vous avez vendu 5 d''outils              ',80,45);
+                            end
+                        else
+                            ecrireTexte('Vous n''avez pas assez d''outils      ',80,45);
                       end;
                      11: running:=False;
                    end;

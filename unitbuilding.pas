@@ -336,7 +336,7 @@ implementation
       batiment[B_Villa].construct[1]       := 30; //cout gold
       batiment[B_Villa].construct[2]       := 20; //cout bois
       //Cout de construction
-      batiment[B_Chapelle].construct[1]    := 150; // cout GOLD
+      batiment[B_Chapelle].construct[1]    := 1000; // cout GOLD
       batiment[B_Chapelle].construct[2]    := 75; // cout BOIS
       //Cout de construction
       batiment[B_CentreVille].construct[1] := 500; // cout GOLD

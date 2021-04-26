@@ -227,45 +227,76 @@ implementation
 
   {procedure qui affiche le txt scénarisé de l'event piraterie s'il vient d'être activé}
   procedure printTxtScenarioPirates();
+    const
+      spacing = '                       ';
+
     var
       text: String;
       paragraphe: String;
+      randomTxt: Integer;
+
     begin
       //si l'event vient d'être lancé
-      if (tabEventImpromptu[pirate].tourDebEvent=getNbTour() ) then
+      if (tabEventImpromptu[pirate].tourDebEvent=getNbTour()) then
         begin
              effacerEcran(); //efface ecran pour affiche txt scenario
-             paragraphe:='La piraterie n''est jamais fini !'#13#10'(Camarades), vos marchands se font attaqués par des pirates sans pitié...'#13#10'Vous êtes désormais dans l''incapacité de faire appel à eux mais soyez patient ils finiront bien par revenir...';
-             ecrireTexte(paragraphe,5,5);
-             ecrireTexte(text,5,10);
+             randomTxt := randomRange(1,4);
+             case randomTxt of
+                   1:paragraphe:='La piraterie n''est jamais finie !'#13#10''#13#10''+spacing+'Vos marchands se font attaquer par des pirates sans pitié...'#13#10''+spacing+'Vous êtes désormais dans l''incapacité de faire appel à eux mais soyez patient! Ils finiront bien par revenir...';
+                   2:paragraphe:='Mille millions de mille sabords ! Les pirates sont de retours !'#13#10''#13#10''+spacing+'Les marchands se font piller au large, '#13#10''+spacing+'ce n''est pas bon pour les affaires...';
+                   3:paragraphe:='Des pirates pillent les commerçants au large des côtes!'#13#10''#13#10''+spacing+'Les malheureux marchands ont fuit la région!'#13#10''+spacing+' Espérons qu''ils reviennent bientôt...';
+                   else paragraphe:='La piraterie n''est jamais finie !'#13#10''#13#10''+spacing+'Vos marchands se font attaquer par des pirates sans pitié...'#13#10''+spacing+'Vous êtes désormais dans l''incapacité de faire appel à eux mais soyez patient! Ils finiront bien par revenir...';
+             end;
+             //paragraphe:='La piraterie n''est jamais finie !'#13#10'Vos marchands se font attaquer par des pirates sans pitié...'#13#10'Vous êtes désormais dans l''incapacité de faire appel à eux mais soyez patient! Ils finiront bien par revenir...';
+             ecrireTexte(paragraphe,20,5);
+             //ecrireTexte(text,15,10);
         end;
     end;
 
   //procédure qui affiche le txt scénarisé de l'event ouragan s'il vient d'être activé
   procedure printTxtScenarioOuragan();
+    const
+      spacing = '                       ';
     var
       text: String;
       paragraphe: String;
+      randomTxt: Integer;
     begin
       //si l'event vient d'être lancé
       if (tabEventImpromptu[ouragan].tourDebEvent=getNbTour() ) then
         begin
              effacerEcran(); //mise à jour affichage
-             paragraphe:='Ouragan dévastateur !'#13#10'Prenez garde ! Un terrible ouragan a frappé votre ville ! Vos bâtiments sont en périls...';
-             ecrireTexte(paragraphe,5,10);
+             randomTxt := randomRange(1,5);
+             case randomTxt of
+                   1:paragraphe:='[   O U R A G A N    ]'#13#10''#13#10''+spacing+'Prenez garde et abritez-vous au sommet de la montagne dans les batisses protégées du danger! '#13#10''+spacing+' Un terrible ouragan va frapper votre colonie ! Vos bâtiments au pied de l''île sont en péril...'#13#10''#13#10''+spacing+'Que Dieu ait pitié de vos âmes de pécheurs!';
+                   2:paragraphe:='[   T E M P E T E    ]'#13#10''#13#10''+spacing+'Dépechez-vous d''abriter toute la population dans les habitats du sommet de la montagne!'#13#10''+spacing+' Une gigantesque tempête va bientôt semer le chaos sur votre île ! Vos bâtiments courent un grand risque...'#13#10''#13#10''+spacing+'Que Dieu ait pitié de vos âmes!';
+                   3:paragraphe:='[   T O R N A D E    ]'#13#10''#13#10''+spacing+'Oh mon dieu, c''est abominable! Une gigantesque tempête se profile au loin, '#13#10''+spacing+'elle sèmera prochainement le chaos sur votre île ! Vos bâtiments courent un grand risque...'#13#10''#13#10''+spacing+'Que Dieu vous protège!';
+                   4:paragraphe:='[   O U R A G A N   ]'#13#10''#13#10''+spacing+'Prenez garde ! Un terrible ouragan va frapper votre ville incessament sous peu.'#13#10''+spacing+'Vous avez encore le temps de diriger la population en lieu sûr, les maisons du sommet de l''île ont été construites ici pour ça! '#13#10''+spacing+' Toutefois, votre industrie côtiere est en péril...'#13#10''#13#10''+spacing+'Que Dieu vous garde!';
+             end;
+             ecrireTexte(paragraphe,20,10);
         end;
     end;
 
+  //procédure qui affiche le txt scénarisé de l'event covid noire s'il vient d'être activé
   procedure printTxtScenarioCovidNoir();
+    const
+      spacing = '                       ';
     var
       paragraphe: String;
+      randomTxt: Integer;
     begin
       //si l'event vient d'être lancé
       if (tabEventImpromptu[pesteNoir].tourDebEvent=getNbTour() ) then
          begin
               effacerEcran(); //mise à jour affichage
-              paragraphe:= 'Un affreux virus a fait son apparition sur l''île, il s''agit du puissant Corona noir !'#13#10'Malheureusement de nombreux colons et habitants se sont fait contaminés...' ;
-              ecrireTexte(paragraphe,5,10);
+              randomTxt := randomRange(1,4);
+              case randomTxt of
+                   1:paragraphe:='Un affreux virus a fait son apparition sur l''île, il s''agit du sournois Corona noir !'#13#10''#13#10''+spacing+'Malheureusement de nombreux colons et habitants seront contaminés à coup sûr...' ;
+                   2:paragraphe:='Un terrible virus circule en ville, on le surnomme le corona noir !'#13#10''#13#10''+spacing+'Malheureusement de nombreux colons et habitants sont tombés malades et ont perdu la vie...'#13#10''#13#10''+spacing+'Que Dieu vous protège!';
+                   3:paragraphe:='Le mal invisible a atteint vos contrées! '#13#10''#13#10''+spacing+'les habitants l''ont nommé le Corona noir! Diable, c''est une véritable création démoniaque!'#13#10''+spacing+'La population tombe comme les mouches...'#13#10''#13#10''+spacing+'Que dieu ait pitié de vos âmes de pécheurs!';
+                   else paragraphe:='Un affreux virus a fait son apparition sur l''île, il s''agit du sournois Corona noir !'#13#10''#13#10''+spacing+'Malheureusement de nombreux colons et habitants seront contaminés à coup sûr...' ;
+             end;
+              ecrireTexte(paragraphe,20,10);
          end;
     end;
 

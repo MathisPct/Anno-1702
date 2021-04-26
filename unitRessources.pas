@@ -170,7 +170,7 @@ implementation
     begin
        initRessourceTxt();//Cette procédure initialise tous les noms des ressources
 
-       typeRessouce[1].quantite:=20000;
+       typeRessouce[1].quantite:=10000;
        typeRessouce[2].quantite:=150;
        typeRessouce[3].quantite:=150;
        typeRessouce[4].quantite:=150;
@@ -189,8 +189,7 @@ implementation
   procedure initRessourceDiffNormal();
     begin
        initRessourceTxt();//Cette procédure initialise tous les noms des ressources
-
-       typeRessouce[1].quantite:=15000;
+       typeRessouce[1].quantite:=5000;
        typeRessouce[2].quantite:=100;
        typeRessouce[3].quantite:=100;
        typeRessouce[4].quantite:=0;
@@ -210,7 +209,7 @@ implementation
     begin
        initRessourceTxt();//Cette procédure initialise tous les noms des ressources
 
-       typeRessouce[1].quantite:=7500;
+       typeRessouce[1].quantite:=2000;
        typeRessouce[2].quantite:=50;
        typeRessouce[3].quantite:=50;
        typeRessouce[4].quantite:=0;
