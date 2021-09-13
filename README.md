@@ -1,3 +1,6 @@
+<div align="center">
+  <img src="doc/media/bandeAnnonceAnno.gif" alt="Vidéo de présentation d'Anno1702">
+</div>
 <h2>Qu'est-ce qu'<b>Anno 1702</b> ❓</h2>
 <p><b>Anno 1702</b> est un jeu textuel de gestion et de stratégie en temps réel. Il se déroule durant la période de l’âge d’or de la marine à voile, au moment de la colonisation 
 des Amériques. Le principe du jeu est de développer une colonie en subvenant à ses besoins par la mise en place d’habitations pour accueillir des colons, 
